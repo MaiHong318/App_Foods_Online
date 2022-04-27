@@ -1,6 +1,7 @@
 package com.example.epapp_demo.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,7 +53,14 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull CategoriesAdapter.ViewHolder holder, int position) {
 
-        Picasso.get().load(list.get(position).getHinhanh()).into(holder.iv);
+        if(TextUtils.isEmpty(list.get(position).getHinhanh())) {
+            // Load default image
+            holder.iv.setImageResource(R.drawable.slider3);
+        } else {
+            Picasso.get().load(list.get(position).getHinhanh()).into(holder.iv);
+        }
+
+
 
         holder.name.setText(list.get(position).getNameLoai());
     }
