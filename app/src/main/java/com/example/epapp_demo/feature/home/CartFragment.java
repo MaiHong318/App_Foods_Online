@@ -13,19 +13,19 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.GioHangAdapter;
+import com.example.epapp_demo.adapter.CartAdapter;
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
 
 import java.util.ArrayList;
 
-public class GioHangFragment extends Fragment {
+public class CartFragment extends Fragment {
     RecyclerView rcv;
     Button Add;
-    GioHangAdapter adapter;
+    CartAdapter adapter;
     ArrayList<ChiTietGioHang> list = new ArrayList<>();
     DbHelper db;
-    public GioHangFragment() {
+    public CartFragment() {
         // Required empty public constructor
     }
 
@@ -35,7 +35,7 @@ public class GioHangFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_gio_hang, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
         rcv = view.findViewById(R.id.rcvGioHang);
         Add = view.findViewById(R.id.btnAddGioHang);
         db = new DbHelper(getContext());
@@ -44,7 +44,7 @@ public class GioHangFragment extends Fragment {
         rcv.setLayoutManager(place);
 
         list = db.listGioHang();
-        adapter = new GioHangAdapter(list, getContext());
+        adapter = new CartAdapter(list, getContext());
         rcv.setAdapter(adapter);
 
         Add.setOnClickListener(new View.OnClickListener() {

@@ -47,10 +47,10 @@ public class BottomNavigation extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ListRestaurantFragment()).commit();
                     return true;
                 case R.id.action_three:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new DonHangfragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new OrderFragment()).commit();
                     return true;
                 case R.id.action_giohang:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new GioHangFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new CartFragment()).commit();
                     return true;
                 case R.id.action_bon:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new SettingFragment()).commit();

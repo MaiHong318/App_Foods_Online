@@ -39,7 +39,7 @@ public class ShowPhanLoaiAdapter  extends RecyclerView.Adapter<ShowPhanLoaiAdapt
     @NonNull
     @Override
     public ShowPhanLoaiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.loai_one_item,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_categories,parent,false);
         phanLoaiDAO = new PhanLoaiDAO(context);
         return new ShowPhanLoaiAdapter.ViewHolder(view);
     }

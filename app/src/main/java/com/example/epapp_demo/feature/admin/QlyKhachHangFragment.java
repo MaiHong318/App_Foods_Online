@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.KhachHangAdapter;
+import com.example.epapp_demo.adapter.CustomerAdapter;
 import com.example.epapp_demo.model.local.database.KhachHangDAO;
 import com.example.epapp_demo.model.local.modul.KhachHang;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +23,7 @@ public class QlyKhachHangFragment extends Fragment {
      KhachHangDAO khachHangDAO = new KhachHangDAO(getActivity());
     private FirebaseAuth mAuth;
 
-    public static KhachHangAdapter khachHangAdapter;
+    public static CustomerAdapter khachHangAdapter;
     RecyclerView lv;
     ArrayList<KhachHang> list = new ArrayList<>();
 
@@ -43,7 +43,7 @@ public class QlyKhachHangFragment extends Fragment {
         list = khachHangDAO.getAll();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
-        khachHangAdapter = new KhachHangAdapter(getActivity(),list);
+        khachHangAdapter = new CustomerAdapter(getActivity(),list);
         lv.setAdapter(khachHangAdapter);
         Log.d("test1", String.valueOf(list));
 

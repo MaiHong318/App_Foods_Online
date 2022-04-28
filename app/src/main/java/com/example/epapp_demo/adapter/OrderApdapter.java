@@ -22,14 +22,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
-public class DonHangApdapter extends RecyclerView.Adapter<DonHangApdapter.ViewHolder> {
+public class OrderApdapter extends RecyclerView.Adapter<OrderApdapter.ViewHolder> {
 
     List<DonHang> list;
     Context context;
     DonHangDAO donHangDAO;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    public DonHangApdapter(List<DonHang> list, Context context){
+    public OrderApdapter(List<DonHang> list, Context context){
         this.list = list;
         this.context = context;
         donHangDAO = new DonHangDAO(context);
@@ -37,14 +37,14 @@ public class DonHangApdapter extends RecyclerView.Adapter<DonHangApdapter.ViewHo
 
     @NonNull
     @Override
-    public DonHangApdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.donhang_one_item,parent,false);
+    public OrderApdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_order,parent,false);
         donHangDAO= new DonHangDAO(context);
-        return new DonHangApdapter.ViewHolder(view);
+        return new OrderApdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final DonHangApdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final OrderApdapter.ViewHolder holder, final int position) {
 
         String i = list.get(position).getStoreID();
         holder.ivID.setText(list.get(position).getDHID());

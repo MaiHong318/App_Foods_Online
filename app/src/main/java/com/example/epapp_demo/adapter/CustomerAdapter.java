@@ -15,7 +15,7 @@ import com.example.epapp_demo.model.local.modul.KhachHang;
 
 import java.util.ArrayList;
 
-public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.ViewHolder> {
+public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> {
 
     Context context;
     ArrayList<KhachHang> list;
@@ -23,7 +23,7 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
 
 
 
-    public KhachHangAdapter(Context context, ArrayList<KhachHang> list) {
+    public CustomerAdapter(Context context, ArrayList<KhachHang> list) {
         this.context = context;
         this.list = list;
         khachHangDAO = new KhachHangDAO(context);
@@ -32,9 +32,9 @@ public class KhachHangAdapter extends RecyclerView.Adapter<KhachHangAdapter.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.khachhang_one_item,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_customer,parent,false);
         khachHangDAO = new KhachHangDAO(context);
-        return new KhachHangAdapter.ViewHolder(view);
+        return new CustomerAdapter.ViewHolder(view);
     }
 
     @Override

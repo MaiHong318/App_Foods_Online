@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.epapp_demo.feature.login.LoginActivity;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.feature.profile.DoiThongTinFragment;
+import com.example.epapp_demo.feature.profile.ChangeProfileFragment;
 import com.example.epapp_demo.model.local.modul.KhachHang;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -118,7 +118,7 @@ public class SettingFragment extends Fragment {
         txtDoiThongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment newFragment = new DoiThongTinFragment();
+                Fragment newFragment = new ChangeProfileFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, newFragment);
                 transaction.addToBackStack(null);

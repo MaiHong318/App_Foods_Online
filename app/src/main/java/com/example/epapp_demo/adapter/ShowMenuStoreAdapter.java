@@ -39,7 +39,7 @@ public class ShowMenuStoreAdapter extends RecyclerView.Adapter<ShowMenuStoreAdap
     @NonNull
     @Override
     public ShowMenuStoreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.monan_one_item,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
         cuaHangDAO = new CuaHangDAO(context);
         return new ShowMenuStoreAdapter.ViewHolder(view);
     }

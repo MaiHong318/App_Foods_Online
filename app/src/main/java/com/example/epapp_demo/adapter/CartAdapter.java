@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.feature.home.GioHangFragment;
+import com.example.epapp_demo.feature.home.CartFragment;
 
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
@@ -25,11 +25,11 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHolder> {
+public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     ArrayList<ChiTietGioHang> list;
     Context context;
 
-    public GioHangAdapter(ArrayList<ChiTietGioHang> list, Context context){
+    public CartAdapter(ArrayList<ChiTietGioHang> list, Context context){
         this.list = list;
         this.context = context;
 
@@ -37,14 +37,14 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
 
     @NonNull
     @Override
-    public GioHangAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.giohang_one_item,parent,false);
+    public CartAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_cart,parent,false);
 
-        return new GioHangAdapter.ViewHolder(view);
+        return new CartAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GioHangAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
         final DecimalFormat formatter = new DecimalFormat("###,###,###");
         holder.name.setText(list.get(position).getTenMonAn());
         holder.soluong.setText("Số lượng: "+list.get(position).getSoluong()+"");
@@ -92,7 +92,7 @@ public class GioHangAdapter extends RecyclerView.Adapter<GioHangAdapter.ViewHold
                     Log.d("1122",s);
                     dbHelper.delete(s);
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    GioHangFragment myFragment = new GioHangFragment();
+                    CartFragment myFragment = new CartFragment();
                     activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, myFragment).addToBackStack(null).commit();
                 }
             });

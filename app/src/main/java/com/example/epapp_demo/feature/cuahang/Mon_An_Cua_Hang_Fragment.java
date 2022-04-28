@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.MonAnAdapter;
+import com.example.epapp_demo.adapter.FoodAdapter;
 import com.example.epapp_demo.model.local.database.MonAnDAO;
 import com.example.epapp_demo.model.local.modul.MonAn;
 import com.example.epapp_demo.model.local.modul.PhanLoai;
@@ -34,7 +34,7 @@ public class Mon_An_Cua_Hang_Fragment extends Fragment {
     MonAnDAO monAnDAO = new MonAnDAO(getActivity());
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    public static MonAnAdapter monAnAdapter;
+    public static FoodAdapter monAnAdapter;
     ArrayList<MonAn> list = new ArrayList<>();
 
     public Mon_An_Cua_Hang_Fragment() {
@@ -55,7 +55,7 @@ public class Mon_An_Cua_Hang_Fragment extends Fragment {
         rcv.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
         list = monAnDAO.getAll(i);
-        monAnAdapter = new MonAnAdapter(list,getActivity());
+        monAnAdapter = new FoodAdapter(list,getActivity());
         rcv.setAdapter(monAnAdapter);
         final ArrayList<PhanLoai> listPL = new PhanLoaiDAO(getActivity()).getAllspn();
 

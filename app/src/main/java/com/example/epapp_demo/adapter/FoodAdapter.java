@@ -30,14 +30,14 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> {
+public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
     List<MonAn> list;
     Context context;
     MonAnDAO monAnDAO;
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference("MonAn");
-    public MonAnAdapter(List<MonAn> list, Context context){
+    public FoodAdapter(List<MonAn> list, Context context){
         this.list = list;
         this.context = context;
         monAnDAO = new MonAnDAO(context);
@@ -46,9 +46,9 @@ public class MonAnAdapter extends RecyclerView.Adapter<MonAnAdapter.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.monan_one_item,parent,false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
         monAnDAO= new MonAnDAO(context);
-        return new MonAnAdapter.ViewHolder(view);
+        return new FoodAdapter.ViewHolder(view);
     }
 
     @Override

@@ -27,7 +27,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-public class DoiThongTinFragment extends Fragment {
+public class ChangeProfileFragment extends Fragment {
     EditText edtHoTen, edtSdt, edtDiaChi;
     TextView txtNgaySinh;
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -36,7 +36,7 @@ public class DoiThongTinFragment extends Fragment {
     String userID, pass, email;
     Button btnXacNhan;
     DatePickerDialog datePickerDialog;
-    public DoiThongTinFragment() {
+    public ChangeProfileFragment() {
         // Required empty public constructor
     }
 
@@ -50,7 +50,7 @@ public class DoiThongTinFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.doi_thong_tin_fragment, container, false);
+       View view = inflater.inflate(R.layout.change_profile_fragment, container, false);
        edtHoTen = view.findViewById(R.id.ed_ChangeName);
        edtSdt = view.findViewById(R.id.ed_ChangePhone);
        edtDiaChi = view.findViewById(R.id.ed_ChangeAddress);

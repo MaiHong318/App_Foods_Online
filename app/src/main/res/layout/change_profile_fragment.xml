@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".feature.profile.DoiThongTinFragment">
+    tools:context=".feature.profile.ChangeProfileFragment">
 
     <LinearLayout
         android:layout_width="120dp"

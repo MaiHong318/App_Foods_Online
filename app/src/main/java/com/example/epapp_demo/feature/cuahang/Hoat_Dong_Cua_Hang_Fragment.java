@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.DonHangApdapter;
+import com.example.epapp_demo.adapter.OrderApdapter;
 import com.example.epapp_demo.model.local.database.DonHangDAO;
 import com.example.epapp_demo.model.local.modul.DonHang;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +23,7 @@ public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
     DonHangDAO donHangDAO = new DonHangDAO(getActivity());
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-    public static DonHangApdapter donHangApdapter;
+    public static OrderApdapter donHangApdapter;
     ArrayList<DonHang> list = new ArrayList<>();
     public Hoat_Dong_Cua_Hang_Fragment() {
         // Required empty public constructor
@@ -42,7 +42,7 @@ public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
         rcv.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
         list = donHangDAO.getDonByCuaHangID(""+ i +"");
-        donHangApdapter = new DonHangApdapter(list,getActivity());
+        donHangApdapter = new OrderApdapter(list,getActivity());
         rcv.setAdapter(donHangApdapter);
         return view;
     }

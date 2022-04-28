@@ -5,7 +5,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.epapp_demo.feature.home.DonHangfragment;
+import com.example.epapp_demo.feature.home.OrderFragment;
 import com.example.epapp_demo.feature.cuahang.Hoat_Dong_Cua_Hang_Fragment;
 import com.example.epapp_demo.model.local.modul.DonHang;
 import com.google.firebase.database.DataSnapshot;
@@ -38,7 +38,7 @@ public class DonHangDAO {
                     list.add(hd);
 
                 }
-                DonHangfragment.donHangApdapter.notifyDataSetChanged();
+                OrderFragment.donHangApdapter.notifyDataSetChanged();
             }
 
             @Override
