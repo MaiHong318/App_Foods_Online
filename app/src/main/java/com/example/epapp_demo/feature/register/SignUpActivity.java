@@ -61,7 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validateEmail() & validatePassword() == true){
+                if(validateEmail() & validatePassword()){
                     final String email= regUser.getText().toString();
                     final String password = regPass.getText().toString();
                     pb.setVisibility(View.VISIBLE);
