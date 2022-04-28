@@ -10,9 +10,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.CuaHangDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.MonAn;
+import com.example.epapp_demo.model.local.database.CuaHangDAO;
+import com.example.epapp_demo.model.local.modul.MonAn;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

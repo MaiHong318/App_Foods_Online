@@ -3,7 +3,6 @@ package com.example.epapp_demo.adapter;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
@@ -19,7 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.CuaHang_temp;
+import com.example.epapp_demo.model.local.modul.CuaHang_temp;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

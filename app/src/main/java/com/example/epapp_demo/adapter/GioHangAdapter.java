@@ -2,7 +2,6 @@ package com.example.epapp_demo.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -14,18 +13,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.fragment.GioHangFragment;
-import com.example.epapp_demo.fragment.ShowMenuStoreFragment;
-import com.example.epapp_demo.localdb.DbHelper;
+import com.example.epapp_demo.feature.home.GioHangFragment;
 
-import com.example.epapp_demo.model.ChiTietGioHang;
-import com.example.epapp_demo.model.GioHang;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.model.local.database.DbHelper;
+import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

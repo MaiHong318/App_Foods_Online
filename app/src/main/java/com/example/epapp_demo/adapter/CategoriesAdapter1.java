@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.Category;
+import com.example.epapp_demo.model.local.modul.Category;
 
 import java.util.ArrayList;
 import java.util.List;

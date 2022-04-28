@@ -1,32 +1,19 @@
 package com.example.epapp_demo.adapter;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.CuaHangDAO;
-import com.example.epapp_demo.DAO.DonHangDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.CuaHang;
-import com.example.epapp_demo.model.DonHang;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.epapp_demo.model.local.database.CuaHangDAO;
+import com.example.epapp_demo.model.local.modul.CuaHang;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHolder> {
 
