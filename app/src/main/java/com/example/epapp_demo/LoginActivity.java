@@ -1,6 +1,5 @@
 package com.example.epapp_demo;
 
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -20,9 +19,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 
-import com.example.epapp_demo.fragment.HomeFragment;
 import com.example.epapp_demo.model.CuaHang;
 import com.example.epapp_demo.model.KhachHang;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -31,7 +28,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout inputEmail,inputPass;
     TextInputEditText edtemail, edtpassword;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
-    FirebaseAuth fAuth = FirebaseAuth.getInstance();;
+    FirebaseAuth fAuth = FirebaseAuth.getInstance();
     ProgressBar pb;
     LocationManager locationManager;
     boolean GpsStatus;
@@ -140,7 +137,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validateEmail() & validatePassword() == true){
+                if(validateEmail() & validatePassword()){
                     final String email1 = edtemail.getText().toString();
                     final String pass1 = edtpassword.getText().toString();
                     pb.setVisibility(View.VISIBLE);
@@ -236,7 +233,7 @@ public class LoginActivity extends AppCompatActivity {
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-        if (GpsStatus == true) {
+        if (GpsStatus) {
             Intent intent = new Intent(LoginActivity.this, BottomNavigation.class);
             startActivity(intent);
         } else {

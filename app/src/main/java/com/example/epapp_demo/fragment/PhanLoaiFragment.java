@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -65,6 +66,7 @@ public class PhanLoaiFragment extends Fragment {
                 final EditText tenloai = view1.findViewById(R.id.edttenlaoi);
                 final EditText motalaoi = view1.findViewById(R.id.edtMota);
                 final EditText anh = view1.findViewById(R.id.edtUrlAnh);
+
                 builder.setView(view1);
 
                 builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {

@@ -1,5 +1,7 @@
 package com.example.epapp_demo;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -48,6 +50,9 @@ public class BottomNavigationAdmin extends AppCompatActivity {
                 case R.id.theloaimonan:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new PhanLoaiFragment()).commit();
                     return true;
+
+                case R.id.dangxuat:
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
             }
             return false;

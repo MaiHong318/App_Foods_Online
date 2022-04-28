@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.fragment.HomeFragment;
 import com.example.epapp_demo.fragment.Home_Cua_Hang_Fragment;
+import com.example.epapp_demo.fragment.ListPhanLoaiFragment;
 import com.example.epapp_demo.fragment.PhanLoaiFragment;
 import com.example.epapp_demo.model.PhanLoai;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -115,6 +116,31 @@ public class PhanLoaiDAO {
                         DataSnapshot next = (DataSnapshot) iterator.next();
                         PhanLoai pl = next.getValue(PhanLoai.class);
                         list.add(pl);
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
+
+    public ArrayList<PhanLoai> getShowCat() {
+        final ArrayList<PhanLoai> list = new ArrayList<PhanLoai>();
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    list.clear();
+                    Iterable<DataSnapshot> dataSnapshotIterable = dataSnapshot.getChildren();
+                    Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
+                    while (iterator.hasNext()) {
+                        DataSnapshot next = (DataSnapshot) iterator.next();
+                        PhanLoai pl = next.getValue(PhanLoai.class);
+                        list.add(pl);
+                        ListPhanLoaiFragment.showPhanLoaiAdapter.notifyDataSetChanged();
                     }
                 }
             }

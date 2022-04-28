@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -25,7 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.DAO.CuaHangDAO;
-import com.example.epapp_demo.DAO.MonAnDAO;
 import com.example.epapp_demo.DAO.PhanLoaiDAO;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CategoriesAdapter;
@@ -55,6 +55,8 @@ public class HomeFragment extends Fragment implements LocationListener {
     PhanLoaiDAO phanLoaiDAO = new PhanLoaiDAO(getActivity());
     ImageView btn_reload;
     LocationManager locationManager;
+    TextView tv_list_cuahang, tv_list_phanloai;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -85,6 +87,9 @@ public class HomeFragment extends Fragment implements LocationListener {
         rcvCategories = (RecyclerView)view.findViewById(R.id.trending_recycler_view);
         rcvQuanGoiY = view.findViewById(R.id.place_recycler_view);
         btn_reload = view.findViewById(R.id.btn_reload);
+        tv_list_cuahang = view.findViewById(R.id.place_list);
+        tv_list_phanloai = view.findViewById(R.id.categories_list);
+
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcvCategories.setLayoutManager(llmTrending);
         list = phanLoaiDAO.getAllMenu();
@@ -133,6 +138,24 @@ public class HomeFragment extends Fragment implements LocationListener {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, newFragment);
                 transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        tv_list_cuahang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,new ListRestaurantFragment());
+                transaction.commit();
+            }
+        });
+
+        tv_list_phanloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,new ListPhanLoaiFragment());
                 transaction.commit();
             }
         });
