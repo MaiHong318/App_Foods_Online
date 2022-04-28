@@ -1,4 +1,4 @@
-package com.example.epapp_demo;
+package com.example.epapp_demo.feature.login;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,8 +20,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.example.epapp_demo.model.CuaHang;
-import com.example.epapp_demo.model.KhachHang;
+import com.example.epapp_demo.R;
+import com.example.epapp_demo.feature.admin.BottomNavigationAdmin;
+import com.example.epapp_demo.feature.cuahang.Bottom_Navigation_CuaHang_Activity;
+import com.example.epapp_demo.feature.home.BottomNavigation;
+import com.example.epapp_demo.feature.register.SignUpActivity;
+import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.modul.KhachHang;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;

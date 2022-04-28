@@ -1,15 +1,16 @@
-package com.example.epapp_demo.DAO;
+package com.example.epapp_demo.model.local.database;
 
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.epapp_demo.fragment.HomeFragment;
-import com.example.epapp_demo.fragment.Home_Cua_Hang_Fragment;
-import com.example.epapp_demo.fragment.ListPhanLoaiFragment;
-import com.example.epapp_demo.fragment.PhanLoaiFragment;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.feature.admin.ListPhanLoaiFragment;
+import com.example.epapp_demo.feature.admin.PhanLoaiFragment;
+
+
+import com.example.epapp_demo.feature.home.HomeFragment;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;

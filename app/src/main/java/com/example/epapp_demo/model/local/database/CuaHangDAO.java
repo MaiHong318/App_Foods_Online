@@ -1,5 +1,8 @@
 package com.example.epapp_demo.model.local.database;
 
+
+import static com.example.epapp_demo.feature.home.HomeFragment.cuaHangAdapter_temp;
+
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
@@ -32,7 +35,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
-import static com.example.epapp_demo.feature.home.HomeFragment.cuaHangAdapter_temp;
 
 public class CuaHangDAO implements LocationListener {
     DatabaseReference mDatabase;

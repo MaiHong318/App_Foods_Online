@@ -1,4 +1,4 @@
-package com.example.epapp_demo.fragment;
+package com.example.epapp_demo.feature.home;
 
 import android.Manifest;
 import android.content.Context;
@@ -25,15 +25,19 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.CuaHangDAO;
-import com.example.epapp_demo.DAO.PhanLoaiDAO;
+
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CategoriesAdapter;
 import com.example.epapp_demo.adapter.CuaHangAdapter_temp;
 import com.example.epapp_demo.adapter.PlaceAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter;
-import com.example.epapp_demo.model.CuaHang_temp;
-import com.example.epapp_demo.model.PhanLoai;
+
+import com.example.epapp_demo.feature.admin.ListPhanLoaiFragment;
+import com.example.epapp_demo.feature.cuahang.ListRestaurantFragment;
+import com.example.epapp_demo.model.local.database.CuaHangDAO;
+import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.modul.CuaHang_temp;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
