@@ -2,10 +2,8 @@ package com.example.epapp_demo.adapter;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.PhanLoaiDAO;
-import com.example.epapp_demo.LoginActivity;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.PhanLoai;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 
 import java.util.ArrayList;
-
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHolder> {
 

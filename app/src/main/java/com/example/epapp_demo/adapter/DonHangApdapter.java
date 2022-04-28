@@ -10,18 +10,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.DonHangDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.CuaHang;
-import com.example.epapp_demo.model.DonHang;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.epapp_demo.model.local.database.DonHangDAO;
+import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.modul.DonHang;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class DonHangApdapter extends RecyclerView.Adapter<DonHangApdapter.ViewHolder> {

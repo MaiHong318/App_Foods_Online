@@ -1,7 +1,6 @@
 package com.example.epapp_demo.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +10,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.CuaHangDAO;
+
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.CuaHang;
+import com.example.epapp_demo.model.local.database.CuaHangDAO;
+import com.example.epapp_demo.model.local.modul.CuaHang;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

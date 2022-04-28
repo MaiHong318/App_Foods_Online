@@ -14,7 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.epapp_demo.LoginActivity;
+import com.example.epapp_demo.feature.login.LoginActivity;
 import com.example.epapp_demo.R;
 import com.google.android.material.tabs.TabLayout;
 

@@ -9,10 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.epapp_demo.DAO.PhanLoaiDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -26,6 +25,8 @@ public class ShowPhanLoaiAdapter  extends RecyclerView.Adapter<ShowPhanLoaiAdapt
     PhanLoaiDAO phanLoaiDAO;
 
     private ShowPhanLoaiAdapter.OnStoreClickListener mListener;
+
+
     public void setOnStoreItemClickListener (ShowPhanLoaiAdapter.OnStoreClickListener onStoreItemClickListener){
         mListener = onStoreItemClickListener;
     }
@@ -72,7 +73,7 @@ public class ShowPhanLoaiAdapter  extends RecyclerView.Adapter<ShowPhanLoaiAdapt
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mListener.onStoreItemClick(getPosition());
+                    mListener.onStoreItemClick(getAdapterPosition());
                 }
             });
         }
