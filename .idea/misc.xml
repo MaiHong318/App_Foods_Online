@@ -3,6 +3,25 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/activity_bottom_navigation.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/activity_infor_user.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/activity_intro.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/add_to_cart.xml" value="0.325" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/an_vat_fragment.xml" value="0.325" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/change_pass_fragment.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/com_phan_fragment.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/doi_thong_tin_fragment.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_don_hang.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_gio_hang.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_hoat__dong__cua__hang_.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_list_restaurant.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_mon__an__cua__hang_.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_phan_loai_k_h.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_qly_khachhang.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/fragment_tai__khoan__cua__hang_.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/mon_han_fragment.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/profile_fragment.xml" value="0.3546875" />
+        <entry key="..\:/GitHub/App_Foods_Online/app/src/main/res/layout/show_one_store_fragment.xml" value="0.3546875" />
         <entry key="..\:/Users/Admin/Downloads/EPApp_demo/EPApp_demo/app/src/main/res/layout/add_cuahang.xml" value="0.2421875" />
         <entry key="..\:/Users/Admin/Downloads/EPApp_demo/EPApp_demo/app/src/main/res/layout/add_loai.xml" value="0.2421875" />
         <entry key="..\:/Users/Admin/Downloads/EPApp_demo/EPApp_demo/app/src/main/res/layout/add_to_cart.xml" value="0.2421875" />

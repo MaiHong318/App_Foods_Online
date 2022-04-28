@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,23 +13,17 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.epapp_demo.DAO.MonAnDAO;
-import com.example.epapp_demo.DAO.PhanLoaiDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.CuaHang;
-import com.example.epapp_demo.model.MonAn;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.model.local.database.MonAnDAO;
+import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

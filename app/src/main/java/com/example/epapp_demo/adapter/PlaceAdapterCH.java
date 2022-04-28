@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.Place;
+import com.example.epapp_demo.model.local.modul.Place;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -12,17 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.epapp_demo.DAO.MonAnDAO;
-import com.example.epapp_demo.DAO.PhanLoaiDAO;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.Category;
-import com.example.epapp_demo.model.MonAn;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
+
 import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {

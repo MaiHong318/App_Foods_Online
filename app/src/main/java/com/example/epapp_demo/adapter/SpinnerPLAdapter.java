@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.PhanLoai;
+import com.example.epapp_demo.model.local.modul.PhanLoai;
 
 import java.util.List;
 
