@@ -55,7 +55,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     PhanLoaiDAO phanLoaiDAO = new PhanLoaiDAO(getActivity());
     ImageView btn_reload;
     LocationManager locationManager;
-    TextView tv_list_cuahang;
+    TextView tv_list_cuahang, tv_list_phanloai;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -88,6 +88,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         rcvQuanGoiY = view.findViewById(R.id.place_recycler_view);
         btn_reload = view.findViewById(R.id.btn_reload);
         tv_list_cuahang = view.findViewById(R.id.place_list);
+        tv_list_phanloai = view.findViewById(R.id.categories_list);
 
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcvCategories.setLayoutManager(llmTrending);
@@ -146,6 +147,15 @@ public class HomeFragment extends Fragment implements LocationListener {
             public void onClick(View view) {
                 FragmentTransaction transaction =  getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout,new ListRestaurantFragment());
+                transaction.commit();
+            }
+        });
+
+        tv_list_phanloai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,new ListPhanLoaiFragment());
                 transaction.commit();
             }
         });

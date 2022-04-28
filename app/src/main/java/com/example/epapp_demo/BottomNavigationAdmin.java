@@ -1,6 +1,5 @@
 package com.example.epapp_demo;
 
-import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 import android.content.Intent;
 import android.os.Bundle;
