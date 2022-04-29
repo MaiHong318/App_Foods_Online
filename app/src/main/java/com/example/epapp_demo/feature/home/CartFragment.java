@@ -52,9 +52,10 @@ public class CartFragment extends Fragment {
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
-                DatabaseReference mdata=firebaseDatabase.getReference("Đơn hàng");
-                mdata.setValue(list);
+//                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+//                DatabaseReference mdata=firebaseDatabase.getReference("Đơn hàng");
+//                mdata.setValue(list);
+
                 Toast.makeText(getContext(),"Đặt hàng thành công",Toast.LENGTH_SHORT).show();
             }
         });
