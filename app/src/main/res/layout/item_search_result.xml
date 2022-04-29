@@ -4,6 +4,44 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_store"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="StoreName"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:id="@+id/no_favorite"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star2"
+                android:layout_alignParentRight="true"
+                android:tint="@color/colorPrimary"
+                android:layout_margin="10dp"/>
+
+            <ImageView
+                android:id="@+id/favorite"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@drawable/star"
+                android:layout_alignParentRight="true"
+                android:tint="@color/colorPrimary"
+                android:visibility="visible"
+                android:layout_margin="10dp"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="170dp"
@@ -16,6 +54,7 @@
         app:cardElevation="2dp">
 
         <ImageView
+            android:id="@+id/iv_food_picture"
             android:layout_width="wrap_content"
             android:layout_height="150dp"
             android:scaleType="centerCrop"
@@ -26,37 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                android:id="@+id/image"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:id="@+id/no_favorite"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/star2"
-                        android:layout_alignParentRight="true"
-                        android:tint="@color/colorPrimary"
-                        android:layout_margin="10dp"/>
-
-                    <ImageView
-                        android:id="@+id/favorite"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
-                        android:src="@drawable/star"
-                        android:layout_alignParentRight="true"
-                        android:tint="@color/colorPrimary"
-                        android:visibility="gone"
-                        android:layout_margin="10dp"/>
-
-                </RelativeLayout>
-
-            </LinearLayout>
 
         </RelativeLayout>
 
@@ -72,14 +81,14 @@
         android:layout_marginBottom="5dp">
 
         <TextView
-            android:id="@+id/product_name"
+            android:id="@+id/tv_food"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Crispy Chicken Sandwich"
             android:textColor="@color/overlay_dark_80" />
 
         <TextView
-            android:id="@+id/product_description"
+            android:id="@+id/tv_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="$25.00"

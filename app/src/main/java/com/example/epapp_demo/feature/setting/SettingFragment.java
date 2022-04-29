@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,6 +20,7 @@ import com.example.epapp_demo.feature.login.LoginActivity;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.profile.ChangeProfileFragment;
 import com.example.epapp_demo.model.local.modul.Customer;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -35,10 +37,10 @@ import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 public class SettingFragment extends Fragment {
     TextView  txtDoiThongTin, txtChangePassWord;
     ImageView logout;
+
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference1 = firebaseDatabase.getReference("KhachHang");
-    CircularImageView profile_image;
     TextView tvNameProfile, tvMailProfile, tvPhoneProfile, tvAddressProfile,tvNgaySinh;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();
     public static String userID;
@@ -67,7 +69,8 @@ public class SettingFragment extends Fragment {
         tvNgaySinh = view.findViewById(R.id.tvNgaySinhProfile);
         txtDoiThongTin = view.findViewById(R.id.txtDoiThongTin);
         txtChangePassWord = view.findViewById(R.id.txtDoiMatKhau);
-        profile_image = view.findViewById(R.id.profile_image);
+        logout = view.findViewById(R.id.ivLogout);
+
         userID = fAuth.getCurrentUser().getUid();
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
             email = user.getEmail();
@@ -88,7 +91,7 @@ public class SettingFragment extends Fragment {
 
             }
         });
-        logout = view.findViewById(R.id.ivLogout);
+
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -135,10 +138,9 @@ public class SettingFragment extends Fragment {
                 transaction.commit();
             }
         });
+
+
         return view;
     }
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getActivity(),LoginActivity.class));
-    }
+
 }

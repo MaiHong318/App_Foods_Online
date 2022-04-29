@@ -22,14 +22,15 @@
                 android:id="@+id/browse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
                 android:layout_marginLeft="22dp"
+                android:layout_marginTop="25dp"
                 android:layout_marginBottom="15dp"
                 android:text="Profile"
                 android:textColor="@android:color/white"
                 android:textSize="35sp"
                 android:textStyle="bold"
                 android:typeface="monospace" />
+
             <ImageView
                 android:id="@+id/ivLogout"
                 android:layout_width="40dp"
@@ -77,7 +78,7 @@
                 android:layout_weight="2">
 
                 <com.mikhaellopez.circularimageview.CircularImageView
-                    android:id="@+id/profile_image"
+                    android:id="@+id/iv_avt"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"

@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -40,8 +41,11 @@ import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -75,7 +79,7 @@ public class HomeFragment extends Fragment implements LocationListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-       View view = inflater.inflate(R.layout.home_fragment, container, false);
+       View view = inflater.inflate(R.layout.fragment_home, container, false);
 
      return view;
     }
@@ -175,9 +179,13 @@ public class HomeFragment extends Fragment implements LocationListener {
         btnSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               String search = edtSearch.getText().toString().trim();
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("MonAn");
-                databaseReference.orderByChild("nameMonAn").startAt(search).endAt(search+"\uf8ff");
+                Bundle bundle = new Bundle();
+                bundle.putString("search",edtSearch.getText().toString().trim());
+                SearchFragment searchFragment = new SearchFragment();
+                searchFragment.setArguments(bundle);
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,searchFragment);
+                transaction.commit();
             }
         });
 
