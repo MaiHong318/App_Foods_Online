@@ -16,6 +16,8 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CartAdapter;
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
@@ -50,6 +52,9 @@ public class CartFragment extends Fragment {
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+                DatabaseReference mdata=firebaseDatabase.getReference("Đơn hàng");
+                mdata.setValue(list);
                 Toast.makeText(getContext(),"Đặt hàng thành công",Toast.LENGTH_SHORT).show();
             }
         });
