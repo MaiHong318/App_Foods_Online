@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.PhanLoaiAdapter;
+import com.example.epapp_demo.adapter.CategoriesAdapter;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Categories;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -32,7 +32,7 @@ public class CategoriesFragment extends Fragment {
     private FirebaseAuth mAuth;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference("PhanLoai");
     String LoaiID;
-    public static PhanLoaiAdapter phanLoaiAdapter;
+    public static CategoriesAdapter categoriesAdapter;
     RecyclerView lv;
     ArrayList<Categories> list = new ArrayList<>();
     FloatingActionButton add;
@@ -51,17 +51,17 @@ public class CategoriesFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         list = categoriesDAO.getAll();
-        phanLoaiAdapter= new PhanLoaiAdapter(list,getActivity());
+        categoriesAdapter = new CategoriesAdapter(list,getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
-        lv.setAdapter(phanLoaiAdapter);
+        lv.setAdapter(categoriesAdapter);
         Log.d("test2", String.valueOf(list));
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_loai,null);
+                View view1 = getLayoutInflater().inflate(R.layout.add_categories_dialog,null);
                 final EditText tenloai = view1.findViewById(R.id.edttenlaoi);
                 final EditText motalaoi = view1.findViewById(R.id.edtMota);
                 final EditText anh = view1.findViewById(R.id.edtUrlAnh);

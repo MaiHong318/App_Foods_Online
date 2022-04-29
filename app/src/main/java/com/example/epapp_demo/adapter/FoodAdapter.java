@@ -106,7 +106,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                View view1 = LayoutInflater.from(context).inflate(R.layout.add_monan,null);
+                View view1 = LayoutInflater.from(context).inflate(R.layout.add_food_dialog,null);
 
                 final EditText tenmon = view1.findViewById(R.id.edtTenMon);
                 final Spinner spn = view1.findViewById(R.id.spnTheLoai);

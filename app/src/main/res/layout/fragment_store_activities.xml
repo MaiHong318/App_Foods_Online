@@ -14,7 +14,7 @@
         />
     <androidx.recyclerview.widget.RecyclerView
 
-        android:id="@+id/recycler_hoat_dong_cua_hang"
+        android:id="@+id/rcv_store_acti"
         android:layout_height="match_parent"
         android:layout_margin="8dp"
         android:layout_width="match_parent"

@@ -16,7 +16,7 @@ import com.example.epapp_demo.model.local.modul.Category;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CategoriesAdapter1 extends RecyclerView.Adapter<CategoriesAdapter1.ItemHolder> {
+public class StoreSalesAdapter extends RecyclerView.Adapter<StoreSalesAdapter.ItemHolder> {
 
 //    List<PhanLoai> list;
 //    Context context;
@@ -80,7 +80,7 @@ public class CategoriesAdapter1 extends RecyclerView.Adapter<CategoriesAdapter1.
         mListener = listener;
     }
 
-    public CategoriesAdapter1(Context context) {
+    public StoreSalesAdapter(Context context) {
         this.context = context;
         String[] categoryNames = {"Tháng 1", "Tháng 2",
                 "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6","Tháng 7","Tháng 8",};
@@ -105,7 +105,7 @@ public class CategoriesAdapter1 extends RecyclerView.Adapter<CategoriesAdapter1.
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.theloai_one_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_one_categories, viewGroup, false);
         ItemHolder holder = new ItemHolder(view, mListener);
         return holder;
     }

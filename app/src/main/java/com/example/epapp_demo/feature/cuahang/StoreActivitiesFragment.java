@@ -18,14 +18,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
 
-public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
-    RecyclerView rcv;
+public class StoreActivitiesFragment extends Fragment {
+    RecyclerView rcvSA;
     OrderDAO orderDAO = new OrderDAO(getActivity());
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public static OrderApdapter donHangApdapter;
     ArrayList<Order> list = new ArrayList<>();
-    public Hoat_Dong_Cua_Hang_Fragment() {
+    public StoreActivitiesFragment() {
         // Required empty public constructor
     }
 
@@ -33,17 +33,17 @@ public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view= inflater.inflate(R.layout.fragment_hoat__dong__cua__hang_, container, false);
+       View view= inflater.inflate(R.layout.fragment_store_activities, container, false);
 
         String i = mAuth.getCurrentUser().getUid();
-        rcv = view.findViewById(R.id.recycler_hoat_dong_cua_hang);
+        rcvSA = view.findViewById(R.id.rcv_store_acti);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rcv.setLayoutManager(layoutManager);
+        rcvSA.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
         list = orderDAO.getDonByCuaHangID(""+ i +"");
         donHangApdapter = new OrderApdapter(list,getActivity());
-        rcv.setAdapter(donHangApdapter);
+        rcvSA.setAdapter(donHangApdapter);
         return view;
     }
 }

@@ -49,7 +49,7 @@ public class NearbyStoreAdapter extends ArrayAdapter<NearbyStore> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = this.context.getLayoutInflater();
-            convertView = inflater.inflate(R.layout.item_cuahang_gan, null);
+            convertView = inflater.inflate(R.layout.item_nearby_stote, null);
             viewHolder.img_cuahang = convertView.findViewById(R.id.img_cuahang);
             viewHolder.tv_tenquan = convertView.findViewById(R.id.tv_tenquan);
             viewHolder.tv_diachi = convertView.findViewById(R.id.tv_address);
