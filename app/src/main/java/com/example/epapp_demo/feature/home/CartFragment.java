@@ -59,6 +59,7 @@ public class CartFragment extends Fragment {
         list = db.listGioHang();
         adapter = new CartAdapter(list, getContext());
         rcv.setAdapter(adapter);
+        rcv.clearOnChildAttachStateChangeListeners();
         Add.setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
