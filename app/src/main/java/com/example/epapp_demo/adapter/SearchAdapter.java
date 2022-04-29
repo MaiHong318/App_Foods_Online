@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.Food;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.tvStore.setText(list.get(position).getStoreID());
         holder.tvFood.setText(list.get(position).getNameMonAn());
         holder.tvCost.setText(list.get(position).getGiaMonAn());
+        Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.ivFood);
 
 
     }
