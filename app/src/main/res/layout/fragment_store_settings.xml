@@ -18,12 +18,12 @@
         android:layout_height="200dp">
 
         <ImageView
-            android:scaleType="centerCrop"
             android:id="@+id/ivCH"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:layout_gravity="center"
             android:background="@color/green"
-            android:layout_gravity="center" />
+            android:scaleType="centerCrop" />
 
         <RelativeLayout
             android:id="@+id/layout"

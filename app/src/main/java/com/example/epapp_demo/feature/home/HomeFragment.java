@@ -28,16 +28,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CategoriesAdapter;
-import com.example.epapp_demo.adapter.CuaHangAdapter_temp;
+import com.example.epapp_demo.adapter.NearbyStoreAdapter;
 import com.example.epapp_demo.adapter.PlaceAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter;
 
-import com.example.epapp_demo.feature.admin.ListPhanLoaiFragment;
-import com.example.epapp_demo.feature.cuahang.ListRestaurantFragment;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang_temp;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
+import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.NearbyStore;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -50,13 +50,13 @@ public class HomeFragment extends Fragment implements LocationListener {
     SliderView sliderView;
     RecyclerView rcvCategories;
     ListView rcvQuanGoiY;
-    public static CuaHangAdapter_temp cuaHangAdapter_temp;
-    List<CuaHang_temp> temp = new ArrayList<>();
+    public static NearbyStoreAdapter nearbyStoreAdapter_;
+    List<NearbyStore> temp = new ArrayList<>();
     PlaceAdapter placeAdapter;
     public static CategoriesAdapter categoriesAdapter;
-    ArrayList<PhanLoai> list = new ArrayList<>();
+    ArrayList<Categories> list = new ArrayList<>();
     boolean GpsStatus;
-    PhanLoaiDAO phanLoaiDAO = new PhanLoaiDAO(getActivity());
+    CategoriesDAO categoriesDAO = new CategoriesDAO(getActivity());
     ImageView btn_reload;
     LocationManager locationManager;
     TextView tv_list_cuahang, tv_list_phanloai;
@@ -96,7 +96,7 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcvCategories.setLayoutManager(llmTrending);
-        list = phanLoaiDAO.getAllMenu();
+        list = categoriesDAO.getAllMenu();
         categoriesAdapter = new CategoriesAdapter(list,getActivity());
         rcvCategories.setAdapter(categoriesAdapter);
 
@@ -133,10 +133,10 @@ public class HomeFragment extends Fragment implements LocationListener {
                 }
             }
         });
-        cuaHangAdapter_temp.setOnCuaHangGanItemClickListener(new CuaHangAdapter_temp.OnCuaHangGanClickListener() {
+        nearbyStoreAdapter_.setOnCuaHangGanItemClickListener(new NearbyStoreAdapter.OnCuaHangGanClickListener() {
             @Override
             public void onCuaHangGanItemClick(int position) {
-                CuaHang_temp cuaHangTemp = temp.get(position);
+                NearbyStore cuaHangTemp = temp.get(position);
                 String idStore = cuaHangTemp.getMacuahang();
                 ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             @Override
             public void onClick(View view) {
                 FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new ListRestaurantFragment());
+                transaction.replace(R.id.frame_layout,new ListStoreFragment());
                 transaction.commit();
             }
         });
@@ -159,7 +159,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             @Override
             public void onClick(View view) {
                 FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new ListPhanLoaiFragment());
+                transaction.replace(R.id.frame_layout,new ListCategoriesFragment());
                 transaction.commit();
             }
         });
@@ -188,10 +188,10 @@ public class HomeFragment extends Fragment implements LocationListener {
     }
 
     public void getTemp() {
-        CuaHangDAO cuaHangDAO = new CuaHangDAO(getActivity());
-        temp = cuaHangDAO.getTemp(getActivity());
-        cuaHangAdapter_temp = new CuaHangAdapter_temp(getActivity(), R.layout.item_cuahang_gan, temp);
-        rcvQuanGoiY.setAdapter(cuaHangAdapter_temp);
+        StoreDAO storeDAO = new StoreDAO(getActivity());
+        temp = storeDAO.getTemp(getActivity());
+        nearbyStoreAdapter_ = new NearbyStoreAdapter(getActivity(), R.layout.item_cuahang_gan, temp);
+        rcvQuanGoiY.setAdapter(nearbyStoreAdapter_);
         Log.d("size","temp: "+temp.size());
     }
 }

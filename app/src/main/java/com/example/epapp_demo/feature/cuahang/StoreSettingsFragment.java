@@ -18,8 +18,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.login.LoginActivity;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,23 +31,23 @@ import com.squareup.picasso.Picasso;
 import static com.firebase.ui.auth.AuthUI.getApplicationContext;
 
 
-public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
+public class StoreSettingsFragment extends Fragment {
     ImageView ivAvt;
     ImageView ivEditViTri, ivLogoutCH, ivEditProfileCH;
     TextView tvNameCHa, tvMailCHa,tvDiaChiCHa, tvDanhgia, kinhdo, vido;
     FirebaseAuth fAuth = FirebaseAuth.getInstance();;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     String userID = fAuth.getCurrentUser().getUid();
-    CuaHangDAO cuaHangDAO = new CuaHangDAO(getActivity());
+    StoreDAO storeDAO = new StoreDAO(getActivity());
 
-    public Tai_Khoan_Cua_Hang_Fragment() {
+    public StoreSettingsFragment() {
         // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view=  inflater.inflate(R.layout.fragment_tai__khoan__cua__hang_, container, false);
+        View view=  inflater.inflate(R.layout.fragment_store_settings, container, false);
         return  view;
     }
 
@@ -71,7 +71,7 @@ public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.edit_avata_ch,null);
+                View view1 = getLayoutInflater().inflate(R.layout.edit_avatar,null);
                 final EditText url = view1.findViewById(R.id.url);
                 builder.setView(view1);
                 builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
@@ -81,12 +81,12 @@ public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
                         mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                                Store user = dataSnapshot.getValue(Store.class);
                                 String url1 = url.getText().toString();
                                 userID = fAuth.getCurrentUser().getUid();
 //                                        String userId = mData.push().getKey();
-                                CuaHang s = new CuaHang(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),url1,user.getStoreViDo(),user.getStoreKinhDo(),1);
-                                cuaHangDAO.update(s);
+                                Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),url1,user.getStoreViDo(),user.getStoreKinhDo(),1);
+                                storeDAO.update(s);
 
                             }
 
@@ -129,12 +129,12 @@ public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
                         mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                                Store user = dataSnapshot.getValue(Store.class);
                                 double kinhdo1 = Double.parseDouble(kinhdo.getText().toString());
                                 double vido1 = Double.parseDouble(vido.getText().toString());
 
-                                CuaHang s = new CuaHang(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),user.getStoreHinhAnh(),vido1,kinhdo1,1);
-                                cuaHangDAO.update(s);
+                                Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),user.getStoreHinhAnh(),vido1,kinhdo1,1);
+                                storeDAO.update(s);
                             }
 
                             @Override
@@ -177,12 +177,12 @@ public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 try{
-                                    CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                                    Store user = dataSnapshot.getValue(Store.class);
                                     String name1 = name.getText().toString();
                                     String diachi1 = diachi.getText().toString();
 
-                                    CuaHang s = new CuaHang(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), name1,diachi1,user.getStoreDanhGia(),user.getStoreHinhAnh(),user.getStoreViDo(),user.getStoreKinhDo(),1);
-                                    cuaHangDAO.update(s);
+                                    Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), name1,diachi1,user.getStoreDanhGia(),user.getStoreHinhAnh(),user.getStoreViDo(),user.getStoreKinhDo(),1);
+                                    storeDAO.update(s);
                                 }catch (Exception e){
                                     e.printStackTrace();
                                 }
@@ -211,7 +211,7 @@ public class Tai_Khoan_Cua_Hang_Fragment extends Fragment {
         mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                Store user = dataSnapshot.getValue(Store.class);
 
                 try {
                     Picasso.get().load(user.getStoreHinhAnh()).into(ivAvt);

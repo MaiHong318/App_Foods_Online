@@ -18,7 +18,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.modul.CuaHang_temp;
+import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -26,16 +26,16 @@ import java.text.NumberFormat;
 import java.util.List;
 
 
-public class CuaHangAdapter_temp extends ArrayAdapter<CuaHang_temp> {
+public class NearbyStoreAdapter extends ArrayAdapter<NearbyStore> {
     Activity context;
     int resource;
-    List<CuaHang_temp> objects;
-    private CuaHangAdapter_temp.OnCuaHangGanClickListener mListener;
-    public void setOnCuaHangGanItemClickListener (CuaHangAdapter_temp.OnCuaHangGanClickListener onCuaHangGanItemClickListener){
+    List<NearbyStore> objects;
+    private NearbyStoreAdapter.OnCuaHangGanClickListener mListener;
+    public void setOnCuaHangGanItemClickListener (NearbyStoreAdapter.OnCuaHangGanClickListener onCuaHangGanItemClickListener){
         mListener = onCuaHangGanItemClickListener;
     }
 
-    public CuaHangAdapter_temp(Activity context, int resource, List<CuaHang_temp> objects) {
+    public NearbyStoreAdapter(Activity context, int resource, List<NearbyStore> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
@@ -61,7 +61,7 @@ public class CuaHangAdapter_temp extends ArrayAdapter<CuaHang_temp> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
-        final CuaHang_temp cuaHang = this.objects.get(position);
+        final NearbyStore cuaHang = this.objects.get(position);
         if (cuaHang.getTencuahang().length() > 20) {
             viewHolder.tv_tenquan.setText(cuaHang.getTencuahang().substring(0, 20) + " ...");
         } else {

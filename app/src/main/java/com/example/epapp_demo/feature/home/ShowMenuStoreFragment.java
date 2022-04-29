@@ -27,13 +27,13 @@ import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.ShowMenuStoreAdapter;
 
-import com.example.epapp_demo.feature.cuahang.ListRestaurantFragment;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
+import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
+import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.database.ShowMenuDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
-import com.example.epapp_demo.model.local.modul.GioHang;
-import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.modul.Store;
+import com.example.epapp_demo.model.local.modul.Cart;
+import com.example.epapp_demo.model.local.modul.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -50,11 +50,11 @@ public class ShowMenuStoreFragment extends Fragment {
     public static ShowMenuStoreAdapter showMenuStoreAdapter;
     RecyclerView recyclerMenu;
     String idCuahangGan;
-    CuaHangDAO cuaHangDAO;
+    StoreDAO storeDAO;
     Integer soluong, tonggia;
     ShowMenuDAO showMenuDAO;
-    ArrayList <MonAn> list = new ArrayList<>();
-    ArrayList <CuaHang> listCuaHang = new ArrayList<>();
+    ArrayList <Food> list = new ArrayList<>();
+    ArrayList <Store> listStore = new ArrayList<>();
     public ShowMenuStoreFragment(String idStore) {
         this.idStore = idStore;
         // Required empty public constructor
@@ -150,7 +150,7 @@ public class ShowMenuStoreFragment extends Fragment {
                         String MonAnId = list.get(position).getMonAnID();
                         String HoaDonId = null;
                         int soLuong = soluong;
-                        GioHang gh = new GioHang(HoaDonId,MonAnId,soLuong);
+                        Cart gh = new Cart(HoaDonId,MonAnId,soLuong);
                         //1. Add vô ArrayList
                         DbHelper.giohang.add(gh);
                         //2. Add vô SQLite
@@ -166,7 +166,7 @@ public class ShowMenuStoreFragment extends Fragment {
         ivBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment newFragment = new ListRestaurantFragment();
+                Fragment newFragment = new ListStoreFragment();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, newFragment);
                 transaction.addToBackStack(null);
@@ -177,9 +177,9 @@ public class ShowMenuStoreFragment extends Fragment {
         mData.child(idStore).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                CuaHang cuaHang = dataSnapshot.getValue(CuaHang.class);
-                storeName.setText(cuaHang.getStoreName());
-                storeLocation.setText(cuaHang.getStoreDiaChi());
+                Store store = dataSnapshot.getValue(Store.class);
+                storeName.setText(store.getStoreName());
+                storeLocation.setText(store.getStoreDiaChi());
 
             }
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.feature.cuahang.ListRestaurantFragment;
+import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.feature.setting.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -44,7 +44,7 @@ public class BottomNavigation extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new HomeFragment()).commit();
                     return true;
                 case R.id.action_two:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ListRestaurantFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new ListStoreFragment()).commit();
                     return true;
                 case R.id.action_three:
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, new OrderFragment()).commit();

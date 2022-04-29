@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CustomerAdapter;
-import com.example.epapp_demo.model.local.database.KhachHangDAO;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.database.CustomerDAO;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 
-public class QlyKhachHangFragment extends Fragment {
+public class CustomerFragment extends Fragment {
 
-     KhachHangDAO khachHangDAO = new KhachHangDAO(getActivity());
+     CustomerDAO customerDAO = new CustomerDAO(getActivity());
     private FirebaseAuth mAuth;
 
     public static CustomerAdapter khachHangAdapter;
     RecyclerView lv;
-    ArrayList<KhachHang> list = new ArrayList<>();
+    ArrayList<Customer> list = new ArrayList<>();
 
 
-    public QlyKhachHangFragment() {
+    public CustomerFragment() {
         // Required empty public constructor
     }
 
@@ -36,11 +36,11 @@ public class QlyKhachHangFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_qly_khachhang, container, false);
+        View view= inflater.inflate(R.layout.fragment_customer, container, false);
         lv = view.findViewById(R.id.rcvQlyKH);
         mAuth = FirebaseAuth.getInstance();
 
-        list = khachHangDAO.getAll();
+        list = customerDAO.getAll();
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
         khachHangAdapter = new CustomerAdapter(getActivity(),list);

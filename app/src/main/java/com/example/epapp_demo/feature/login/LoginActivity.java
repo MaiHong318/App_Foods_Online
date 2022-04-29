@@ -22,11 +22,11 @@ import androidx.core.app.ActivityCompat;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.admin.BottomNavigationAdmin;
-import com.example.epapp_demo.feature.cuahang.Bottom_Navigation_CuaHang_Activity;
+import com.example.epapp_demo.feature.cuahang.BottomNavigationStore;
 import com.example.epapp_demo.feature.home.BottomNavigation;
 import com.example.epapp_demo.feature.register.SignUpActivity;
-import com.example.epapp_demo.model.local.modul.CuaHang;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.modul.Store;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                         try {
-                            KhachHang user = dataSnapshot.getValue(KhachHang.class);
+                            Customer user = dataSnapshot.getValue(Customer.class);
                             Log.d("abcxyz", String.valueOf(user));
                             int phanquyen = user.getPhanQuyen();
                             if (phanquyen == 0) {
@@ -106,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                                 dialog.hide();
                             }
                         } catch (Exception e) {
-                            Intent i = new Intent(LoginActivity.this, Bottom_Navigation_CuaHang_Activity.class);
+                            Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
                             startActivity(i);
                             finish();
                             dialog.hide();
@@ -122,9 +122,9 @@ public class LoginActivity extends AppCompatActivity {
                 mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                        Store user = dataSnapshot.getValue(Store.class);
                         Log.d("abcxyz", String.valueOf(user));
-                        Intent i = new Intent(LoginActivity.this, Bottom_Navigation_CuaHang_Activity.class);
+                        Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
                         startActivity(i);
                         finish();
                         dialog.hide();
@@ -167,7 +167,7 @@ public class LoginActivity extends AppCompatActivity {
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                                                         try {
-                                                            KhachHang user = dataSnapshot.getValue(KhachHang.class);
+                                                            Customer user = dataSnapshot.getValue(Customer.class);
                                                             Log.d("abcxyz", String.valueOf(user));
                                                             int phanquyen = user.getPhanQuyen();
                                                             if (phanquyen == 0) {
@@ -180,7 +180,7 @@ public class LoginActivity extends AppCompatActivity {
                                                                 finish();
                                                             }
                                                         } catch (Exception e) {
-                                                            Intent i = new Intent(LoginActivity.this, Bottom_Navigation_CuaHang_Activity.class);
+                                                            Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
                                                             startActivity(i);
                                                             finish();
                                                         }
@@ -197,9 +197,9 @@ public class LoginActivity extends AppCompatActivity {
                                                 mData.child("CuaHang").child(userId).addValueEventListener(new ValueEventListener() {
                                                     @Override
                                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                                                        Store user = dataSnapshot.getValue(Store.class);
                                                         Log.d("abcxyz", String.valueOf(user));
-                                                        Intent i = new Intent(LoginActivity.this, Bottom_Navigation_CuaHang_Activity.class);
+                                                        Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
                                                         startActivity(i);
                                                         finish();
 

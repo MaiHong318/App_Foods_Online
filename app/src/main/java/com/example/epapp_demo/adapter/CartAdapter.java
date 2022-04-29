@@ -19,17 +19,17 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.home.CartFragment;
 
 import com.example.epapp_demo.model.local.database.DbHelper;
-import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
+import com.example.epapp_demo.model.local.modul.CartDetails;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
-    ArrayList<ChiTietGioHang> list;
+    ArrayList<CartDetails> list;
     Context context;
 
-    public CartAdapter(ArrayList<ChiTietGioHang> list, Context context){
+    public CartAdapter(ArrayList<CartDetails> list, Context context){
         this.list = list;
         this.context = context;
 

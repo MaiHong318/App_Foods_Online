@@ -10,30 +10,30 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.KhachHangDAO;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.database.CustomerDAO;
+import com.example.epapp_demo.model.local.modul.Customer;
 
 import java.util.ArrayList;
 
 public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<KhachHang> list;
-    KhachHangDAO khachHangDAO;
+    ArrayList<Customer> list;
+    CustomerDAO customerDAO;
 
 
 
-    public CustomerAdapter(Context context, ArrayList<KhachHang> list) {
+    public CustomerAdapter(Context context, ArrayList<Customer> list) {
         this.context = context;
         this.list = list;
-        khachHangDAO = new KhachHangDAO(context);
+        customerDAO = new CustomerDAO(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_customer,parent,false);
-        khachHangDAO = new KhachHangDAO(context);
+        customerDAO = new CustomerDAO(context);
         return new CustomerAdapter.ViewHolder(view);
     }
 

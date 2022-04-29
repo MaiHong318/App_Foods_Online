@@ -13,8 +13,8 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -24,15 +24,15 @@ import java.util.List;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
-    List<PhanLoai> list;
+    List<Categories> list;
     Context context;
-    PhanLoaiDAO phanLoaiDAO;
+    CategoriesDAO categoriesDAO;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    public CategoriesAdapter(List<PhanLoai> list, Context context) {
+    public CategoriesAdapter(List<Categories> list, Context context) {
         this.list = list;
         this.context = context;
-        phanLoaiDAO = new PhanLoaiDAO(context);
+        categoriesDAO = new CategoriesDAO(context);
     }
 
     public CategoriesAdapter(FragmentActivity activity) {
@@ -43,7 +43,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
     @Override
     public CategoriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.theloai_one_item, parent, false);
-        phanLoaiDAO = new PhanLoaiDAO(context);
+        categoriesDAO = new CategoriesDAO(context);
         return new CategoriesAdapter.ViewHolder(view);
     }
 

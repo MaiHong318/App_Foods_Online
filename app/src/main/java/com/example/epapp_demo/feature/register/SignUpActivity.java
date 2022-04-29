@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.epapp_demo.feature.home.BottomNavigation;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.login.LoginActivity;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity {
                                                 Toast.LENGTH_SHORT).show();
                                         userID = mAuth.getCurrentUser().getUid();
 //                                        String userId = mData.push().getKey();
-                                        KhachHang s = new KhachHang(userID,"","",password,"", email,"",0);
+                                        Customer s = new Customer(userID,"","",password,"", email,"",0);
                                         mData.child("KhachHang").child(userID).push();
                                         mData.child("KhachHang").child(userID).setValue(s);
 //                                        KhachHangDAO khachHangDAO = new KhachHangDAO(SignUpActivity.this);

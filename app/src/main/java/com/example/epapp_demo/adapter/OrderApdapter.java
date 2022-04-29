@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.DonHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
-import com.example.epapp_demo.model.local.modul.DonHang;
+import com.example.epapp_demo.model.local.database.OrderDAO;
+import com.example.epapp_demo.model.local.modul.Store;
+import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,22 +24,22 @@ import java.util.List;
 
 public class OrderApdapter extends RecyclerView.Adapter<OrderApdapter.ViewHolder> {
 
-    List<DonHang> list;
+    List<Order> list;
     Context context;
-    DonHangDAO donHangDAO;
+    OrderDAO orderDAO;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    public OrderApdapter(List<DonHang> list, Context context){
+    public OrderApdapter(List<Order> list, Context context){
         this.list = list;
         this.context = context;
-        donHangDAO = new DonHangDAO(context);
+        orderDAO = new OrderDAO(context);
     }
 
     @NonNull
     @Override
     public OrderApdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_order,parent,false);
-        donHangDAO= new DonHangDAO(context);
+        orderDAO = new OrderDAO(context);
         return new OrderApdapter.ViewHolder(view);
     }
 
@@ -55,7 +55,7 @@ public class OrderApdapter extends RecyclerView.Adapter<OrderApdapter.ViewHolder
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                CuaHang user = dataSnapshot.getValue(CuaHang.class);
+                Store user = dataSnapshot.getValue(Store.class);
 
                 holder.ivCuaHang.setText(user.getStoreName());
 

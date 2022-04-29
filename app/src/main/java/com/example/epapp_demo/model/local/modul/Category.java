@@ -1,7 +1,6 @@
 package com.example.epapp_demo.model.local.modul;
 
 public class Category {
-
     private String mCategoryName;
     private int mCategoryImage;
 

@@ -17,10 +17,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.MonAnDAO;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.MonAn;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.database.FoodDAO;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Food;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,22 +32,22 @@ import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
 
-    List<MonAn> list;
+    List<Food> list;
     Context context;
-    MonAnDAO monAnDAO;
+    FoodDAO foodDAO;
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference("MonAn");
-    public FoodAdapter(List<MonAn> list, Context context){
+    public FoodAdapter(List<Food> list, Context context){
         this.list = list;
         this.context = context;
-        monAnDAO = new MonAnDAO(context);
+        foodDAO = new FoodDAO(context);
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
-        monAnDAO= new MonAnDAO(context);
+        foodDAO = new FoodDAO(context);
         return new FoodAdapter.ViewHolder(view);
     }
 
@@ -62,10 +62,10 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         holder.gia_MA.setText(formatter.format(list.get(position).getGiaMonAn())+" VND");
         holder.moTa_MA.setText(list.get(position).getMoTa());
 
-        final MonAnDAO monAnDAO = new MonAnDAO(context);
+        final FoodDAO foodDAO = new FoodDAO(context);
 
         final FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        final ArrayList<PhanLoai> listPL = new PhanLoaiDAO(context).getAllspn();
+        final ArrayList<Categories> listPL = new CategoriesDAO(context).getAllspn();
         //delete
         holder.item_mon_an.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                     public void onClick(DialogInterface dialog, int which) {
 
                         String id = list.get(position).getMonAnID();
-                        monAnDAO.delete(id);
+                        foodDAO.delete(id);
 
                         notifyDataSetChanged();
                         dialog.dismiss();
@@ -114,7 +114,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 final EditText gia = view1.findViewById(R.id.edtGiaMon);
                 final EditText url = view1.findViewById(R.id.edtUrlMon);
 
-                MonAn ma = list.get(position);
+                Food ma = list.get(position);
                 tenmon.setText(ma.getNameMonAn());
                 mota.setText(ma.getMoTa());
                 gia.setText(String.valueOf(ma.getGiaMonAn()));
@@ -143,12 +143,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                         String mota1 = mota.getText().toString();
                         int gia1 = Integer.parseInt(gia.getText().toString());
                         String url1 = url.getText().toString();
-                        PhanLoai loai = (PhanLoai) spn.getSelectedItem();
+                        Categories loai = (Categories) spn.getSelectedItem();
                         String matheloai = loai.getLoaiID();
                         String idMonAn = list.get(position).getMonAnID();
                         String a = mAuth.getCurrentUser().getUid();
-                        MonAn s = new MonAn(idMonAn,tenmon1,gia1,url1,a,matheloai,mota1);
-                        monAnDAO.update(s, idMonAn);
+                        Food s = new Food(idMonAn,tenmon1,gia1,url1,a,matheloai,mota1);
+                        foodDAO.update(s, idMonAn);
                     }
                 }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override

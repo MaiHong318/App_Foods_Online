@@ -16,29 +16,28 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.PhanLoaiAdapter;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PhanLoaiFragment extends Fragment {
+public class CategoriesFragment extends Fragment {
 
     public static String id;
-    PhanLoaiDAO phanLoaiDAO= new PhanLoaiDAO(getActivity());
+    CategoriesDAO categoriesDAO = new CategoriesDAO(getActivity());
     private FirebaseAuth mAuth;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference("PhanLoai");
     String LoaiID;
     public static PhanLoaiAdapter phanLoaiAdapter;
     RecyclerView lv;
-    ArrayList<PhanLoai> list = new ArrayList<>();
+    ArrayList<Categories> list = new ArrayList<>();
     FloatingActionButton add;
 
-    public PhanLoaiFragment() {
+    public CategoriesFragment() {
         // Required empty public constructor
     }
 
@@ -46,12 +45,12 @@ public class PhanLoaiFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_phanloai, container, false);
+        View view= inflater.inflate(R.layout.fragment_categories, container, false);
         lv = view.findViewById(R.id.rcvPhanLoai);
         add = view.findViewById(R.id.btnAddPhanLoai);
         mAuth = FirebaseAuth.getInstance();
 
-        list = phanLoaiDAO.getAll();
+        list = categoriesDAO.getAll();
         phanLoaiAdapter= new PhanLoaiAdapter(list,getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
@@ -77,8 +76,8 @@ public class PhanLoaiFragment extends Fragment {
                         String anh1 = anh.getText().toString();
                         String tenl1 = tenloai.getText().toString();
                         String motal1 = motalaoi.getText().toString();
-                        PhanLoai s = new PhanLoai(null,tenl1,motal1,anh1);
-                        phanLoaiDAO.insert(s);
+                        Categories s = new Categories(null,tenl1,motal1,anh1);
+                        categoriesDAO.insert(s);
 
                     }
                 }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {

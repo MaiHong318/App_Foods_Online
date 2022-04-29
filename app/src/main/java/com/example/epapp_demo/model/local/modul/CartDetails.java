@@ -1,6 +1,6 @@
 package com.example.epapp_demo.model.local.modul;
 
-public class ChiTietGioHang {
+public class CartDetails {
     private int giohangId;
     private String MonAnId;
     private String tenMonAn;
@@ -8,10 +8,10 @@ public class ChiTietGioHang {
     private int soluong;
     private String hinh;
 
-    public ChiTietGioHang() {
+    public CartDetails() {
     }
 
-    public ChiTietGioHang(int giohangId, String monAnId, String tenMonAn, int gia, int soluong, String hinh) {
+    public CartDetails(int giohangId, String monAnId, String tenMonAn, int gia, int soluong, String hinh) {
         this.giohangId = giohangId;
         MonAnId = monAnId;
         this.tenMonAn = tenMonAn;

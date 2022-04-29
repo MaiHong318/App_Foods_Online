@@ -2,7 +2,7 @@ package com.example.epapp_demo.model.local.modul;
 
 import java.io.Serializable;
 
-public class PhanLoai implements Serializable {
+public class Categories implements Serializable {
     private String LoaiID;
     private String NameLoai;
     private String mota;
@@ -40,10 +40,10 @@ public class PhanLoai implements Serializable {
         this.hinhanh = hinhanh;
     }
 
-    public PhanLoai() {
+    public Categories() {
     }
 
-    public PhanLoai(String loaiID, String nameLoai, String mota, String hinhanh) {
+    public Categories(String loaiID, String nameLoai, String mota, String hinhanh) {
         LoaiID = loaiID;
         NameLoai = nameLoai;
         this.mota = mota;

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,20 +15,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.ShowCuaHangAdapter;
+import com.example.epapp_demo.feature.home.HomeFragment;
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 
 import java.util.ArrayList;
 
 
-public class ListRestaurantFragment extends Fragment {
-    RecyclerView recyclerCuaHang;
-    CuaHangDAO cuaHangDAO;
-    ArrayList <CuaHang> list = new ArrayList<>();
+public class ListStoreFragment extends Fragment {
+    RecyclerView rcvStore;
+    RelativeLayout btnBack;
+    StoreDAO storeDAO;
+    ArrayList <Store> list = new ArrayList<>();
     public static ShowCuaHangAdapter showcuaHangAdapter;
 
-    public ListRestaurantFragment() {
+    public ListStoreFragment() {
         // Required empty public constructor
     }
 
@@ -35,29 +38,40 @@ public class ListRestaurantFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_list_restaurant, container, false);
+        View view = inflater.inflate(R.layout.fragment_list_store, container, false);
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        cuaHangDAO = new CuaHangDAO(getActivity());
-        recyclerCuaHang = view.findViewById(R.id.recycler_CuaHang);
+        storeDAO = new StoreDAO(getActivity());
+        rcvStore = view.findViewById(R.id.rcvStore);
+        btnBack = view.findViewById(R.id.btn_back);
+
         LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerCuaHang.setLayoutManager(place);
-        list = cuaHangDAO.getShowCuahang();
+        rcvStore.setLayoutManager(place);
+        list = storeDAO.getShowCuahang();
         showcuaHangAdapter = new ShowCuaHangAdapter(list,getActivity());
-        recyclerCuaHang.setAdapter(showcuaHangAdapter);
+        rcvStore.setAdapter(showcuaHangAdapter);
         showcuaHangAdapter.setOnStoreItemClickListener(new ShowCuaHangAdapter.OnStoreClickListener() {
             @Override
             public void onStoreItemClick(int position) {
-                CuaHang cuaHang = list.get(position);
-                String idStore = cuaHang.getStoreID();
+                Store store = list.get(position);
+                String idStore = store.getStoreID();
                 ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.frame_layout, newFragment);
                 transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout,new HomeFragment());
                 transaction.commit();
             }
         });

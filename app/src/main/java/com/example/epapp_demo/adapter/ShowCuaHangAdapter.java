@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -22,25 +22,25 @@ import java.util.List;
 public class ShowCuaHangAdapter extends RecyclerView.Adapter<ShowCuaHangAdapter.ViewHolder> {
 
     Context context;
-    private List<CuaHang> cuaHangs = new ArrayList<>();
-    ArrayList<CuaHang> cuahang;
-    CuaHangDAO cuaHangDAO;
+    private List<Store> stores = new ArrayList<>();
+    ArrayList<Store> cuahang;
+    StoreDAO storeDAO;
     private ShowCuaHangAdapter.OnStoreClickListener mListener;
     public void setOnStoreItemClickListener (ShowCuaHangAdapter.OnStoreClickListener onStoreItemClickListener){
         mListener = onStoreItemClickListener;
     }
-    public ShowCuaHangAdapter(ArrayList<CuaHang> cuahang, Context context){
+    public ShowCuaHangAdapter(ArrayList<Store> cuahang, Context context){
         this.cuahang = cuahang;
         this.context = context;
-        cuaHangDAO = new CuaHangDAO(context);
+        storeDAO = new StoreDAO(context);
     }
 
 
     @NonNull
     @Override
     public ShowCuaHangAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.quanan_one_item,parent,false);
-        cuaHangDAO = new CuaHangDAO(context);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_one_store,parent,false);
+        storeDAO = new StoreDAO(context);
         return new ShowCuaHangAdapter.ViewHolder(view);
     }
 

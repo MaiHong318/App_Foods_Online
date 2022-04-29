@@ -10,42 +10,42 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowPhanLoaiAdapter  extends RecyclerView.Adapter<ShowPhanLoaiAdapter.ViewHolder> {
+public class ShowCategoriesAdapter extends RecyclerView.Adapter<ShowCategoriesAdapter.ViewHolder> {
 
     Context context;
-    private List<PhanLoai> phanLoais = new ArrayList<>();
-    ArrayList<PhanLoai> phanloai;
-    PhanLoaiDAO phanLoaiDAO;
+    private List<Categories> categories = new ArrayList<>();
+    ArrayList<Categories> phanloai;
+    CategoriesDAO categoriesDAO;
 
-    private ShowPhanLoaiAdapter.OnStoreClickListener mListener;
+    private ShowCategoriesAdapter.OnStoreClickListener mListener;
 
 
-    public void setOnStoreItemClickListener (ShowPhanLoaiAdapter.OnStoreClickListener onStoreItemClickListener){
+    public void setOnStoreItemClickListener (ShowCategoriesAdapter.OnStoreClickListener onStoreItemClickListener){
         mListener = onStoreItemClickListener;
     }
-    public ShowPhanLoaiAdapter(ArrayList<PhanLoai> phanloai, Context context){
+    public ShowCategoriesAdapter(ArrayList<Categories> phanloai, Context context){
         this.phanloai = phanloai;
         this.context = context;
-        phanLoaiDAO = new PhanLoaiDAO(context);
+        categoriesDAO = new CategoriesDAO(context);
     }
 
     @NonNull
     @Override
-    public ShowPhanLoaiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ShowCategoriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_categories,parent,false);
-        phanLoaiDAO = new PhanLoaiDAO(context);
-        return new ShowPhanLoaiAdapter.ViewHolder(view);
+        categoriesDAO = new CategoriesDAO(context);
+        return new ShowCategoriesAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShowPhanLoaiAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ShowCategoriesAdapter.ViewHolder holder, int position) {
         try {
             Picasso.get().load(phanloai.get(position).getHinhanh()).into(holder.ivPhanLoaiPicture);
             holder.tvNameLoai.setText(phanloai.get(position).getNameLoai());

@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.modul.CuaHang_temp;
+import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.example.epapp_demo.model.local.modul.Place;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ItemHolder>{
     private List<Place> mPlaces = new ArrayList<>();
     private Context context;
     int resource;
-    List<CuaHang_temp> objects;
+    List<NearbyStore> objects;
     private OnPlaceClickListener mListener;
     public void setOnPlaceItemClickListener (OnPlaceClickListener onPlaceItemClickListener){
         mListener = onPlaceItemClickListener;
@@ -64,7 +64,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ItemHolder>{
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.quanan_one_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_one_store, viewGroup, false);
         ItemHolder holder = new ItemHolder(view, mListener);
         return holder;
     }

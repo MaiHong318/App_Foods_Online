@@ -17,7 +17,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.setting.SettingFragment;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -60,7 +60,7 @@ public class ChangeProfileFragment extends Fragment {
        databaseReference1.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                KhachHang nguoiDung = dataSnapshot.getValue(KhachHang.class);
+                Customer nguoiDung = dataSnapshot.getValue(Customer.class);
                 edtHoTen.setText(nguoiDung.getUserName());
                 edtDiaChi.setText(nguoiDung.getUserDiaChi());
                 pass = nguoiDung.getUserPass();

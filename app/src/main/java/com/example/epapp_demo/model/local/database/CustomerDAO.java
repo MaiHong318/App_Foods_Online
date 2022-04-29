@@ -5,8 +5,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.epapp_demo.feature.admin.QlyKhachHangFragment;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.feature.admin.CustomerFragment;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -18,18 +18,18 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class KhachHangDAO {
+public class CustomerDAO {
     DatabaseReference mDatabase;
     Context context;
     String KhachHangID;
-    public KhachHangDAO(Context context) {
+    public CustomerDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("KhachHang");
         this.context = context;
     }
 
 
-    public ArrayList<KhachHang> getAll() {
-            final ArrayList<KhachHang> list = new ArrayList<KhachHang>();
+    public ArrayList<Customer> getAll() {
+            final ArrayList<Customer> list = new ArrayList<Customer>();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -39,9 +39,9 @@ public class KhachHangDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        KhachHang sach = next.getValue(KhachHang.class);
+                        Customer sach = next.getValue(Customer.class);
                         list.add(sach);
-                        QlyKhachHangFragment.khachHangAdapter.notifyDataSetChanged();
+                        CustomerFragment.khachHangAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -53,7 +53,7 @@ public class KhachHangDAO {
         return list;
     }
 
-    public void update(final KhachHang s) {
+    public void update(final Customer s) {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

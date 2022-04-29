@@ -6,14 +6,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
-import com.example.epapp_demo.model.local.modul.GioHang;
-import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.modul.CartDetails;
+import com.example.epapp_demo.model.local.modul.Cart;
+import com.example.epapp_demo.model.local.modul.Food;
 
 import java.util.ArrayList;
 
 public class DbHelper extends SQLiteOpenHelper {
-    public static ArrayList<GioHang> giohang = new ArrayList<>();
+    public static ArrayList<Cart> giohang = new ArrayList<>();
     SQLiteDatabase db;
     public DbHelper(Context context){
         super(context,"giohang",null,1);
@@ -29,7 +29,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(sql);
     }
 
-    public void insertGH(GioHang gh){
+    public void insertGH(Cart gh){
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("DonHangId", gh.getStoreID());
@@ -38,13 +38,13 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert("giohang", null, values);
     }
 
-    public void insertMonAn(MonAn monAn){
+    public void insertMonAn(Food food){
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("MonAnId", monAn.getMonAnID());
-        values.put("NameMonAn", monAn.getNameMonAn());
-        values.put("GiaMonAn", monAn.getGiaMonAn());
-        values.put("HinhAnhMonAn", monAn.getHinhAnhMonAn());
+        values.put("MonAnId", food.getMonAnID());
+        values.put("NameMonAn", food.getNameMonAn());
+        values.put("GiaMonAn", food.getGiaMonAn());
+        values.put("HinhAnhMonAn", food.getHinhAnhMonAn());
         db.insert("MonAn", null, values);
     }
 
@@ -54,15 +54,15 @@ public class DbHelper extends SQLiteOpenHelper {
         db.delete("MonAn", "MonAnId=?",new String[]{id});
     }
 
-    public ArrayList<ChiTietGioHang> listGioHang(){
-        ArrayList<ChiTietGioHang> list = new ArrayList<>();
+    public ArrayList<CartDetails> listGioHang(){
+        ArrayList<CartDetails> list = new ArrayList<>();
         db = this.getReadableDatabase();
         String sql = "Select g.GioHangId, g.MonAnId, m.NameMonAn, m.GiaMonAn, g.SoLuong, m.HinhAnhMonAn " +
                 " from giohang g inner join MonAn m on g.MonAnId=m.MonAnId";
         Cursor cs = db.rawQuery(sql, null);
         cs.moveToFirst();
         while (!cs.isAfterLast()){
-            ChiTietGioHang ctgh = new ChiTietGioHang(cs.getInt(0), cs.getString(1), cs.getString(2)
+            CartDetails ctgh = new CartDetails(cs.getInt(0), cs.getString(1), cs.getString(2)
                     , cs.getInt(3), cs.getInt(4), cs.getString(5));
             list.add(ctgh);
             cs.moveToNext();

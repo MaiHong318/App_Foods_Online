@@ -13,21 +13,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Categories;
 
 import java.util.ArrayList;
 
 public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<PhanLoai> phanloai;
-    PhanLoaiDAO phanLoaiDAO;
+    ArrayList<Categories> phanloai;
+    CategoriesDAO categoriesDAO;
 
-    public PhanLoaiAdapter(ArrayList<PhanLoai> phanloai, Context context){
+    public PhanLoaiAdapter(ArrayList<Categories> phanloai, Context context){
         this.phanloai =phanloai;
         this.context = context;
-        phanLoaiDAO = new PhanLoaiDAO(context);
+        categoriesDAO = new CategoriesDAO(context);
     }
 
     public PhanLoaiAdapter(Context context) {
@@ -37,7 +37,7 @@ public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHo
     @Override
     public PhanLoaiAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_categories,parent,false);
-        phanLoaiDAO = new PhanLoaiDAO (context);
+        categoriesDAO = new CategoriesDAO(context);
         return new ViewHolder(view);
     }
 
@@ -70,7 +70,7 @@ public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHo
         public void onClick(View v) {
             final int position = getLayoutPosition();
             if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
-            final PhanLoai gd =phanloai.get(position);
+            final Categories gd =phanloai.get(position);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -91,8 +91,8 @@ public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHo
                     final String ten1 = ten.getText().toString();
                     final String mota1 = mota.getText().toString();
                     final String anh1 = anh.getText().toString();
-                    PhanLoai s = new PhanLoai(gd.getLoaiID(),ten1,mota1,anh1);
-                    phanLoaiDAO.update(s);
+                    Categories s = new Categories(gd.getLoaiID(),ten1,mota1,anh1);
+                    categoriesDAO.update(s);
                 }
             });
             builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
@@ -108,7 +108,7 @@ public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHo
         public boolean onLongClick(View view) {
             final int position = getLayoutPosition();
             if (getAdapterPosition() == RecyclerView.NO_POSITION);
-            final PhanLoai gd =phanloai.get(position);
+            final Categories gd =phanloai.get(position);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater layoutInflater = LayoutInflater.from(context);
@@ -120,8 +120,8 @@ public class PhanLoaiAdapter extends RecyclerView.Adapter<PhanLoaiAdapter.ViewHo
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
 
-                    PhanLoai s = new PhanLoai(gd.getLoaiID(),gd.getNameLoai(),gd.getMota(),gd.getHinhanh());
-                    phanLoaiDAO.delete(s);
+                    Categories s = new Categories(gd.getLoaiID(),gd.getNameLoai(),gd.getMota(),gd.getHinhanh());
+                    categoriesDAO.delete(s);
                 }
             });
             builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {

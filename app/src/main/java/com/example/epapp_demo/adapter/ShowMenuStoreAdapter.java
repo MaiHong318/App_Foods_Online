@@ -11,8 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Food;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -21,40 +21,40 @@ import java.util.List;
 
 public class ShowMenuStoreAdapter extends RecyclerView.Adapter<ShowMenuStoreAdapter.ViewHolder> {
     Context context;
-    private List<MonAn> monAns = new ArrayList<>();
-    ArrayList<MonAn> monAn;
-    CuaHangDAO cuaHangDAO;
+    private List<Food> foods = new ArrayList<>();
+    ArrayList<Food> food;
+    StoreDAO storeDAO;
     RecyclerView rcvMenu;
     DecimalFormat formatter = new DecimalFormat("###,###,###");
     private ShowMenuStoreAdapter.OnMenuClickListener mListener;
     public void setOnMenuItemClickListener (ShowMenuStoreAdapter.OnMenuClickListener onMenuItemClickListener){
         mListener = onMenuItemClickListener;
     }
-    public ShowMenuStoreAdapter(ArrayList<MonAn> monAn, Context context){
-        this.monAn = monAn;
+    public ShowMenuStoreAdapter(ArrayList<Food> food, Context context){
+        this.food = food;
         this.context = context;
-        cuaHangDAO = new CuaHangDAO(context);
+        storeDAO = new StoreDAO(context);
     }
 
     @NonNull
     @Override
     public ShowMenuStoreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
-        cuaHangDAO = new CuaHangDAO(context);
+        storeDAO = new StoreDAO(context);
         return new ShowMenuStoreAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Picasso.get().load(monAn.get(position).getHinhAnhMonAn()).into(holder.ivHinhMonAn);
-        holder.tenMonAn.setText(monAn.get(position).getNameMonAn());
-        holder.moTaMonAn.setText(monAn.get(position).getMoTa());
-        holder.giaMonAn.setText(formatter.format(monAn.get(position).getGiaMonAn())+" VND");
+        Picasso.get().load(food.get(position).getHinhAnhMonAn()).into(holder.ivHinhMonAn);
+        holder.tenMonAn.setText(food.get(position).getNameMonAn());
+        holder.moTaMonAn.setText(food.get(position).getMoTa());
+        holder.giaMonAn.setText(formatter.format(food.get(position).getGiaMonAn())+" VND");
     }
 
     @Override
     public int getItemCount() {
-        return monAn.size();
+        return food.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

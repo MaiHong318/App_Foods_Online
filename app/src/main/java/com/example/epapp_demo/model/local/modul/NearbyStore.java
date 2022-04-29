@@ -2,7 +2,7 @@ package com.example.epapp_demo.model.local.modul;
 
 import java.io.Serializable;
 
-public class CuaHang_temp implements Serializable {
+public class NearbyStore implements Serializable {
     private String macuahang;
     private String tencuahang;
     private String diachi;
@@ -12,7 +12,7 @@ public class CuaHang_temp implements Serializable {
     private Double longitude;
     private Double khoangcach;
 
-    public CuaHang_temp(String macuahang, String tencuahang, String diachi, Double rating, String hinhanh, Double latitude, Double longitude, Double khoangcach) {
+    public NearbyStore(String macuahang, String tencuahang, String diachi, Double rating, String hinhanh, Double latitude, Double longitude, Double khoangcach) {
         this.macuahang = macuahang;
         this.tencuahang = tencuahang;
         this.diachi = diachi;
@@ -23,7 +23,7 @@ public class CuaHang_temp implements Serializable {
         this.khoangcach = khoangcach;
     }
 
-    public CuaHang_temp() {
+    public NearbyStore() {
     }
 
     public String getMacuahang() {

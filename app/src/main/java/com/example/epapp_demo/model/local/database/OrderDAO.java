@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.home.OrderFragment;
 import com.example.epapp_demo.feature.cuahang.Hoat_Dong_Cua_Hang_Fragment;
-import com.example.epapp_demo.model.local.modul.DonHang;
+import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -16,24 +16,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class DonHangDAO {
+public class OrderDAO {
     DatabaseReference mDatabase;
     Context context;
-    public DonHangDAO(Context context) {
+    public OrderDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("DonHang");
         this.context = context;
     }
 
 
-    public ArrayList<DonHang> getDonByKhachID(String idKhachHang) {
-        final ArrayList<DonHang> list = new ArrayList<DonHang>();
+    public ArrayList<Order> getDonByKhachID(String idKhachHang) {
+        final ArrayList<Order> list = new ArrayList<Order>();
         mDatabase.orderByChild("userID").equalTo(idKhachHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     ds.getKey();
-                    DonHang hd = ds.getValue(DonHang.class);
+                    Order hd = ds.getValue(Order.class);
                     Log.d("ab1", hd.getStoreID());
                     list.add(hd);
 
@@ -48,15 +48,15 @@ public class DonHangDAO {
         });
         return list;
     }
-    public ArrayList<DonHang> getDonByCuaHangID(String idCuaHang) {
-        final ArrayList<DonHang> list = new ArrayList<DonHang>();
+    public ArrayList<Order> getDonByCuaHangID(String idCuaHang) {
+        final ArrayList<Order> list = new ArrayList<Order>();
         mDatabase.orderByChild("storeID").equalTo(idCuaHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     ds.getKey();
-                    DonHang hd = ds.getValue(DonHang.class);
+                    Order hd = ds.getValue(Order.class);
                     Log.d("ab1", hd.getStoreID());
                     list.add(hd);
 

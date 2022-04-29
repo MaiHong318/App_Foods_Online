@@ -22,13 +22,13 @@ import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 
-public class Home_Cua_Hang_Fragment extends Fragment {
+public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
     RecyclerView rcvCategories, rcvQuanGoiY;
     PlaceAdapterCH placeAdapter;
     public static CategoriesAdapter1 categoriesAdapter;
     ArrayList<Category> list = new ArrayList<>();
-    public Home_Cua_Hang_Fragment() {
+    public HomeStoreFragment() {
         // Required empty public constructor
     }
 
@@ -36,7 +36,7 @@ public class Home_Cua_Hang_Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home__cua__hang_, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_store, container, false);
 
         return view;
     }

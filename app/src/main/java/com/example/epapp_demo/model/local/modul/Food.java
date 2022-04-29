@@ -2,7 +2,7 @@ package com.example.epapp_demo.model.local.modul;
 
 import java.io.Serializable;
 
-public class MonAn implements Serializable {
+public class Food implements Serializable {
     private String MonAnID;
     private String NameMonAn;
     private int GiaMonAn;
@@ -11,7 +11,7 @@ public class MonAn implements Serializable {
     private String PhanLoaiID;
     private String MoTa;
 
-    public MonAn() {
+    public Food() {
     }
 
     @Override
@@ -85,7 +85,7 @@ public class MonAn implements Serializable {
         MoTa = moTa;
     }
 
-    public MonAn(String monAnID, String nameMonAn, int giaMonAn, String hinhAnhMonAn, String storeID, String phanLoaiID, String moTa) {
+    public Food(String monAnID, String nameMonAn, int giaMonAn, String hinhAnhMonAn, String storeID, String phanLoaiID, String moTa) {
         MonAnID = monAnID;
         NameMonAn = nameMonAn;
         GiaMonAn = giaMonAn;

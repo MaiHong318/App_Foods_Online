@@ -5,12 +5,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.epapp_demo.feature.admin.ListPhanLoaiFragment;
-import com.example.epapp_demo.feature.admin.PhanLoaiFragment;
+import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
+import com.example.epapp_demo.feature.admin.CategoriesFragment;
 
 
 import com.example.epapp_demo.feature.home.HomeFragment;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,16 +22,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PhanLoaiDAO {
+public class CategoriesDAO {
     DatabaseReference mDatabase;
     Context context;
     String PhanLoaiID;
-    public PhanLoaiDAO(Context context) {
+    public CategoriesDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("PhanLoai");
         this.context = context;
     }
 
-    public void insert(PhanLoai s) {
+    public void insert(Categories s) {
         PhanLoaiID = mDatabase.push().getKey();
         String MaSach = mDatabase.child(PhanLoaiID).getKey();
         s.setLoaiID(MaSach);
@@ -52,8 +52,8 @@ public class PhanLoaiDAO {
     }
 
 
-    public ArrayList<PhanLoai> getAll() {
-        final ArrayList<PhanLoai> list = new ArrayList<PhanLoai>();
+    public ArrayList<Categories> getAll() {
+        final ArrayList<Categories> list = new ArrayList<Categories>();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -63,9 +63,9 @@ public class PhanLoaiDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        PhanLoai pl = next.getValue(PhanLoai.class);
+                        Categories pl = next.getValue(Categories.class);
                         list.add(pl);
-                        PhanLoaiFragment.phanLoaiAdapter.notifyDataSetChanged();
+                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -77,8 +77,8 @@ public class PhanLoaiDAO {
         return list;
     }
 
-    public ArrayList<PhanLoai> getAllMenu() {
-        final ArrayList<PhanLoai> list = new ArrayList<PhanLoai>();
+    public ArrayList<Categories> getAllMenu() {
+        final ArrayList<Categories> list = new ArrayList<Categories>();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -88,7 +88,7 @@ public class PhanLoaiDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        PhanLoai pl = next.getValue(PhanLoai.class);
+                        Categories pl = next.getValue(Categories.class);
                         list.add(pl);
                         HomeFragment.categoriesAdapter.notifyDataSetChanged();
                     }
@@ -104,8 +104,8 @@ public class PhanLoaiDAO {
     }
 
 
-    public ArrayList<PhanLoai> getAllspn() {
-        final ArrayList<PhanLoai> list = new ArrayList<PhanLoai>();
+    public ArrayList<Categories> getAllspn() {
+        final ArrayList<Categories> list = new ArrayList<Categories>();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -115,7 +115,7 @@ public class PhanLoaiDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        PhanLoai pl = next.getValue(PhanLoai.class);
+                        Categories pl = next.getValue(Categories.class);
                         list.add(pl);
                     }
                 }
@@ -128,8 +128,8 @@ public class PhanLoaiDAO {
         return list;
     }
 
-    public ArrayList<PhanLoai> getShowCat() {
-        final ArrayList<PhanLoai> list = new ArrayList<PhanLoai>();
+    public ArrayList<Categories> getShowCat() {
+        final ArrayList<Categories> list = new ArrayList<Categories>();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -139,9 +139,9 @@ public class PhanLoaiDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        PhanLoai pl = next.getValue(PhanLoai.class);
+                        Categories pl = next.getValue(Categories.class);
                         list.add(pl);
-                        ListPhanLoaiFragment.showPhanLoaiAdapter.notifyDataSetChanged();
+                        ListCategoriesFragment.showCategoriesAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -153,7 +153,7 @@ public class PhanLoaiDAO {
         return list;
     }
 
-    public void delete(final PhanLoai s) {
+    public void delete(final Categories s) {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -165,7 +165,7 @@ public class PhanLoaiDAO {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        PhanLoaiFragment.phanLoaiAdapter.notifyDataSetChanged();
+                                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
                                         Log.d("delete","delete Thanh cong");
                                     }
                                 })
@@ -184,7 +184,7 @@ public class PhanLoaiDAO {
             }
         });
     }
-    public void update(final PhanLoai s) {
+    public void update(final Categories s) {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -192,7 +192,7 @@ public class PhanLoaiDAO {
                     if (data.child("loaiID").getValue(String.class).equalsIgnoreCase(s.getLoaiID())) {
                         PhanLoaiID = data.getKey();
                         Log.d("getKey", "onCreate: key :" + PhanLoaiID);
-                        PhanLoaiFragment.phanLoaiAdapter.notifyDataSetChanged();
+                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
                         mDatabase.child(PhanLoaiID).setValue(s)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

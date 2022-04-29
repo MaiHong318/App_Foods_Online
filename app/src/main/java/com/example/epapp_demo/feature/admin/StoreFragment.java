@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CuaHangAdapter;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,18 +30,18 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class QlyCuaHangFragment extends Fragment {
+public class StoreFragment extends Fragment {
 
-    CuaHangDAO cuaHangDAO = new CuaHangDAO(getActivity());
+    StoreDAO storeDAO = new StoreDAO(getActivity());
     private FirebaseAuth mAuth;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     String userID;
     public static CuaHangAdapter cuaHangAdapte;
     RecyclerView lv;
-    ArrayList<CuaHang> list = new ArrayList<>();
+    ArrayList<Store> list = new ArrayList<>();
     FloatingActionButton add;
 
-    public QlyCuaHangFragment() {
+    public StoreFragment() {
         // Required empty public constructor
     }
 
@@ -49,12 +49,12 @@ public class QlyCuaHangFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_qly_cuahang, container, false);
+        View view= inflater.inflate(R.layout.fragment_store, container, false);
         lv = view.findViewById(R.id.rcvQlyCH);
         add = view.findViewById(R.id.btnAddCH);
         mAuth = FirebaseAuth.getInstance();
 
-        list = cuaHangDAO.getAll();
+        list = storeDAO.getAll();
         cuaHangAdapte = new CuaHangAdapter(list,getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
@@ -89,7 +89,7 @@ public class QlyCuaHangFragment extends Fragment {
                                             Toast.makeText(getActivity(), "Đăng kí thành công",
                                                     Toast.LENGTH_SHORT).show();
                                             userID = mAuth.getCurrentUser().getUid();
-                                            CuaHang s = new CuaHang(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);
+                                            Store s = new Store(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);
                                             mData.child("CuaHang").child(userID).push();
                                             mData.child("CuaHang").child(userID).setValue(s);
                                             Log.d("Status","Success");

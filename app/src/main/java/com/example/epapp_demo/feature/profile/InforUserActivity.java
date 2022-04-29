@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.feature.home.BottomNavigation;
-import com.example.epapp_demo.model.local.modul.KhachHang;
+import com.example.epapp_demo.model.local.modul.Customer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -88,7 +88,7 @@ public class InforUserActivity extends AppCompatActivity {
                         mData.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                KhachHang user = new KhachHang(uid, name, address,pass,phone,email,ngaysinh,0);
+                                Customer user = new Customer(uid, name, address,pass,phone,email,ngaysinh,0);
                                 mData.child("KhachHang").child(uid).setValue(user);
                                 Intent intent = new Intent(InforUserActivity.this, BottomNavigation.class);
                                 intent.putExtra("uid", uid);

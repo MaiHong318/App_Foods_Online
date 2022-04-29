@@ -8,15 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
+import com.example.epapp_demo.model.local.modul.Categories;
 
 import java.util.List;
 
 public class SpinnerPLAdapter extends BaseAdapter {
     Context context;
-    List<? extends PhanLoai> list;
+    List<? extends Categories> list;
 
-    public SpinnerPLAdapter(Context context, List<? extends PhanLoai> list) {
+    public SpinnerPLAdapter(Context context, List<? extends Categories> list) {
         this.context = context;
         this.list = list;
     }

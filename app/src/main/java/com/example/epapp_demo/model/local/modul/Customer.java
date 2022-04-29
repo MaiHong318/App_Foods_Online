@@ -2,7 +2,7 @@ package com.example.epapp_demo.model.local.modul;
 
 import java.io.Serializable;
 
-public class KhachHang implements Serializable {
+public class Customer implements Serializable {
     private String UserID;
     private String UserName;
     private String UserDiaChi;
@@ -72,10 +72,10 @@ public class KhachHang implements Serializable {
         PhanQuyen = phanQuyen;
     }
 
-    public KhachHang() {
+    public Customer() {
     }
 
-    public KhachHang(String userID, String userName, String userDiaChi, String userPass, String userSDT, String userMail, String userNgaySinh, int phanQuyen) {
+    public Customer(String userID, String userName, String userDiaChi, String userPass, String userSDT, String userMail, String userNgaySinh, int phanQuyen) {
         UserID = userID;
         UserName = userName;
         UserDiaChi = userDiaChi;

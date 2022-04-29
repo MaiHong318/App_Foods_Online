@@ -27,7 +27,7 @@ public class BottomNavigationAdmin extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         // set fragment home đầu tiên
         if (savedInstanceState == null) {
-            QlyCuaHangFragment gt  = new QlyCuaHangFragment();
+            StoreFragment gt  = new StoreFragment();
             FragmentManager mn = getSupportFragmentManager();
             mn.beginTransaction()
                     .add(R.id.fragment_2, gt)
@@ -42,13 +42,13 @@ public class BottomNavigationAdmin extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.qlycuahang:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new QlyCuaHangFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new StoreFragment()).commit();
                     return true;
                 case R.id.qlynguoidung:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new QlyKhachHangFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CustomerFragment()).commit();
                     return true;
                 case R.id.theloaimonan:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new PhanLoaiFragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CategoriesFragment()).commit();
                     return true;
 
                 case R.id.dangxuat:

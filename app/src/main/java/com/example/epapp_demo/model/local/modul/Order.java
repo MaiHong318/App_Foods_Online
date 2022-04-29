@@ -3,7 +3,7 @@ package com.example.epapp_demo.model.local.modul;
 import java.io.Serializable;
 import java.util.List;
 
-public class DonHang implements Serializable {
+public class Order implements Serializable {
     private String DHID;
     private String UserID;
     private String StoreID;
@@ -50,10 +50,10 @@ public class DonHang implements Serializable {
         this.DHThoiGian = dHThoiGian;
     }
 
-    public DonHang() {
+    public Order() {
     }
 
-    public DonHang(String DHID, String userID, String storeID, String dHTrangThai, String dHThoiGian) {
+    public Order(String DHID, String userID, String storeID, String dHTrangThai, String dHThoiGian) {
         this.DHID = DHID;
         UserID = userID;
         StoreID = storeID;

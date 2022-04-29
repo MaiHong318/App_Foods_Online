@@ -1,7 +1,7 @@
 package com.example.epapp_demo.model.local.database;
 
 
-import static com.example.epapp_demo.feature.home.HomeFragment.cuaHangAdapter_temp;
+import static com.example.epapp_demo.feature.home.HomeFragment.nearbyStoreAdapter_;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,10 +17,10 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.example.epapp_demo.feature.cuahang.ListRestaurantFragment;
-import com.example.epapp_demo.feature.admin.QlyCuaHangFragment;
-import com.example.epapp_demo.model.local.modul.CuaHang;
-import com.example.epapp_demo.model.local.modul.CuaHang_temp;
+import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
+import com.example.epapp_demo.feature.admin.StoreFragment;
+import com.example.epapp_demo.model.local.modul.Store;
+import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -36,12 +36,12 @@ import java.util.Iterator;
 import java.util.List;
 
 
-public class CuaHangDAO implements LocationListener {
+public class StoreDAO implements LocationListener {
     DatabaseReference mDatabase;
     Context context;
     String CuaHangID;
-    List<CuaHang_temp> temp = new ArrayList<>();
-    public CuaHangDAO(Context context) {
+    List<NearbyStore> temp = new ArrayList<>();
+    public StoreDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("CuaHang");
         this.context = context;
     }
@@ -57,9 +57,9 @@ public class CuaHangDAO implements LocationListener {
         return d;
     }
 
-    public ArrayList<CuaHang> getAll() {
+    public ArrayList<Store> getAll() {
 
-        final ArrayList<CuaHang> list = new ArrayList<CuaHang>();
+        final ArrayList<Store> list = new ArrayList<Store>();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,9 +70,9 @@ public class CuaHangDAO implements LocationListener {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        CuaHang sach = next.getValue(CuaHang.class);
+                        Store sach = next.getValue(Store.class);
                         list.add(sach);
-                       QlyCuaHangFragment.cuaHangAdapte.notifyDataSetChanged();
+                       StoreFragment.cuaHangAdapte.notifyDataSetChanged();
                     }
                 }
             }
@@ -83,9 +83,9 @@ public class CuaHangDAO implements LocationListener {
         });
         return list;
     }
-    public ArrayList<CuaHang> getShowCuahang() {
+    public ArrayList<Store> getShowCuahang() {
 
-        final ArrayList<CuaHang> list = new ArrayList<CuaHang>();
+        final ArrayList<Store> list = new ArrayList<Store>();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -96,9 +96,9 @@ public class CuaHangDAO implements LocationListener {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        CuaHang sach = next.getValue(CuaHang.class);
+                        Store sach = next.getValue(Store.class);
                         list.add(sach);
-                        ListRestaurantFragment.showcuaHangAdapter.notifyDataSetChanged();
+                        ListStoreFragment.showcuaHangAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -110,7 +110,7 @@ public class CuaHangDAO implements LocationListener {
         return list;
     }
 
-    public void update(final CuaHang s) {
+    public void update(final Store s) {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -142,7 +142,7 @@ public class CuaHangDAO implements LocationListener {
         });
     }
     //get CuaHang within 10km
-    public List<CuaHang_temp> getTemp(Context context) {
+    public List<NearbyStore> getTemp(Context context) {
         LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
@@ -162,19 +162,19 @@ public class CuaHangDAO implements LocationListener {
                 temp.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
                     //convert ra đối tượng HoaDon
-                    CuaHang cuaHang = data.getValue(CuaHang.class);
+                    Store store = data.getValue(Store.class);
                     try{
                         if (location != null) {
-                            double khoangcach = distanceBetween2Points(location.getLatitude(), location.getLongitude(), cuaHang.getStoreViDo(), cuaHang.getStoreKinhDo());
+                            double khoangcach = distanceBetween2Points(location.getLatitude(), location.getLongitude(), store.getStoreViDo(), store.getStoreKinhDo());
                             if (khoangcach > 0) {
-                                temp.add(new CuaHang_temp(
-                                        cuaHang.getStoreID(),
-                                        cuaHang.getStoreName(),
-                                        cuaHang.getStoreDiaChi(),
-                                        cuaHang.getStoreDanhGia(),
-                                        cuaHang.getStoreHinhAnh(),
-                                        cuaHang.getStoreViDo(),
-                                        cuaHang.getStoreKinhDo(),
+                                temp.add(new NearbyStore(
+                                        store.getStoreID(),
+                                        store.getStoreName(),
+                                        store.getStoreDiaChi(),
+                                        store.getStoreDanhGia(),
+                                        store.getStoreHinhAnh(),
+                                        store.getStoreViDo(),
+                                        store.getStoreKinhDo(),
                                         khoangcach
                                 ));
                             }
@@ -185,14 +185,14 @@ public class CuaHangDAO implements LocationListener {
                 }
 
                 //sort khoảng cách đến quán ăn theo thứ tự tăng dần
-                Collections.sort(temp, new Comparator<CuaHang_temp>() {
+                Collections.sort(temp, new Comparator<NearbyStore>() {
                     @Override
-                    public int compare(CuaHang_temp o1, CuaHang_temp o2) {
+                    public int compare(NearbyStore o1, NearbyStore o2) {
                         return Double.valueOf(o1.getKhoangcach()).compareTo(o2.getKhoangcach());
                     }
                 });
 
-                cuaHangAdapter_temp.notifyDataSetChanged();
+                nearbyStoreAdapter_.notifyDataSetChanged();
 
             }
 

@@ -18,26 +18,26 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.FoodAdapter;
-import com.example.epapp_demo.model.local.database.MonAnDAO;
-import com.example.epapp_demo.model.local.modul.MonAn;
-import com.example.epapp_demo.model.local.modul.PhanLoai;
-import com.example.epapp_demo.model.local.database.PhanLoaiDAO;
+import com.example.epapp_demo.model.local.database.FoodDAO;
+import com.example.epapp_demo.model.local.modul.Food;
+import com.example.epapp_demo.model.local.modul.Categories;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import java.util.ArrayList;
 
-public class Mon_An_Cua_Hang_Fragment extends Fragment {
+public class FoodOfStoreFragment extends Fragment {
 
     RecyclerView rcv;
     FloatingActionButton add;
 
-    MonAnDAO monAnDAO = new MonAnDAO(getActivity());
+    FoodDAO foodDAO = new FoodDAO(getActivity());
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public static FoodAdapter monAnAdapter;
-    ArrayList<MonAn> list = new ArrayList<>();
+    ArrayList<Food> list = new ArrayList<>();
 
-    public Mon_An_Cua_Hang_Fragment() {
+    public FoodOfStoreFragment() {
         // Required empty public constructor
     }
 
@@ -45,7 +45,7 @@ public class Mon_An_Cua_Hang_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_mon__an__cua__hang_, container, false);
+        View view= inflater.inflate(R.layout.fragment_food_of_store, container, false);
         rcv = view.findViewById(R.id.recycler_mon_an_cua_hang);
         add = view.findViewById(R.id.btn_add_mon_an);
 
@@ -54,10 +54,10 @@ public class Mon_An_Cua_Hang_Fragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcv.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
-        list = monAnDAO.getAll(i);
+        list = foodDAO.getAll(i);
         monAnAdapter = new FoodAdapter(list,getActivity());
         rcv.setAdapter(monAnAdapter);
-        final ArrayList<PhanLoai> listPL = new PhanLoaiDAO(getActivity()).getAllspn();
+        final ArrayList<Categories> listPL = new CategoriesDAO(getActivity()).getAllspn();
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,12 +84,12 @@ public class Mon_An_Cua_Hang_Fragment extends Fragment {
                         String mota1 = mota.getText().toString();
                         int gia1 = Integer.parseInt(gia.getText().toString());
                         String url1 = url.getText().toString();
-                        PhanLoai loai = (PhanLoai) spn.getSelectedItem();
+                        Categories loai = (Categories) spn.getSelectedItem();
                         String matheloai = loai.getLoaiID();
 
                         String a = mAuth.getCurrentUser().getUid();
-                        MonAn s = new MonAn(null,tenmon1,gia1,url1,a,matheloai,mota1);
-                        monAnDAO.insert(s);
+                        Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
+                        foodDAO.insert(s);
                     }
                 }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override

@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CartAdapter;
 import com.example.epapp_demo.model.local.database.DbHelper;
-import com.example.epapp_demo.model.local.modul.ChiTietGioHang;
+import com.example.epapp_demo.model.local.modul.CartDetails;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class CartFragment extends Fragment {
     RecyclerView rcv;
     Button Add;
     CartAdapter adapter;
-    ArrayList<ChiTietGioHang> list = new ArrayList<>();
+    ArrayList<CartDetails> list = new ArrayList<>();
     DbHelper db;
     public CartFragment() {
         // Required empty public constructor

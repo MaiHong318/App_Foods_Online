@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
-import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.modul.Food;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,17 +24,17 @@ public class ShowMenuDAO {
         this.context = context;
     }
 
-    public ArrayList<MonAn> getMonAnByCuaHangID(String idCuaHang) {
-        final ArrayList<MonAn> list = new ArrayList<MonAn>();
+    public ArrayList<Food> getMonAnByCuaHangID(String idCuaHang) {
+        final ArrayList<Food> list = new ArrayList<Food>();
         mDatabase.orderByChild("storeID").equalTo(idCuaHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     ds.getKey();
-                    MonAn monAn = ds.getValue(MonAn.class);
-                    Log.d("ab1", monAn.getMonAnID());
-                    list.add(monAn);
+                    Food food = ds.getValue(Food.class);
+                    Log.d("ab1", food.getMonAnID());
+                    list.add(food);
 
                 }
                 ShowMenuStoreFragment.showMenuStoreAdapter.notifyDataSetChanged();

@@ -5,9 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.epapp_demo.feature.cuahang.Mon_An_Cua_Hang_Fragment;
+import com.example.epapp_demo.feature.cuahang.FoodOfStoreFragment;
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
-import com.example.epapp_demo.model.local.modul.MonAn;
+import com.example.epapp_demo.model.local.modul.Food;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -19,28 +19,28 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class MonAnDAO {
+public class FoodDAO {
     DatabaseReference mDatabase;
     Context context;
     String monAnID;
-    public MonAnDAO(Context context) {
+    public FoodDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("MonAn");
         this.context = context;
     }
 
-    public ArrayList<MonAn> getAll(String idCuaHang) {
-        final ArrayList<MonAn> list = new ArrayList<MonAn>();
+    public ArrayList<Food> getAll(String idCuaHang) {
+        final ArrayList<Food> list = new ArrayList<Food>();
         mDatabase.orderByChild("storeID").equalTo(idCuaHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     ds.getKey();
-                    MonAn hd = ds.getValue(MonAn.class);
+                    Food hd = ds.getValue(Food.class);
                     list.add(hd);
 
                 }
-                Mon_An_Cua_Hang_Fragment.monAnAdapter.notifyDataSetChanged();
+                FoodOfStoreFragment.monAnAdapter.notifyDataSetChanged();
             }
 
             @Override
@@ -52,9 +52,9 @@ public class MonAnDAO {
     }
 
 
-    public ArrayList<MonAn> getToanBoMonAn() {
+    public ArrayList<Food> getToanBoMonAn() {
 
-        final ArrayList<MonAn> list = new ArrayList<MonAn>();
+        final ArrayList<Food> list = new ArrayList<Food>();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -65,9 +65,9 @@ public class MonAnDAO {
                     Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
                     while (iterator.hasNext()) {
                         DataSnapshot next = (DataSnapshot) iterator.next();
-                        MonAn monAn = next.getValue(MonAn.class);
-                        list.add(monAn);
-                        Mon_An_Cua_Hang_Fragment.monAnAdapter.notifyDataSetChanged();
+                        Food food = next.getValue(Food.class);
+                        list.add(food);
+                        FoodOfStoreFragment.monAnAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -78,7 +78,7 @@ public class MonAnDAO {
         });
         return list;
     }
-    public void update(final MonAn s, String id) {
+    public void update(final Food s, String id) {
         mDatabase.child(id).setValue(s)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -107,7 +107,7 @@ public class MonAnDAO {
         });
 
     }
-    public void insert(MonAn s) {
+    public void insert(Food s) {
         monAnID = mDatabase.push().getKey();
         String MaSach = mDatabase.child(monAnID).getKey();
         s.setMonAnID(MaSach);
@@ -127,17 +127,17 @@ public class MonAnDAO {
         });
     }
 
-    public ArrayList<MonAn> getAllByIDMonAn(String idMonAn) {
-        final ArrayList<MonAn> list = new ArrayList<MonAn>();
+    public ArrayList<Food> getAllByIDMonAn(String idMonAn) {
+        final ArrayList<Food> list = new ArrayList<Food>();
         mDatabase.orderByChild("monAnID").equalTo(idMonAn).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     ds.getKey();
-                    MonAn monAn = ds.getValue(MonAn.class);
-                    Log.d("ab1", monAn.getMonAnID());
-                    list.add(monAn);
+                    Food food = ds.getValue(Food.class);
+                    Log.d("ab1", food.getMonAnID());
+                    list.add(food);
 
                 }
                 ShowMenuStoreFragment.showMenuStoreAdapter.notifyDataSetChanged();

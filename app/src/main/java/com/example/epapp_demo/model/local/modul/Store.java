@@ -3,7 +3,7 @@ package com.example.epapp_demo.model.local.modul;
 import java.io.Serializable;
 import java.util.List;
 
-public class CuaHang implements Serializable {
+public class Store implements Serializable {
 
     private String StoreID;
     private String StoreMail;
@@ -105,10 +105,10 @@ public class CuaHang implements Serializable {
         PhanQuyen = phanQuyen;
     }
 
-    public CuaHang() {
+    public Store() {
     }
 
-    public CuaHang(String storeID, String storeMail, String storePass, List storeMonAn, String storeName, String storeDiaChi, Double storeDanhGia, String storeHinhAnh, Double storeViDo, Double storeKinhDo, int phanQuyen) {
+    public Store(String storeID, String storeMail, String storePass, List storeMonAn, String storeName, String storeDiaChi, Double storeDanhGia, String storeHinhAnh, Double storeViDo, Double storeKinhDo, int phanQuyen) {
         StoreID = storeID;
         StoreMail = storeMail;
         StorePass = storePass;

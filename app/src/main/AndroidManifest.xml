@@ -26,7 +26,7 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA8KJ9ht_zAuqBTqqv_uZaIwN18l_wqeyc"/>
-        <activity android:name=".feature.cuahang.Bottom_Navigation_CuaHang_Activity"></activity>
+        <activity android:name=".feature.cuahang.BottomNavigationStore"></activity>
         <activity android:name=".feature.admin.BottomNavigationAdmin"></activity>
         <activity android:name=".feature.register.SignUpActivity" />
         <activity android:name=".feature.login.LoginActivity" />

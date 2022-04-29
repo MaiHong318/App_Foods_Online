@@ -10,28 +10,28 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.database.CuaHangDAO;
-import com.example.epapp_demo.model.local.modul.CuaHang;
+import com.example.epapp_demo.model.local.database.StoreDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 
 import java.util.ArrayList;
 
 public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHolder> {
 
     Context context;
-    ArrayList<CuaHang> cuahang;
-    CuaHangDAO cuaHangDAO;
+    ArrayList<Store> cuahang;
+    StoreDAO storeDAO;
 
-    public CuaHangAdapter(ArrayList<CuaHang> cuahang, Context context){
+    public CuaHangAdapter(ArrayList<Store> cuahang, Context context){
         this.cuahang = cuahang;
         this.context = context;
-        cuaHangDAO = new CuaHangDAO(context);
+        storeDAO = new StoreDAO(context);
     }
 
     @NonNull
     @Override
     public CuaHangAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.cuahang_one_item,parent,false);
-        cuaHangDAO = new CuaHangDAO(context);
+        storeDAO = new StoreDAO(context);
         return new CuaHangAdapter.ViewHolder(view);
     }
 

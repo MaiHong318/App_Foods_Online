@@ -2,7 +2,7 @@ package com.example.epapp_demo.model.local.modul;
 
 import java.io.Serializable;
 
-class StoreYeuThich implements Serializable {
+class FavoriteStore implements Serializable {
     private int Like;
 
     public int getLike() {
@@ -13,10 +13,10 @@ class StoreYeuThich implements Serializable {
         Like = like;
     }
 
-    public StoreYeuThich() {
+    public FavoriteStore() {
     }
 
-    public StoreYeuThich(int like) {
+    public FavoriteStore(int like) {
 
         Like = like;
     }

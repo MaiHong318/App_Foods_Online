@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.OrderApdapter;
-import com.example.epapp_demo.model.local.database.DonHangDAO;
-import com.example.epapp_demo.model.local.modul.DonHang;
+import com.example.epapp_demo.model.local.database.OrderDAO;
+import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
@@ -20,11 +20,11 @@ import java.util.ArrayList;
 
 public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
     RecyclerView rcv;
-    DonHangDAO donHangDAO = new DonHangDAO(getActivity());
+    OrderDAO orderDAO = new OrderDAO(getActivity());
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     public static OrderApdapter donHangApdapter;
-    ArrayList<DonHang> list = new ArrayList<>();
+    ArrayList<Order> list = new ArrayList<>();
     public Hoat_Dong_Cua_Hang_Fragment() {
         // Required empty public constructor
     }
@@ -41,7 +41,7 @@ public class Hoat_Dong_Cua_Hang_Fragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcv.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
-        list = donHangDAO.getDonByCuaHangID(""+ i +"");
+        list = orderDAO.getDonByCuaHangID(""+ i +"");
         donHangApdapter = new OrderApdapter(list,getActivity());
         rcv.setAdapter(donHangApdapter);
         return view;
