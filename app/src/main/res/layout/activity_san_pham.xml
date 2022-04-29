@@ -31,8 +31,8 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="250dp"
-                        android:background="@android:color/black"
-                        android:alpha="0.3"/>
+                        android:alpha="0.3"
+                        android:background="@android:color/black" />
 
                 </RelativeLayout>
 
