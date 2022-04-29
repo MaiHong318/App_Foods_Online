@@ -15,21 +15,22 @@ import java.util.ArrayList;
 public class DbHelper extends SQLiteOpenHelper {
     public static ArrayList<Cart> giohang = new ArrayList<>();
     SQLiteDatabase db;
-    public DbHelper(Context context){
-        super(context,"giohang",null,1);
+
+    public DbHelper(Context context) {
+        super(context, "giohang", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql= "create table giohang(GioHangId integer primary key autoincrement, " +
+        String sql = "create table giohang(GioHangId integer primary key autoincrement, " +
                 "DonHangId text, MonAnId text, SoLuong integer)";
         db.execSQL(sql);
-        sql= "create table MonAn(MonAnId text primary key, " +
+        sql = "create table MonAn(MonAnId text primary key, " +
                 "NameMonAn text, GiaMonAn integer, HinhAnhMonAn text)";
         db.execSQL(sql);
     }
 
-    public void insertGH(Cart gh){
+    public void insertGH(Cart gh) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("DonHangId", gh.getStoreID());
@@ -38,7 +39,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert("giohang", null, values);
     }
 
-    public void insertMonAn(Food food){
+    public void insertMonAn(Food food) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("MonAnId", food.getMonAnID());
@@ -48,20 +49,29 @@ public class DbHelper extends SQLiteOpenHelper {
         db.insert("MonAn", null, values);
     }
 
-    public void delete(String id){
+    public void delete(String id) {
         db = this.getWritableDatabase();
-        db.delete("giohang", "MonAnId=?",new String[]{id});
-        db.delete("MonAn", "MonAnId=?",new String[]{id});
+        db.delete("giohang", "MonAnId=?", new String[]{id});
+        db.delete("MonAn", "MonAnId=?", new String[]{id});
     }
 
-    public ArrayList<CartDetails> listGioHang(){
+
+    public void deleteCart(String id) {
+        db = this.getWritableDatabase();
+        db.delete("giohang", "MonAnId=?", new String[]{id});
+        db.delete("MonAn", "MonAnId=?", new String[]{id});
+    }
+
+
+
+    public ArrayList<CartDetails> listGioHang() {
         ArrayList<CartDetails> list = new ArrayList<>();
         db = this.getReadableDatabase();
         String sql = "Select g.GioHangId, g.MonAnId, m.NameMonAn, m.GiaMonAn, g.SoLuong, m.HinhAnhMonAn " +
                 " from giohang g inner join MonAn m on g.MonAnId=m.MonAnId";
         Cursor cs = db.rawQuery(sql, null);
         cs.moveToFirst();
-        while (!cs.isAfterLast()){
+        while (!cs.isAfterLast()) {
             CartDetails ctgh = new CartDetails(cs.getInt(0), cs.getString(1), cs.getString(2)
                     , cs.getInt(3), cs.getInt(4), cs.getString(5));
             list.add(ctgh);
@@ -70,6 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         cs.close();
         return list;
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 

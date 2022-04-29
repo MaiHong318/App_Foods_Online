@@ -1,5 +1,8 @@
 package com.example.epapp_demo.model.local.modul;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CartDetails {
     private int giohangId;
     private String MonAnId;
@@ -42,5 +45,16 @@ public class CartDetails {
 
     public String getHinh() {
         return hinh;
+    }
+
+    public Map<String,Object> toMap(){
+        HashMap<String,Object> result=new HashMap<>();
+//        result.put("giohangId",giohangId);
+//        result.put("MonAnId",MonAnId);
+        result.put("tenMonAn",tenMonAn);
+        result.put("gia",gia);
+        result.put("soluong",soluong);
+        result.put("hinh",hinh);
+        return  result;
     }
 }

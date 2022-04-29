@@ -20,7 +20,7 @@ public class OrderDAO {
     DatabaseReference mDatabase;
     Context context;
     public OrderDAO(Context context) {
-        this.mDatabase = FirebaseDatabase.getInstance().getReference("DonHang");
+        this.mDatabase = FirebaseDatabase.getInstance().getReference("Đơn hàng");
         this.context = context;
     }
 
@@ -38,7 +38,7 @@ public class OrderDAO {
                     list.add(hd);
 
                 }
-                OrderFragment.donHangApdapter.notifyDataSetChanged();
+//                OrderFragment.donHangApdapter.notifyDataSetChanged();
             }
 
             @Override
