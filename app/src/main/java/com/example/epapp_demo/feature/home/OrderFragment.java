@@ -1,5 +1,6 @@
 package com.example.epapp_demo.feature.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +32,8 @@ public class OrderFragment extends Fragment {
 
     RecyclerView rcv;
 //    OrderDAO orderDAO = new OrderDAO(getActivity());
-//    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-//
+   private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+  //FirebaseDatabase mdb = FirebaseDatabase.getInstance();
 //    public static OrderApdapter donHangApdapter;
 
     ArrayList<Order> list = new ArrayList<>();
@@ -58,31 +59,34 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order, container, false);
 
-//        String i = mAuth.getCurrentUser().getUid();
+        String i = mAuth.getCurrentUser().getUid();
         rcv = view.findViewById(R.id.rcv_DonHang);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcv.setLayoutManager(layoutManager);
         //mAuth = FirebaseAuth.getInstance();
 
-//        list = orderDAO.getDonByKhachID(""+ i +"");
-//        donHangApdapter = new OrderApdapter(list,getActivity());
+  //      list = orderDAO.getDonByKhachID(""+ i +"");
+  //      donHangApdapter = new OrderApdapter(list,getActivity());
+        listCar=getListCart(i);
         adapter = new CartAdapter(listCar, getContext());
         rcv.setAdapter(adapter);
-        getListCart();
+//        getListCart(""+i+"");
 
         return view;
     }
 
-    public void getListCart(){
+    public  ArrayList<CartDetails> getListCart(String idCuahang){
+        final ArrayList<CartDetails> list = new ArrayList<>();
         FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
         DatabaseReference mdata=mAuth.getReference("Đơn hàng");
-        mdata.addValueEventListener(new ValueEventListener() {
+        mdata.orderByChild("monAnId").equalTo(idCuahang).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
               for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                    CartDetails cartDetails=dataSnapshot1.getValue(CartDetails.class);
-                   listCar.add(cartDetails);
+                  list.add(cartDetails);
               }
               adapter.notifyDataSetChanged();
             }
@@ -92,5 +96,6 @@ public class OrderFragment extends Fragment {
                 Toast.makeText(getContext(),"Thất bại",Toast.LENGTH_SHORT).show();
             }
         });
+        return list;
     }
 }

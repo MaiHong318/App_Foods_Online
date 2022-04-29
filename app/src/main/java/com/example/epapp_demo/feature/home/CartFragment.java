@@ -4,6 +4,7 @@ import static com.example.epapp_demo.model.local.database.DbHelper.giohang;
 
 import static java.lang.String.valueOf;
 
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +27,15 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CartAdapter;
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.modul.CartDetails;
+import com.example.epapp_demo.model.local.modul.Categories;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,18 +78,19 @@ public class CartFragment extends Fragment {
                 if (list.isEmpty()) {
                     Toast.makeText(getContext(), "Bạn chưa thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                 } else {
-                    mdata.setValue(list, new DatabaseReference.CompletionListener() {
+                    String id = mdata.push().getKey();
+                    mdata.child(id).setValue(list, new DatabaseReference.CompletionListener() {
                         @Override
                         public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                             list.forEach((item) -> {
                                 db.delete(String.valueOf(item.getMonAnId()));
-
                             });
                             rcv.setAdapter(null);
                             Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
 
                         }
                     });
+
 
 
                 }
@@ -92,5 +101,7 @@ public class CartFragment extends Fragment {
 
         return view;
     }
+
+
 
 }

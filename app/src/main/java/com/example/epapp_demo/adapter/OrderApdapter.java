@@ -1,5 +1,6 @@
 package com.example.epapp_demo.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +45,7 @@ public class OrderApdapter extends RecyclerView.Adapter<OrderApdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final OrderApdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final OrderApdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         String i = list.get(position).getStoreID();
         holder.ivID.setText(list.get(position).getDHID());
