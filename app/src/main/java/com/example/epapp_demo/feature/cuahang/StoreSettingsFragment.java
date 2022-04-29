@@ -116,7 +116,7 @@ public class StoreSettingsFragment extends Fragment {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-                View view1 = layoutInflater.inflate(R.layout.vitri_cuahang,null);
+                View view1 = layoutInflater.inflate(R.layout.add_locate_store,null);
 
                 final EditText kinhdo = view1.findViewById(R.id.edtKinhDo);
                 final EditText vido = view1.findViewById(R.id.edtViDo);
@@ -163,7 +163,7 @@ public class StoreSettingsFragment extends Fragment {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-                View view1 = layoutInflater.inflate(R.layout.edit_cuahang,null);
+                View view1 = layoutInflater.inflate(R.layout.edit_store,null);
 
                 final EditText name = view1.findViewById(R.id.edtNameCHa);
                 final EditText diachi = view1.findViewById(R.id.edtDiaCHiCHa);

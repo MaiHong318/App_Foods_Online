@@ -65,7 +65,7 @@ public class StoreFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_cuahang,null);
+                View view1 = getLayoutInflater().inflate(R.layout.add_store_dialog,null);
                 final EditText tenCH = view1.findViewById(R.id.edtNameStore);
                 final EditText mailCH = view1.findViewById(R.id.edtMailStore);
                 final EditText passCH = view1.findViewById(R.id.edtPassStore);

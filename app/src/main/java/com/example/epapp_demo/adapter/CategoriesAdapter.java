@@ -1,163 +1,140 @@
 package com.example.epapp_demo.adapter;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
-import android.text.TextUtils;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Categories;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.squareup.picasso.Picasso;
-import java.util.List;
+
+import java.util.ArrayList;
 
 public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.ViewHolder> {
 
-    List<Categories> list;
     Context context;
+    ArrayList<Categories> phanloai;
     CategoriesDAO categoriesDAO;
-    DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
 
-    public CategoriesAdapter(List<Categories> list, Context context) {
-        this.list = list;
+    public CategoriesAdapter(ArrayList<Categories> phanloai, Context context){
+        this.phanloai =phanloai;
         this.context = context;
         categoriesDAO = new CategoriesDAO(context);
     }
 
-    public CategoriesAdapter(FragmentActivity activity) {
-
+    public CategoriesAdapter(Context context) {
     }
 
     @NonNull
     @Override
     public CategoriesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.theloai_one_item, parent, false);
+        View view= LayoutInflater.from(context).inflate(R.layout.item_categories,parent,false);
         categoriesDAO = new CategoriesDAO(context);
-        return new CategoriesAdapter.ViewHolder(view);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull CategoriesAdapter.ViewHolder holder, int position) {
 
-        if(TextUtils.isEmpty(list.get(position).getHinhanh())) {
-            // Load default image
-            holder.iv.setImageResource(R.drawable.slider3);
-        } else {
-            Picasso.get().load(list.get(position).getHinhanh()).into(holder.iv);
-        }
+        holder.tvidloai.setText(phanloai.get(position).getLoaiID());
+        holder.tvnameloai.setText(phanloai.get(position).getNameLoai());
+        holder.tvmota.setText(phanloai.get(position).getMota());
 
-
-
-        holder.name.setText(list.get(position).getNameLoai());
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return phanloai.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView name;
-        public ImageView iv;
-
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
+        TextView tvidloai, tvnameloai, tvmota;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name = itemView.findViewById(R.id.category_name);
-            iv = itemView.findViewById(R.id.category_photo);
+            tvidloai = itemView.findViewById(R.id.tvLoaiid);
+            tvnameloai = itemView.findViewById(R.id.Nameloai);
+            tvmota = itemView.findViewById(R.id.tvMota);
             itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
+            final int position = getLayoutPosition();
+            if (getAdapterPosition() == RecyclerView.NO_POSITION) return;
+            final Categories gd =phanloai.get(position);
 
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            View view1 = layoutInflater.inflate(R.layout.edit_phanloai,null);
+            final TextView ten = view1.findViewById(R.id.edtEditLoai);
+            final TextView mota = view1.findViewById(R.id.edtEditMota);
+            final TextView anh = view1.findViewById(R.id.edtEditUrl);
+            ten.setText(gd.getNameLoai());
+            mota.setText(gd.getMota());
+
+
+
+
+            builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    final String ten1 = ten.getText().toString();
+                    final String mota1 = mota.getText().toString();
+                    final String anh1 = anh.getText().toString();
+                    Categories s = new Categories(gd.getLoaiID(),ten1,mota1,anh1);
+                    categoriesDAO.update(s);
+                }
+            });
+            builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.setView(view1);
+            builder.show();
+        }
+        @Override
+        public boolean onLongClick(View view) {
+            final int position = getLayoutPosition();
+            if (getAdapterPosition() == RecyclerView.NO_POSITION);
+            final Categories gd =phanloai.get(position);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            LayoutInflater layoutInflater = LayoutInflater.from(context);
+            View view1 = layoutInflater.inflate(R.layout.delete_alert_dialog,null);
+
+
+            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    Categories s = new Categories(gd.getLoaiID(),gd.getNameLoai(),gd.getMota(),gd.getHinhanh());
+                    categoriesDAO.delete(s);
+                }
+            });
+            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+            builder.setView(view1);
+            builder.show();
+
+            return true;
         }
     }
 
-
 }
-
-
-//    private List<Category> categories = new ArrayList<>();
-//    private Context context;
-//    private OnItemClickListener mListener;
-//    public void setOnItemClickListener(OnItemClickListener listener){
-//        mListener = listener;
-//    }
-//    public CategoriesAdapter(Context context){
-//        this.context = context;
-//        String[] categoryNames = {"Cơm Phần", "Trà Sữa",
-//                "Gà Rán", "Bún/Phở","Ăn Vặt", "Món Hàn"};
-//
-//        int images_array[] = {
-//                R.drawable.rice,
-//                R.drawable.milk,
-//                R.drawable.ic_fried_chicken,
-//                R.drawable.ic_noodles,
-//                R.drawable.ic_snack,
-//                R.drawable.ic_koreanfood,
-//        };
-//
-//        for (int i = 0; i < 6; i++){
-//            Category category = new Category(categoryNames[i], images_array[i]);
-//            categories.add(category);
-//        }
-//    }
-//
-//    @NonNull
-//    @Override
-//    public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-//        View view = LayoutInflater.from(context).inflate(R.layout.theloai_one_item, viewGroup, false);
-//        ItemHolder holder = new ItemHolder(view, mListener);
-//        return holder;
-//    }
-//
-//    @Override
-//    public void onBindViewHolder(@NonNull ItemHolder holder, final int position) {
-//        final Category category =  categories.get(position);
-//        holder.mCategoryName.setText(category.getCategoryName());
-//        holder.mCategoryImage.setImageResource(category.getCategoryDrawable());
-//    }
-//
-//    public class ItemHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-//        public TextView mCategoryName;
-//        public ImageView mCategoryImage;
-//        public View mView;
-//
-//
-//        public ItemHolder(@NonNull View itemView, final OnItemClickListener listener) {
-//            super(itemView);
-//            mView = itemView;
-//            mCategoryName = itemView.findViewById(R.id.category_name);
-//            mCategoryImage = itemView.findViewById(R.id.category_photo);
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    if (listener != null) {
-//                        int position = getAdapterPosition();
-//                        if (position != RecyclerView.NO_POSITION){
-//                            listener.onItemClick(position);
-//                        }
-//                    }
-//                }
-//            });
-//        }
-//
-//        @Override
-//        public void onClick(View v) {}
-//    }
-//
-//    public interface OnItemClickListener {
-//        void onItemClick(int position);
-//    }
-//
-//    @Override
-//    public int getItemCount() {
-//        return categories.size();
-//    }

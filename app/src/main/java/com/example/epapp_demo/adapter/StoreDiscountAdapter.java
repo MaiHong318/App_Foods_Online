@@ -18,20 +18,20 @@ import com.example.epapp_demo.model.local.modul.Place;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlaceAdapterCH extends RecyclerView.Adapter<PlaceAdapterCH.ItemHolder>{
+public class StoreDiscountAdapter extends RecyclerView.Adapter<StoreDiscountAdapter.ItemHolder>{
 
     private List<Place> mPlaces = new ArrayList<>();
     private Context context;
     private OnPlaceClickListener mListener;
 
-    public PlaceAdapterCH() {
+    public StoreDiscountAdapter() {
 
     }
 
     public void setOnPlaceItemClickListener (OnPlaceClickListener onPlaceItemClickListener){
         mListener = onPlaceItemClickListener;
     }
-    public PlaceAdapterCH(Context context){
+    public StoreDiscountAdapter(Context context){
         this.context = context;
 
         String[] placeNames = {"Khuyến mãi cho cửa hàng mới", "Tháng tri ân",
@@ -66,7 +66,7 @@ public class PlaceAdapterCH extends RecyclerView.Adapter<PlaceAdapterCH.ItemHold
     @NonNull
     @Override
     public ItemHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(context).inflate(R.layout.khuyen_mai_item, viewGroup, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_discount, viewGroup, false);
         ItemHolder holder = new ItemHolder(view, mListener);
         return holder;
     }

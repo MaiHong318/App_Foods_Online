@@ -1,7 +1,8 @@
 package com.example.epapp_demo.model.local.database;
 
 
-import static com.example.epapp_demo.feature.home.HomeFragment.nearbyStoreAdapter_;
+
+import static com.example.epapp_demo.feature.home.HomeFragment.nearbyStoreAdapter;
 
 import android.Manifest;
 import android.app.Activity;
@@ -192,7 +193,7 @@ public class StoreDAO implements LocationListener {
                     }
                 });
 
-                nearbyStoreAdapter_.notifyDataSetChanged();
+                nearbyStoreAdapter.notifyDataSetChanged();
 
             }
 

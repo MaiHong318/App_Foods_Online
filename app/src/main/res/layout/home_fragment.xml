@@ -44,7 +44,21 @@
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
+
+
+                        <EditText
+                            android:id="@+id/edtSearch"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:hint="Tìm kiếm"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
+                            android:textColor="@color/Silver1"
+                            android:textSize="18sp" />
+
                         <RelativeLayout
+                            android:id="@+id/btnSearch"
                             android:layout_width="50dp"
                             android:layout_height="match_parent">
 
@@ -56,17 +70,6 @@
                                 android:src="@drawable/ic_search" />
 
                         </RelativeLayout>
-
-                        <EditText
-                            android:id="@+id/search_text"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center_vertical"
-                            android:hint="Tìm kiếm"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/Silver1"
-                            android:textSize="18sp" />
 
                     </LinearLayout>
 

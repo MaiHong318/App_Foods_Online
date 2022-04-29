@@ -41,7 +41,7 @@ public class BottomNavigationStore extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new HomeStoreFragment()).commit();
                     return true;
                 case R.id.Hoat_Dong:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new Hoat_Dong_Cua_Hang_Fragment()).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new StoreActivitiesFragment()).commit();
                     return true;
                 case R.id.Mon_An:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new FoodOfStoreFragment()).commit();

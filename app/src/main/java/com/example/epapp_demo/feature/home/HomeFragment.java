@@ -12,8 +12,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.CategoriesAdapter;
+import com.example.epapp_demo.adapter.HomeCategoriesAdapter;
 import com.example.epapp_demo.adapter.NearbyStoreAdapter;
 import com.example.epapp_demo.adapter.PlaceAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter;
@@ -38,6 +40,8 @@ import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -50,16 +54,18 @@ public class HomeFragment extends Fragment implements LocationListener {
     SliderView sliderView;
     RecyclerView rcvCategories;
     ListView rcvQuanGoiY;
-    public static NearbyStoreAdapter nearbyStoreAdapter_;
+    public static NearbyStoreAdapter nearbyStoreAdapter;
     List<NearbyStore> temp = new ArrayList<>();
     PlaceAdapter placeAdapter;
-    public static CategoriesAdapter categoriesAdapter;
+    public static HomeCategoriesAdapter homeCategoriesAdapter;
     ArrayList<Categories> list = new ArrayList<>();
     boolean GpsStatus;
     CategoriesDAO categoriesDAO = new CategoriesDAO(getActivity());
     ImageView btn_reload;
     LocationManager locationManager;
     TextView tv_list_cuahang, tv_list_phanloai;
+    EditText edtSearch;
+    RelativeLayout btnSearch;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -93,12 +99,14 @@ public class HomeFragment extends Fragment implements LocationListener {
         btn_reload = view.findViewById(R.id.btn_reload);
         tv_list_cuahang = view.findViewById(R.id.place_list);
         tv_list_phanloai = view.findViewById(R.id.categories_list);
+        edtSearch = view.findViewById(R.id.edtSearch);
+        btnSearch = view.findViewById(R.id.btnSearch);
 
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcvCategories.setLayoutManager(llmTrending);
         list = categoriesDAO.getAllMenu();
-        categoriesAdapter = new CategoriesAdapter(list,getActivity());
-        rcvCategories.setAdapter(categoriesAdapter);
+        homeCategoriesAdapter = new HomeCategoriesAdapter(list,getActivity());
+        rcvCategories.setAdapter(homeCategoriesAdapter);
 
         //custom slider
         SliderAdapter adapter = new SliderAdapter(getActivity());
@@ -133,7 +141,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                 }
             }
         });
-        nearbyStoreAdapter_.setOnCuaHangGanItemClickListener(new NearbyStoreAdapter.OnCuaHangGanClickListener() {
+        nearbyStoreAdapter.setOnCuaHangGanItemClickListener(new NearbyStoreAdapter.OnCuaHangGanClickListener() {
             @Override
             public void onCuaHangGanItemClick(int position) {
                 NearbyStore cuaHangTemp = temp.get(position);
@@ -164,6 +172,15 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         });
 
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               String search = edtSearch.getText().toString().trim();
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("MonAn");
+                databaseReference.orderByChild("nameMonAn").startAt(search).endAt(search+"\uf8ff");
+            }
+        });
+
 
     }
 
@@ -190,8 +207,8 @@ public class HomeFragment extends Fragment implements LocationListener {
     public void getTemp() {
         StoreDAO storeDAO = new StoreDAO(getActivity());
         temp = storeDAO.getTemp(getActivity());
-        nearbyStoreAdapter_ = new NearbyStoreAdapter(getActivity(), R.layout.item_cuahang_gan, temp);
-        rcvQuanGoiY.setAdapter(nearbyStoreAdapter_);
+        nearbyStoreAdapter = new NearbyStoreAdapter(getActivity(), R.layout.item_nearby_stote, temp);
+        rcvQuanGoiY.setAdapter(nearbyStoreAdapter);
         Log.d("size","temp: "+temp.size());
     }
 }

@@ -70,7 +70,7 @@ public class ShowMenuStoreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.show_one_store_fragment, container, false);
+        View view = inflater.inflate(R.layout.fragment_one_store, container, false);
         final TextView storeName, storeLocation;
         ImageView ivBack = view.findViewById(R.id.ivBack);
         storeName = view.findViewById(R.id.txtStoreName);

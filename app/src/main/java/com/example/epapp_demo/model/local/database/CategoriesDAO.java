@@ -65,7 +65,7 @@ public class CategoriesDAO {
                         DataSnapshot next = (DataSnapshot) iterator.next();
                         Categories pl = next.getValue(Categories.class);
                         list.add(pl);
-                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
+                        CategoriesFragment.categoriesAdapter.notifyDataSetChanged();
                     }
                 }
             }
@@ -90,7 +90,7 @@ public class CategoriesDAO {
                         DataSnapshot next = (DataSnapshot) iterator.next();
                         Categories pl = next.getValue(Categories.class);
                         list.add(pl);
-                        HomeFragment.categoriesAdapter.notifyDataSetChanged();
+                        HomeFragment.homeCategoriesAdapter.notifyDataSetChanged();
                     }
                 }
 
@@ -165,7 +165,7 @@ public class CategoriesDAO {
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void aVoid) {
-                                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
+                                        CategoriesFragment.categoriesAdapter.notifyDataSetChanged();
                                         Log.d("delete","delete Thanh cong");
                                     }
                                 })
@@ -192,7 +192,7 @@ public class CategoriesDAO {
                     if (data.child("loaiID").getValue(String.class).equalsIgnoreCase(s.getLoaiID())) {
                         PhanLoaiID = data.getKey();
                         Log.d("getKey", "onCreate: key :" + PhanLoaiID);
-                        CategoriesFragment.phanLoaiAdapter.notifyDataSetChanged();
+                        CategoriesFragment.categoriesAdapter.notifyDataSetChanged();
                         mDatabase.child(PhanLoaiID).setValue(s)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override

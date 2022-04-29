@@ -6,7 +6,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.home.OrderFragment;
-import com.example.epapp_demo.feature.cuahang.Hoat_Dong_Cua_Hang_Fragment;
+import com.example.epapp_demo.feature.cuahang.StoreActivitiesFragment;
 import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -61,7 +61,7 @@ public class OrderDAO {
                     list.add(hd);
 
                 }
-                Hoat_Dong_Cua_Hang_Fragment.donHangApdapter.notifyDataSetChanged();
+                StoreActivitiesFragment.donHangApdapter.notifyDataSetChanged();
             }
 
             @Override

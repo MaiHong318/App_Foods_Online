@@ -63,7 +63,7 @@ public class FoodOfStoreFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_monan,null);
+                View view1 = getLayoutInflater().inflate(R.layout.add_food_dialog,null);
                 final EditText tenmon = view1.findViewById(R.id.edtTenMon);
                 final Spinner spn = view1.findViewById(R.id.spnTheLoai);
                 final EditText mota = view1.findViewById(R.id.edtMotaMon);

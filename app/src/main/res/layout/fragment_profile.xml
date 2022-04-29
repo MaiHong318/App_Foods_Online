@@ -101,22 +101,22 @@
                         android:id="@+id/tvNameProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Đinh Trọng Quang Đạo"
-                        android:textSize="20dp"
-                        android:textStyle="bold"
+                        android:text="Nguyễn Mai Hồng"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_900"/>
+                        android:textColor="@color/grey_900"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tvMailProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="trong.quang.dao@gmail.com"
                         android:layout_below="@id/tvNameProfile"
                         android:layout_centerVertical="true"
-                        android:textSize="16sp"
+                        android:text="hong3182000@gmail.com"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                        android:textColor="@color/grey_40"/>
+                        android:textColor="@color/grey_40"
+                        android:textSize="16sp" />
 
                 </RelativeLayout>
 
