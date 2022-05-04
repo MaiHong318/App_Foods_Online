@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -149,6 +150,8 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                         String matheloai = loai.getLoaiID();
                         String idMonAn = list.get(position).getMonAnID();
                         String a = mAuth.getCurrentUser().getUid();
+                        String nameStore=mAuth.getCurrentUser().getDisplayName();
+                        Log.d("StoreName","NAME: "+nameStore);
                         Food s = new Food(idMonAn,tenmon1,gia1,url1,a,matheloai,mota1);
                         foodDAO.update(s, idMonAn);
                     }

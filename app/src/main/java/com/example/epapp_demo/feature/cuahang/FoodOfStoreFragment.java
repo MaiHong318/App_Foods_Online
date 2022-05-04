@@ -93,6 +93,7 @@ public class FoodOfStoreFragment extends Fragment {
 
 
                         String a = mAuth.getCurrentUser().getUid();
+//                        String nameStore=mAuth.getCurrentUser().getEmail();
 
                         Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
                         foodDAO.insert(s);

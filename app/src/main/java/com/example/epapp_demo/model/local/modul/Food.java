@@ -96,7 +96,7 @@ public class Food implements Serializable {
 
 
 
-    public Food(String monAnID, String nameMonAn, int giaMonAn, String hinhAnhMonAn, String storeID, String phanLoaiID, String moTa) {
+    public Food(String monAnID, String nameMonAn, int giaMonAn, String hinhAnhMonAn,String storeID, String phanLoaiID, String moTa) {
         MonAnID = monAnID;
         NameMonAn = nameMonAn;
         GiaMonAn = giaMonAn;

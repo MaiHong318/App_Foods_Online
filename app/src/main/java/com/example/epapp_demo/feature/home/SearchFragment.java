@@ -55,15 +55,15 @@ public class SearchFragment extends Fragment {
         String search = bundle.getString("search");
 
         DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("MonAn");
-        databaseReference.orderByChild("nameMonAn").startAt(search).endAt(search+"\uf8ff")
-                .addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
                     @SuppressLint("NotifyDataSetChanged")
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             for(DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-
                                 Food food =dataSnapshot1.getValue(Food.class);
-                                list.add(food);
+                                if(food.getNameMonAn().contains(search)){
+                                    list.add(food);
+                                }
                                 searchAdapter.notifyDataSetChanged();
 
                         }

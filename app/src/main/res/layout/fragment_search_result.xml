@@ -58,12 +58,10 @@
         android:layout_below="@id/toolbar"
         android:background="@drawable/toolbar_shadow_view"/>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/toolbar">
+
 
         <LinearLayout
+            android:layout_marginTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -77,23 +75,23 @@
                     android:id="@+id/browse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
                     android:text="Cửa hàng gợi ý"
                     android:textColor="@color/overlay_dark_80"
                     android:textSize="28sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcvStoreSuggest"
-                android:layout_height="match_parent"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"/>
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+
 
 </RelativeLayout>

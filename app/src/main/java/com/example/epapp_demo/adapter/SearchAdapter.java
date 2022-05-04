@@ -48,7 +48,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
-        holder.tvStore.setText(list.get(position).getStoreID());
+        holder.tvStore.setText(list.get(position).getMoTa());
         holder.tvFood.setText(list.get(position).getNameMonAn());
         holder.tvCost.setText(Integer.toString(list.get(position).getGiaMonAn()));
         Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.ivFood);
