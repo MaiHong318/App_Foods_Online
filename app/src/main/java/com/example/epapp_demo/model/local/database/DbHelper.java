@@ -56,14 +56,6 @@ public class DbHelper extends SQLiteOpenHelper {
     }
 
 
-    public void deleteCart(String id) {
-        db = this.getWritableDatabase();
-        db.delete("giohang", "MonAnId=?", new String[]{id});
-        db.delete("MonAn", "MonAnId=?", new String[]{id});
-    }
-
-
-
     public ArrayList<CartDetails> listGioHang() {
         ArrayList<CartDetails> list = new ArrayList<>();
         db = this.getReadableDatabase();
