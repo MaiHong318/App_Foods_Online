@@ -19,17 +19,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowCuaHangAdapter extends RecyclerView.Adapter<ShowCuaHangAdapter.ViewHolder> {
+public class ShowStoreAdapter extends RecyclerView.Adapter<ShowStoreAdapter.ViewHolder> {
 
     Context context;
     private List<Store> stores = new ArrayList<>();
     ArrayList<Store> cuahang;
     StoreDAO storeDAO;
-    private ShowCuaHangAdapter.OnStoreClickListener mListener;
-    public void setOnStoreItemClickListener (ShowCuaHangAdapter.OnStoreClickListener onStoreItemClickListener){
+    private ShowStoreAdapter.OnStoreClickListener mListener;
+    public void setOnStoreItemClickListener (ShowStoreAdapter.OnStoreClickListener onStoreItemClickListener){
         mListener = onStoreItemClickListener;
     }
-    public ShowCuaHangAdapter(ArrayList<Store> cuahang, Context context){
+    public ShowStoreAdapter(ArrayList<Store> cuahang, Context context){
         this.cuahang = cuahang;
         this.context = context;
         storeDAO = new StoreDAO(context);
@@ -38,10 +38,10 @@ public class ShowCuaHangAdapter extends RecyclerView.Adapter<ShowCuaHangAdapter.
 
     @NonNull
     @Override
-    public ShowCuaHangAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ShowStoreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(context).inflate(R.layout.item_one_store,parent,false);
         storeDAO = new StoreDAO(context);
-        return new ShowCuaHangAdapter.ViewHolder(view);
+        return new ShowStoreAdapter.ViewHolder(view);
     }
 
     @Override

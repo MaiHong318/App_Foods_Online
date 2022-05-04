@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.ShowCuaHangAdapter;
+import com.example.epapp_demo.adapter.ShowStoreAdapter;
 import com.example.epapp_demo.feature.home.HomeFragment;
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
 import com.example.epapp_demo.model.local.database.StoreDAO;
@@ -28,7 +28,7 @@ public class ListStoreFragment extends Fragment {
     RelativeLayout btnBack;
     StoreDAO storeDAO;
     ArrayList <Store> list = new ArrayList<>();
-    public static ShowCuaHangAdapter showcuaHangAdapter;
+    public static ShowStoreAdapter showcuaHangAdapter;
 
     public ListStoreFragment() {
         // Required empty public constructor
@@ -52,9 +52,9 @@ public class ListStoreFragment extends Fragment {
         LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rcvStore.setLayoutManager(place);
         list = storeDAO.getShowCuahang();
-        showcuaHangAdapter = new ShowCuaHangAdapter(list,getActivity());
+        showcuaHangAdapter = new ShowStoreAdapter(list,getActivity());
         rcvStore.setAdapter(showcuaHangAdapter);
-        showcuaHangAdapter.setOnStoreItemClickListener(new ShowCuaHangAdapter.OnStoreClickListener() {
+        showcuaHangAdapter.setOnStoreItemClickListener(new ShowStoreAdapter.OnStoreClickListener() {
             @Override
             public void onStoreItemClick(int position) {
                 Store store = list.get(position);

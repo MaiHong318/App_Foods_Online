@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.Food;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,12 +21,20 @@ import java.util.List;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
 
     List<Food> list;
+    List<Store> storeList;
     Context context;
     FoodDAO foodDAO;
+
+    private SearchAdapter.OnStoreClickListener mListener;
+
 
     public SearchAdapter(List<Food> list, Context context) {
         this.list = list;
         this.context = context;
+    }
+
+    public void setOnStoreItemClickListener (SearchAdapter.OnStoreClickListener onStoreItemClickListener){
+        mListener = onStoreItemClickListener;
     }
 
     @NonNull
@@ -34,13 +43,14 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         View view= LayoutInflater.from(context).inflate(R.layout.item_search_result,parent,false);
         foodDAO = new FoodDAO(context);
         return new SearchAdapter.ViewHolder(view);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
         holder.tvStore.setText(list.get(position).getStoreID());
         holder.tvFood.setText(list.get(position).getNameMonAn());
-        holder.tvCost.setText(list.get(position).getGiaMonAn());
+        holder.tvCost.setText(Integer.toString(list.get(position).getGiaMonAn()));
         Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.ivFood);
 
 
@@ -48,7 +58,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -61,5 +71,9 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             tvCost = itemView.findViewById(R.id.tv_cost);
             ivFood = itemView.findViewById(R.id.iv_food_picture);
         }
+    }
+
+    public interface OnStoreClickListener {
+        void onStoreItemClick(int position);
     }
 }

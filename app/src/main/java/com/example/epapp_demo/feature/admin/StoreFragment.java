@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.CuaHangAdapter;
+import com.example.epapp_demo.adapter.StoreAdapter;
 import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -36,7 +36,7 @@ public class StoreFragment extends Fragment {
     private FirebaseAuth mAuth;
     DatabaseReference mData = FirebaseDatabase.getInstance().getReference();
     String userID;
-    public static CuaHangAdapter cuaHangAdapte;
+    public static StoreAdapter cuaHangAdapte;
     RecyclerView lv;
     ArrayList<Store> list = new ArrayList<>();
     FloatingActionButton add;
@@ -55,7 +55,7 @@ public class StoreFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
 
         list = storeDAO.getAll();
-        cuaHangAdapte = new CuaHangAdapter(list,getActivity());
+        cuaHangAdapte = new StoreAdapter(list,getActivity());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         lv.setLayoutManager(layoutManager);
         lv.setAdapter(cuaHangAdapte);

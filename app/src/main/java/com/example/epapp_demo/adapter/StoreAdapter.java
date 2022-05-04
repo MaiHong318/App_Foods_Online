@@ -15,13 +15,13 @@ import com.example.epapp_demo.model.local.modul.Store;
 
 import java.util.ArrayList;
 
-public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHolder> {
+public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.ViewHolder> {
 
     Context context;
     ArrayList<Store> cuahang;
     StoreDAO storeDAO;
 
-    public CuaHangAdapter(ArrayList<Store> cuahang, Context context){
+    public StoreAdapter(ArrayList<Store> cuahang, Context context){
         this.cuahang = cuahang;
         this.context = context;
         storeDAO = new StoreDAO(context);
@@ -29,10 +29,10 @@ public class CuaHangAdapter extends RecyclerView.Adapter<CuaHangAdapter.ViewHold
 
     @NonNull
     @Override
-    public CuaHangAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.cuahang_one_item,parent,false);
+    public StoreAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view= LayoutInflater.from(context).inflate(R.layout.item_store,parent,false);
         storeDAO = new StoreDAO(context);
-        return new CuaHangAdapter.ViewHolder(view);
+        return new StoreAdapter.ViewHolder(view);
     }
 
     @Override

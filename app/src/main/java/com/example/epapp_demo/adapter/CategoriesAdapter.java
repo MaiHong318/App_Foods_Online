@@ -74,7 +74,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             LayoutInflater layoutInflater = LayoutInflater.from(context);
-            View view1 = layoutInflater.inflate(R.layout.edit_phanloai,null);
+            View view1 = layoutInflater.inflate(R.layout.edit_category,null);
             final TextView ten = view1.findViewById(R.id.edtEditLoai);
             final TextView mota = view1.findViewById(R.id.edtEditMota);
             final TextView anh = view1.findViewById(R.id.edtEditUrl);

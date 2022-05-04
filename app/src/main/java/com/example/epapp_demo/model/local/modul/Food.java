@@ -8,6 +8,7 @@ public class Food implements Serializable {
     private int GiaMonAn;
     private String HinhAnhMonAn;
     private String StoreID;
+    private String NameStore;
     private String PhanLoaiID;
     private String MoTa;
 
@@ -67,6 +68,14 @@ public class Food implements Serializable {
 
     public void setStoreID(String storeID) {
         StoreID = storeID;
+    }
+
+    public String getNameStore() {
+        return NameStore;
+    }
+
+    public void setNameStore(String nameStore) {
+        NameStore = nameStore;
     }
 
     public String getPhanLoaiID() {
