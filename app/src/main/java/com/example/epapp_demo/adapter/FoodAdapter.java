@@ -21,6 +21,7 @@ import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

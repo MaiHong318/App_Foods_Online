@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,6 +40,7 @@ import java.util.Iterator;
 public class OrderFragment extends Fragment {
 
     RecyclerView rcv;
+    TextView tvDelete;
 //    OrderDAO orderDAO = new OrderDAO(getActivity());
    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
   //FirebaseDatabase mdb = FirebaseDatabase.getInstance();
@@ -69,6 +71,7 @@ public class OrderFragment extends Fragment {
 
         String i = mAuth.getCurrentUser().getUid();
         rcv = view.findViewById(R.id.rcv_DonHang);
+        tvDelete=view.findViewById(R.id.tvDelete);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcv.setLayoutManager(layoutManager);
@@ -79,6 +82,13 @@ public class OrderFragment extends Fragment {
         getHistoryCart();
         adapter = new CartAdapter(listCar, getContext());
         rcv.setAdapter(adapter);
+        tvDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteHistoryCart();
+                Toast.makeText(getContext(),"Xóa thành công",Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         return view;
@@ -106,6 +116,26 @@ public class OrderFragment extends Fragment {
             }
         });
         return list;
+    }
+    public void deleteHistoryCart(){
+        FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
+        DatabaseReference mdata=mAuth.getReference().child("Đơn hàng");
+        mdata.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot templateSnapshot : dataSnapshot.getChildren()){
+                    for(DataSnapshot snap : templateSnapshot.getChildren()){
+                       snap.getRef().removeValue();
+                       rcv.setAdapter(null);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("Delete", "onCancelled", databaseError.toException());
+            }
+        });
     }
 
 

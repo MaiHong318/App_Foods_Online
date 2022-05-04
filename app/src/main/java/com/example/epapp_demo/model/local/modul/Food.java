@@ -94,6 +94,8 @@ public class Food implements Serializable {
         MoTa = moTa;
     }
 
+
+
     public Food(String monAnID, String nameMonAn, int giaMonAn, String hinhAnhMonAn, String storeID, String phanLoaiID, String moTa) {
         MonAnID = monAnID;
         NameMonAn = nameMonAn;
@@ -102,6 +104,7 @@ public class Food implements Serializable {
         StoreID = storeID;
         PhanLoaiID = phanLoaiID;
         MoTa = moTa;
+
     }
 
     public String getMonAnID(String maSach) {

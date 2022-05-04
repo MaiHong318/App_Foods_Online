@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.UserInfo;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -89,7 +90,7 @@ public class StoreFragment extends Fragment {
                                             Toast.makeText(getActivity(), "Đăng kí thành công",
                                                     Toast.LENGTH_SHORT).show();
                                             userID = mAuth.getCurrentUser().getUid();
-                                            Store s = new Store(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);
+                                            Store s = new Store(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);;
                                             mData.child("CuaHang").child(userID).push();
                                             mData.child("CuaHang").child(userID).setValue(s);
                                             Log.d("Status","Success");

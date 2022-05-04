@@ -22,8 +22,12 @@ import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserInfo;
+
 import java.util.ArrayList;
 
 public class FoodOfStoreFragment extends Fragment {
@@ -87,7 +91,9 @@ public class FoodOfStoreFragment extends Fragment {
                         Categories loai = (Categories) spn.getSelectedItem();
                         String matheloai = loai.getLoaiID();
 
+
                         String a = mAuth.getCurrentUser().getUid();
+
                         Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
                         foodDAO.insert(s);
                     }
