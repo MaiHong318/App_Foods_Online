@@ -89,11 +89,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
                 public void onClick(DialogInterface dialogInterface, int i) {
                     String s = list.get(position).getMonAnId();
                     DbHelper dbHelper = new DbHelper(context);
-                    Log.d("1122",s);
+//                    Log.d("1122",s);
                     dbHelper.delete(s);
                     AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                    CartFragment myFragment = new CartFragment();
-                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, myFragment).addToBackStack(null).commit();
+//                    CartFragment myFragment = new CartFragment();
+//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, myFragment).addToBackStack(null).commit();
                 }
             });
             builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
