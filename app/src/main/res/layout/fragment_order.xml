@@ -38,6 +38,17 @@
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
+                <TextView
+                    android:id="@+id/tvDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="85dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_toRightOf="@+id/browse"
+                    android:text="Xóa tất cả"
+                    android:textColor="@color/green" />
+
             </RelativeLayout>
 
             <androidx.recyclerview.widget.RecyclerView
