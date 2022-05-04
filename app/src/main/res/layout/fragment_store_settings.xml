@@ -100,23 +100,23 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Chưa có tên cửa hàng"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_900"/>
+                            android:textColor="@color/grey_900"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvMailCHa"
-                            android:textStyle="bold"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Mail"
                             android:layout_below="@id/tvNameCHa"
                             android:layout_centerVertical="true"
-                            android:textSize="14sp"
                             android:layout_marginBottom="5dp"
+                            android:text="Mail"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
-                            android:textColor="@color/grey_40"/>
+                            android:textColor="@color/grey_40"
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                         <TextView
                             android:textStyle="bold"
                             android:textSize="14sp"
