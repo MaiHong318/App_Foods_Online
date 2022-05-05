@@ -12,10 +12,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
+import com.example.epapp_demo.adapter.FoodAdapter;
+import com.example.epapp_demo.adapter.ShowFoodAdapter;
 import com.example.epapp_demo.adapter.StoreSalesAdapter;
 import com.example.epapp_demo.adapter.StoreDiscountAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter1;
+import com.example.epapp_demo.model.local.database.CategoriesDAO;
+import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.Category;
+import com.example.epapp_demo.model.local.modul.Food;
+import com.google.firebase.auth.FirebaseAuth;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -24,10 +30,12 @@ import java.util.ArrayList;
 
 public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
-    RecyclerView rcvCategories, rcvQuanGoiY;
+    RecyclerView rcvOrder, rcvMenu;
     StoreDiscountAdapter placeAdapter;
-    public static StoreSalesAdapter categoriesAdapter;
-    ArrayList<Category> list = new ArrayList<>();
+    public static ShowFoodAdapter foodAdapter;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FoodDAO foodDAO = new FoodDAO(getActivity());
+    ArrayList<Food> list = new ArrayList<>();
     public HomeStoreFragment() {
         // Required empty public constructor
     }
@@ -44,16 +52,17 @@ public class HomeStoreFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sliderView = view.findViewById(R.id.imgSlider);
-        rcvCategories = (RecyclerView)view.findViewById(R.id.trending_recycler_view);
+        rcvOrder = (RecyclerView)view.findViewById(R.id.rcvOrder);
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rcvCategories.setLayoutManager(llmTrending);
-        categoriesAdapter = new StoreSalesAdapter(getActivity());
-        rcvCategories.setAdapter(categoriesAdapter);
-        rcvQuanGoiY = view.findViewById(R.id.place_recycler_view);
+        rcvOrder.setLayoutManager(llmTrending);
+        String id = mAuth.getCurrentUser().getUid();
+        rcvOrder.setAdapter(foodAdapter);
+        rcvMenu = view.findViewById(R.id.rcvMenu);
         LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rcvQuanGoiY.setLayoutManager(place);
-        placeAdapter = new StoreDiscountAdapter(getActivity());
-        rcvQuanGoiY.setAdapter(placeAdapter);
+        rcvMenu.setLayoutManager(place);
+        list = foodDAO.getAllMenu(id);
+        foodAdapter = new ShowFoodAdapter(list, getActivity());
+        rcvMenu.setAdapter(foodAdapter);
         //custom slider
         SliderAdapter1 adapter = new SliderAdapter1(getActivity());
         sliderView.setSliderAdapter(adapter);

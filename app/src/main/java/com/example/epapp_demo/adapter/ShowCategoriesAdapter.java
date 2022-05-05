@@ -70,17 +70,12 @@ public class ShowCategoriesAdapter extends RecyclerView.Adapter<ShowCategoriesAd
             tvMoTa = itemView.findViewById(R.id.tvMota);
             ivPhanLoaiPicture = itemView.findViewById(R.id.ivPhanLoaiPicture);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onStoreItemClick(getAdapterPosition());
-                }
-            });
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-
+            mListener.onStoreItemClick(getAdapterPosition());
         }
     }
 

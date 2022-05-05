@@ -16,8 +16,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
+import com.example.epapp_demo.feature.cuahang.HomeStoreFragment;
 import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Food;
@@ -46,6 +48,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     }
 
     private FoodAdapter.OnClickListener mListener;
+
     public void setOnItemClickListener (FoodAdapter.OnClickListener onItemClickListener){
         mListener = onItemClickListener;
     }

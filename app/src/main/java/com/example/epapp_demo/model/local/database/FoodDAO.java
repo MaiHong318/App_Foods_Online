@@ -7,9 +7,12 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.cuahang.FoodOfStoreFragment;
+import com.example.epapp_demo.feature.cuahang.HomeStoreFragment;
 import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.feature.home.FoodOfCategoriesFragment;
+import com.example.epapp_demo.feature.home.HomeFragment;
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -47,6 +50,35 @@ public class FoodDAO {
                 FoodOfStoreFragment.monAnAdapter.notifyDataSetChanged();
             }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
+
+
+
+    public ArrayList<Food> getAllMenu(String idCuaHang) {
+        final ArrayList<Food> list = new ArrayList<Food>();
+        mDatabase.orderByChild("storeID").equalTo(idCuaHang)
+        .addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    list.clear();
+                    Iterable<DataSnapshot> dataSnapshotIterable = dataSnapshot.getChildren();
+                    Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
+                    while (iterator.hasNext()) {
+                        DataSnapshot next = (DataSnapshot) iterator.next();
+                        Food pl = next.getValue(Food.class);
+                        list.add(pl);
+                        HomeStoreFragment.foodAdapter.notifyDataSetChanged();
+                    }
+                }
+
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

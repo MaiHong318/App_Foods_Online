@@ -56,7 +56,6 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
         }
 
 
-
         holder.name.setText(list.get(position).getNameLoai());
     }
 
@@ -78,6 +77,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<HomeCategoriesAd
 
         @Override
         public void onClick(View v) {
+            mListener.onItemClick(getPosition());
 
         }
     }

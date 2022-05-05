@@ -108,13 +108,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thống kê"
+                    android:text="Đơn hàng"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="14dp" />
 
                 <TextView
-                    android:id="@+id/categories_list"
+                    android:id="@+id/tv_show_order"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -126,13 +126,13 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/trending_recycler_view"
+                android:id="@+id/rcvOrder"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:layout_below="@id/category_title"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
@@ -140,7 +140,7 @@
 
             <LinearLayout
                 android:id="@+id/product_title"
-                android:layout_below="@id/trending_recycler_view"
+                android:layout_below="@id/rcvOrder"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"
@@ -152,13 +152,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Thêm Khuyến Mãi"
+                    android:text="Menu"
                     android:textSize="22sp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="15dp" />
 
                 <TextView
-                    android:id="@+id/place_list"
+                    android:id="@+id/tv_show_menu"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -170,7 +170,7 @@
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/place_recycler_view"
+                android:id="@+id/rcvMenu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/product_title"

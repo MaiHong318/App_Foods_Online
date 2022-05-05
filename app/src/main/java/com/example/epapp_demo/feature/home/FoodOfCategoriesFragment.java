@@ -101,7 +101,7 @@ public class FoodOfCategoriesFragment extends Fragment {
 
         btnBack.setOnClickListener(view1 -> {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
-            transaction.replace(R.id.frame_layout, new ListCategoriesFragment());
+            transaction.replace(R.id.frame_layout, new HomeFragment());
             transaction.commit();
         });
     }

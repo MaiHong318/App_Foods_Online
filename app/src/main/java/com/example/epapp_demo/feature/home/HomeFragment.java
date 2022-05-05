@@ -100,7 +100,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         manager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) this);
         final Location location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         sliderView = view.findViewById(R.id.imgSlider);
-        rcvCategories = (RecyclerView)view.findViewById(R.id.trending_recycler_view);
+        rcvCategories = (RecyclerView)view.findViewById(R.id.rcv_category);
         rcvQuanGoiY = view.findViewById(R.id.place_recycler_view);
         btn_reload = view.findViewById(R.id.btn_reload);
         tv_list_cuahang = view.findViewById(R.id.place_list);
@@ -125,6 +125,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                         dataSnapshot1.getKey();
                         list.add(categories);
                         list.forEach(Categories::getLoaiID);
+
                     }
                 }
 
