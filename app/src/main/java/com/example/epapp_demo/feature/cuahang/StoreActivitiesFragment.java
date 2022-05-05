@@ -1,12 +1,15 @@
 package com.example.epapp_demo.feature.cuahang;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +38,7 @@ public class StoreActivitiesFragment extends Fragment {
 
     public static CartAdapter donHangApdapter;
     ArrayList<CartDetails> list = new ArrayList<>();
+
     public StoreActivitiesFragment() {
         // Required empty public constructor
     }
@@ -43,7 +47,7 @@ public class StoreActivitiesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-       View view= inflater.inflate(R.layout.fragment_store_activities, container, false);
+        View view = inflater.inflate(R.layout.fragment_store_activities, container, false);
 
         String i = mAuth.getCurrentUser().getUid();
         rcvSA = view.findViewById(R.id.rcv_store_acti);
@@ -51,25 +55,37 @@ public class StoreActivitiesFragment extends Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcvSA.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
-         getDonByCuaHangID(""+ i +"");
-        donHangApdapter = new CartAdapter(list,getActivity());
+        getDonByCuaHangID();
+        donHangApdapter = new CartAdapter(list, getActivity());
         rcvSA.setAdapter(donHangApdapter);
         return view;
     }
 
-    public void getDonByCuaHangID(String idCuaHang) {
-        DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference("Đơn hàng");
-        Query query=mDatabase.orderByChild("cuaHangID").equalTo("0B2FTN6wJaddCcj5EBE3S2wTbll1");
-        query.addValueEventListener(new ValueEventListener() {
+    public void getDonByCuaHangID() {
+        String i = mAuth.getCurrentUser().getUid();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Đơn hàng");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    CartDetails cartDetails = ds.getValue(CartDetails.class);
-                    list.add(cartDetails);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot data : ds.getChildren()) {
+                        CartDetails cartDetails = data.getValue(CartDetails.class);
+                        if (cartDetails != null) {
+                            if (cartDetails.getCuaHangID().equals(i)) {
+                                list.add(cartDetails);
+                                Log.d("DonHang", "ListDH" + list);
+                            }
+                            donHangApdapter.notifyDataSetChanged();
+                        }
+
+
+                    }
+
 
                 }
-                donHangApdapter.notifyDataSetChanged();
+
             }
 
             @Override
