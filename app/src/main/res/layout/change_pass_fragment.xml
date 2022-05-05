@@ -46,11 +46,20 @@
             android:layout_marginBottom="15dp"
             android:paddingLeft="10dp" />
         <EditText
-            android:id="@+id/ed_ChangePassWord"
+            android:id="@+id/ed_PassWord"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:background="@drawable/border_add_text"
             android:hint="Mật khẩu cũ"
+            android:layout_marginBottom="15dp"
+            android:inputType="textPassword"
+            android:paddingLeft="10dp" />
+        <EditText
+            android:id="@+id/ed_PassWordNew"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/border_add_text"
+            android:hint="Mật khẩu mới"
             android:layout_marginBottom="15dp"
             android:inputType="textPassword"
             android:paddingLeft="10dp" />

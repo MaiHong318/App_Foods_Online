@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,7 +20,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -40,6 +43,11 @@ import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
@@ -105,6 +113,38 @@ public class HomeFragment extends Fragment implements LocationListener {
         list = categoriesDAO.getAllMenu();
         homeCategoriesAdapter = new HomeCategoriesAdapter(list,getActivity());
         rcvCategories.setAdapter(homeCategoriesAdapter);
+
+        homeCategoriesAdapter.setOnItemClickListener(position -> {
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PhanLoai");
+            databaseReference.orderByChild("loaiID").addValueEventListener(new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Categories categories = dataSnapshot1.getValue(Categories.class);
+                        dataSnapshot1.getKey();
+                        list.add(categories);
+                        list.forEach(Categories::getLoaiID);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+            Bundle bundle = new Bundle();
+            bundle.putString("cat",list.get(position).getLoaiID());
+
+            FoodOfCategoriesFragment newFragment = new FoodOfCategoriesFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+        });
 
         //custom slider
         SliderAdapter adapter = new SliderAdapter(getActivity());

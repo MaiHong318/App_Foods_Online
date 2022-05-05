@@ -65,50 +65,42 @@ public class ListCategoriesFragment extends Fragment {
         list = categoriesDAO.getShowCat();
         showCategoriesAdapter = new ShowCategoriesAdapter(list,getActivity());
         rcvCategories.setAdapter(showCategoriesAdapter);
-        showCategoriesAdapter.setOnStoreItemClickListener(new ShowCategoriesAdapter.OnStoreClickListener() {
-            @Override
-            public void onStoreItemClick(int position) {
+        showCategoriesAdapter.setOnStoreItemClickListener(position -> {
 
-                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PhanLoai");
-                databaseReference.orderByChild("loaiID").addValueEventListener(new ValueEventListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.N)
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                        Categories categories = dataSnapshot1.getValue(Categories.class);
-                        dataSnapshot1.getKey();
-                            list.add(categories);
-                            list.forEach((item)-> {
-                            item.getLoaiID();
-                        });
-                        }
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PhanLoai");
+            databaseReference.orderByChild("loaiID").addValueEventListener(new ValueEventListener() {
+                @RequiresApi(api = Build.VERSION_CODES.N)
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                    Categories categories = dataSnapshot1.getValue(Categories.class);
+                    dataSnapshot1.getKey();
+                        list.add(categories);
+                        list.forEach(Categories::getLoaiID);
                     }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                    }
-                });
+                }
+            });
 
-                Bundle bundle = new Bundle();
-                bundle.putString("cat",list.get(position).getLoaiID());
+            Bundle bundle = new Bundle();
+            bundle.putString("cat",list.get(position).getLoaiID());
 
-                FoodOfCategoriesFragment newFragment = new FoodOfCategoriesFragment();
-                newFragment.setArguments(bundle);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
+            FoodOfCategoriesFragment newFragment = new FoodOfCategoriesFragment();
+            newFragment.setArguments(bundle);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new HomeFragment());
-                transaction.commit();
-            }
+        btnBack.setOnClickListener(view1 -> {
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,new HomeFragment());
+            transaction.commit();
         });
     }
 }
