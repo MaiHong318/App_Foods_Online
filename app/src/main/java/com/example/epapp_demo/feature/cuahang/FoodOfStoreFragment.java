@@ -80,22 +80,28 @@ public class FoodOfStoreFragment extends Fragment {
                 spn.setAdapter(adapter);
 
                 builder.setView(view1);
-                builder.setPositiveButton("Thêm", (dialogInterface, i1) -> {
-                    String tenmon1 = tenmon.getText().toString();
-                    String mota1 = mota.getText().toString();
-                    int gia1 = Integer.parseInt(gia.getText().toString());
-                    String url1 = url.getText().toString();
-                    Categories loai = (Categories) spn.getSelectedItem();
-                    String matheloai = loai.getLoaiID();
+                builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
+                    @SuppressLint("RestrictedApi")
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String tenmon1 = tenmon.getText().toString();
+                        String mota1 = mota.getText().toString();
+                        int gia1 = Integer.parseInt(gia.getText().toString());
+                        String url1 = url.getText().toString();
+                        Categories loai = (Categories) spn.getSelectedItem();
+                        String matheloai = loai.getLoaiID();
 
 
-                    String a = mAuth.getCurrentUser().getUid();
-//                        String nameStore=mAuth.getCurrentUser().getEmail();
+                        String a = mAuth.getCurrentUser().getUid();
 
-                    Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
-                    foodDAO.insert(s);
-                }).setNegativeButton("Hủy", (dialog, which) -> {
+                        Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
+                        foodDAO.insert(s);
+                    }
+                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
                 });
                 builder.setView(view1);
                 builder.show();
