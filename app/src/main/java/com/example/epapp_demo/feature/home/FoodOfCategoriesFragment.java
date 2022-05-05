@@ -94,7 +94,7 @@ public class FoodOfCategoriesFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.w("SearchFragment", "cancel", databaseError.toException());
+                Log.w("Fragment error", "cancel", databaseError.toException());
 
             }
         });

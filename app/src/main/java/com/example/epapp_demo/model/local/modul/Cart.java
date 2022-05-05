@@ -10,6 +10,7 @@ public class Cart implements Serializable {
     private int SoLuong;
 //    private int Gia;
 //    private String HinhAnhGioHang;
+    private String CuaHangID;
 
     public int getGioHangId() {
         return gioHangId;
@@ -67,6 +68,23 @@ public class Cart implements Serializable {
 //        HinhAnhGioHang = hinhAnhGioHang;
 //    }
 
+
+    public String getDonHangID() {
+        return DonHangID;
+    }
+
+    public void setDonHangID(String donHangID) {
+        DonHangID = donHangID;
+    }
+
+    public String getCuaHangID() {
+        return CuaHangID;
+    }
+
+    public void setCuaHangID(String cuaHangID) {
+        CuaHangID = cuaHangID;
+    }
+
     public Cart() {
     }
 
@@ -81,5 +99,13 @@ public class Cart implements Serializable {
         this.DonHangID = DonHangID;
         MonAnID = monAnID;
         SoLuong = soLuong;
+    }
+
+    public Cart(int gioHangId, String donHangID, String monAnID, int soLuong, String cuaHangID) {
+        this.gioHangId = gioHangId;
+        DonHangID = donHangID;
+        MonAnID = monAnID;
+        SoLuong = soLuong;
+        CuaHangID = cuaHangID;
     }
 }

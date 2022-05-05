@@ -7,11 +7,13 @@ import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.home.OrderFragment;
 import com.example.epapp_demo.feature.cuahang.StoreActivitiesFragment;
+import com.example.epapp_demo.model.local.modul.CartDetails;
 import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -27,6 +29,7 @@ public class OrderDAO {
 
     public ArrayList<Order> getDonByKhachID(String idKhachHang) {
         final ArrayList<Order> list = new ArrayList<Order>();
+
         mDatabase.orderByChild("userID").equalTo(idKhachHang).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -48,29 +51,7 @@ public class OrderDAO {
         });
         return list;
     }
-    public ArrayList<Order> getDonByCuaHangID(String idCuaHang) {
-        final ArrayList<Order> list = new ArrayList<Order>();
-        mDatabase.orderByChild("storeID").equalTo(idCuaHang).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                list.clear();
-                for (DataSnapshot ds : dataSnapshot.getChildren()){
-                    ds.getKey();
-                    Order hd = ds.getValue(Order.class);
-                    Log.d("ab1", hd.getStoreID());
-                    list.add(hd);
 
-                }
-                StoreActivitiesFragment.donHangApdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        return list;
-    }
 
 
 }
