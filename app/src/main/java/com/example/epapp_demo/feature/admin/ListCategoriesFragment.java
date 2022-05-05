@@ -1,9 +1,11 @@
 package com.example.epapp_demo.feature.admin;
 
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,9 +20,16 @@ import android.widget.RelativeLayout;
 import com.example.epapp_demo.R;
 
 import com.example.epapp_demo.adapter.ShowCategoriesAdapter;
+import com.example.epapp_demo.feature.home.FoodOfCategoriesFragment;
 import com.example.epapp_demo.feature.home.HomeFragment;
+import com.example.epapp_demo.feature.home.SearchFragment;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -56,18 +65,42 @@ public class ListCategoriesFragment extends Fragment {
         list = categoriesDAO.getShowCat();
         showCategoriesAdapter = new ShowCategoriesAdapter(list,getActivity());
         rcvCategories.setAdapter(showCategoriesAdapter);
-//        showPhanLoaiAdapter.setOnStoreItemClickListener(new ShowCuaHangAdapter.OnStoreClickListener() {
-//            @Override
-//            public void onStoreItemClick(int position) {
-//                PhanLoai phanLoai = list.get(position);
-//                String idCat = phanLoai.getLoaiID();
-//                ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
-//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//                transaction.replace(R.id.frame_layout, newFragment);
-//                transaction.addToBackStack(null);
-//                transaction.commit();
-//            }
-//        });
+        showCategoriesAdapter.setOnStoreItemClickListener(new ShowCategoriesAdapter.OnStoreClickListener() {
+            @Override
+            public void onStoreItemClick(int position) {
+
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PhanLoai");
+                databaseReference.orderByChild("loaiID").addValueEventListener(new ValueEventListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                        Categories categories = dataSnapshot1.getValue(Categories.class);
+                        dataSnapshot1.getKey();
+                            list.add(categories);
+                            list.forEach((item)-> {
+                            item.getLoaiID();
+                        });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+                Bundle bundle = new Bundle();
+                bundle.putString("cat",list.get(position).getLoaiID());
+
+                FoodOfCategoriesFragment newFragment = new FoodOfCategoriesFragment();
+                newFragment.setArguments(bundle);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_layout, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
 
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

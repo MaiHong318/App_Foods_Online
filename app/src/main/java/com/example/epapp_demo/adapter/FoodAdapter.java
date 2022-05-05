@@ -45,6 +45,11 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         foodDAO = new FoodDAO(context);
     }
 
+    private FoodAdapter.OnClickListener mListener;
+    public void setOnItemClickListener (FoodAdapter.OnClickListener onItemClickListener){
+        mListener = onItemClickListener;
+    }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -190,5 +195,9 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
         public void onClick(View v) {
 
         }
+    }
+
+    public interface OnClickListener {
+        void onItemClick(int position);
     }
 }

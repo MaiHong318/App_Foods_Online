@@ -1,13 +1,17 @@
 package com.example.epapp_demo.model.local.database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.example.epapp_demo.feature.cuahang.FoodOfStoreFragment;
+import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
+import com.example.epapp_demo.feature.home.FoodOfCategoriesFragment;
 import com.example.epapp_demo.feature.home.ShowMenuStoreFragment;
 import com.example.epapp_demo.model.local.modul.Food;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -51,6 +55,30 @@ public class FoodDAO {
         return list;
     }
 
+    public ArrayList<Food> getAllCat(String idCategories) {
+        final ArrayList<Food> list = new ArrayList<Food>();
+        mDatabase.orderByChild("phanLoaiID").equalTo(idCategories).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                list.clear();
+                Iterable<DataSnapshot> dataSnapshotIterable = dataSnapshot.getChildren();
+                Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
+                while (iterator.hasNext()) {
+                    DataSnapshot next = (DataSnapshot) iterator.next();
+                    Food cat = next.getValue(Food.class);
+                    list.add(cat);
+                    FoodOfCategoriesFragment.foodAdapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
 
     public ArrayList<Food> getToanBoMonAn() {
 
