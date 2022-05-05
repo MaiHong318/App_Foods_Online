@@ -45,13 +45,14 @@ public class StoreActivitiesFragment extends Fragment {
         // Inflate the layout for this fragment
        View view= inflater.inflate(R.layout.fragment_store_activities, container, false);
 
+
         String i = mAuth.getCurrentUser().getUid();
         rcvSA = view.findViewById(R.id.rcv_store_acti);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcvSA.setLayoutManager(layoutManager);
         mAuth = FirebaseAuth.getInstance();
-         getDonByCuaHangID(""+ i +"");
+         getDonByCuaHangID(i);
         donHangApdapter = new CartAdapter(list,getActivity());
         rcvSA.setAdapter(donHangApdapter);
         return view;
@@ -59,13 +60,14 @@ public class StoreActivitiesFragment extends Fragment {
 
     public void getDonByCuaHangID(String idCuaHang) {
         DatabaseReference mDatabase= FirebaseDatabase.getInstance().getReference("Đơn hàng");
-        Query query=mDatabase.orderByChild("cuaHangID").equalTo("0B2FTN6wJaddCcj5EBE3S2wTbll1");
+        Query query=mDatabase.orderByChild("cuaHangID").equalTo(idCuaHang);
         query.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot ds : dataSnapshot.getChildren()){
                     CartDetails cartDetails = ds.getValue(CartDetails.class);
+                    ds.getKey();
                     list.add(cartDetails);
 
                 }

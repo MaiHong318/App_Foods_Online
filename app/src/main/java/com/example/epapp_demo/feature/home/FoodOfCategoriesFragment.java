@@ -23,9 +23,7 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.FoodAdapter;
 
 import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
-
 import com.example.epapp_demo.model.local.database.FoodDAO;
-
 import com.example.epapp_demo.model.local.modul.Food;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -101,13 +99,10 @@ public class FoodOfCategoriesFragment extends Fragment {
 
 
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, new ListCategoriesFragment());
-                transaction.commit();
-            }
+        btnBack.setOnClickListener(view1 -> {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, new ListCategoriesFragment());
+            transaction.commit();
         });
     }
 }

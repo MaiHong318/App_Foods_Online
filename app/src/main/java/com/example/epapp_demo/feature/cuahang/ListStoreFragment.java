@@ -54,26 +54,20 @@ public class ListStoreFragment extends Fragment {
         list = storeDAO.getShowCuahang();
         showcuaHangAdapter = new ShowStoreAdapter(list,getActivity());
         rcvStore.setAdapter(showcuaHangAdapter);
-        showcuaHangAdapter.setOnStoreItemClickListener(new ShowStoreAdapter.OnStoreClickListener() {
-            @Override
-            public void onStoreItemClick(int position) {
-                Store store = list.get(position);
-                String idStore = store.getStoreID();
-                ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
+        showcuaHangAdapter.setOnStoreItemClickListener(position -> {
+            Store store = list.get(position);
+            String idStore = store.getStoreID();
+            ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new HomeFragment());
-                transaction.commit();
-            }
+        btnBack.setOnClickListener(view1 -> {
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,new HomeFragment());
+            transaction.commit();
         });
     }
 }

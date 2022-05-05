@@ -84,24 +84,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             View view1 = layoutInflater.inflate(R.layout.delete_alert_dialog,null);
 
 
-            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    String s = list.get(position).getMonAnId();
-                    DbHelper dbHelper = new DbHelper(context);
-//                    Log.d("1122",s);
-                    dbHelper.delete(s);
-                    AppCompatActivity activity = (AppCompatActivity) v.getContext();
-//                    CartFragment myFragment = new CartFragment();
-//                    activity.getSupportFragmentManager().beginTransaction().replace(R.id.frame_layout, myFragment).addToBackStack(null).commit();
-                }
-            });
-            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            builder.setPositiveButton("Có", (dialogInterface, i) -> {
+                String s = list.get(position).getMonAnId();
+                DbHelper dbHelper = new DbHelper(context);
+                dbHelper.delete(s);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
 
-                }
+            });
+            builder.setNegativeButton("Không", (dialog, which) -> {
+
             });
             builder.setView(view1);
             builder.show();
