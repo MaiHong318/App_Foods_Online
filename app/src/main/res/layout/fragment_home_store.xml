@@ -108,7 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Đơn hàng"
+                    android:text="Thống kê"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="14dp" />
@@ -125,22 +125,32 @@
 
             </LinearLayout>
 
-            <androidx.recyclerview.widget.RecyclerView
+            <TextView
                 android:id="@+id/rcvOrder"
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@id/category_title"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:orientation="horizontal" />
+                android:orientation="horizontal"
+                android:text="Doanh thu"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_Doanhthu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rcvOrder"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+
+                android:text="300000đ"
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:id="@+id/product_title"
-                android:layout_below="@id/rcvOrder"
+                android:layout_below="@id/tv_Doanhthu"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="5dp"
                 android:layout_width="match_parent"

@@ -1,13 +1,18 @@
 package com.example.epapp_demo.feature.cuahang;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -21,24 +26,34 @@ import com.example.epapp_demo.adapter.StoreDiscountAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter1;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.database.FoodDAO;
+import com.example.epapp_demo.model.local.modul.CartDetails;
 import com.example.epapp_demo.model.local.modul.Category;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.smarteist.autoimageslider.IndicatorAnimations;
 import com.smarteist.autoimageslider.SliderAnimations;
 import com.smarteist.autoimageslider.SliderView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
     RecyclerView rcvOrder, rcvMenu;
     TextView tvShowMenu;
+    TextView tvDoanhThu;
+    TextView tvSoTien;
     StoreDiscountAdapter placeAdapter;
     public static ShowFoodAdapter foodAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FoodDAO foodDAO = new FoodDAO(getActivity());
     ArrayList<Food> list = new ArrayList<>();
+    ArrayList<CartDetails> listCart = new ArrayList<>();
     public HomeStoreFragment() {
         // Required empty public constructor
     }
@@ -55,13 +70,15 @@ public class HomeStoreFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sliderView = view.findViewById(R.id.imgSlider);
-        rcvOrder = (RecyclerView) view.findViewById(R.id.rcvOrder);
+
         tvShowMenu = view.findViewById(R.id.tv_show_menu);
         rcvMenu = view.findViewById(R.id.rcvMenu);
+        tvDoanhThu=view.findViewById(R.id.tv_Doanhthu);
+        tvSoTien=view.findViewById(R.id.rcvOrder);
 
 
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-        rcvOrder.setLayoutManager(llmTrending);
+      //  rcvOrder.setLayoutManager(llmTrending);
         String id = mAuth.getCurrentUser().getUid();
        // rcvOrder.setAdapter(foodAdapter);
 
@@ -69,6 +86,7 @@ public class HomeStoreFragment extends Fragment {
         LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rcvMenu.setLayoutManager(place);
         list = foodDAO.getAllMenu(id);
+        getDonByCuaHangID();
         foodAdapter = new ShowFoodAdapter(list, getActivity());
         rcvMenu.setAdapter(foodAdapter);
 
@@ -89,6 +107,42 @@ public class HomeStoreFragment extends Fragment {
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_1, new FoodOfStoreFragment());
             transaction.commit();
+        });
+    }
+    public void getDonByCuaHangID() {
+        String i = mAuth.getCurrentUser().getUid();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Đơn hàng");
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
+            @SuppressLint("NotifyDataSetChanged")
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                    for (DataSnapshot data : ds.getChildren()) {
+                        CartDetails cartDetails = data.getValue(CartDetails.class);
+                        if (cartDetails != null) {
+                            if (cartDetails.getCuaHangID().equals(i)) {
+                                listCart.add(cartDetails);
+                                Log.d("DonHang", "ListDH" + list);
+                                final DecimalFormat formatter = new DecimalFormat("###,###,###");
+                                int sum=0;
+                                for (CartDetails element : listCart) {
+                                    sum +=element.getGia()*element.getSoluong();
+                                    tvDoanhThu.setText(formatter.format(sum)+ " VNĐ");
+                                }
+                            }
+                        }
+
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
         });
     }
 }

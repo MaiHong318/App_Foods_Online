@@ -16,16 +16,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CartAdapter;
-import com.example.epapp_demo.adapter.OrderApdapter;
 import com.example.epapp_demo.model.local.database.OrderDAO;
 import com.example.epapp_demo.model.local.modul.CartDetails;
-import com.example.epapp_demo.model.local.modul.Order;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -51,6 +48,7 @@ public class StoreActivitiesFragment extends Fragment {
 
         String i = mAuth.getCurrentUser().getUid();
         rcvSA = view.findViewById(R.id.rcv_store_acti);
+
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcvSA.setLayoutManager(layoutManager);
@@ -82,8 +80,6 @@ public class StoreActivitiesFragment extends Fragment {
 
 
                     }
-
-
                 }
 
             }
