@@ -156,7 +156,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Quán gần bạn"
+                    android:text="Quán gợi ý"
                     android:textSize="20sp"
                     android:textColor="@color/black"
                     android:layout_marginLeft="15dp" />
@@ -173,8 +173,8 @@
 
             </LinearLayout>
 
-            <ListView
-                android:id="@+id/place_recycler_view"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvQuanGoiY"
                 android:layout_width="match_parent"
                 android:layout_height="270dp"
                 android:layout_below="@+id/product_title"

@@ -20,6 +20,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.feature.admin.StoreFragment;
+import com.example.epapp_demo.feature.home.HomeFragment;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -84,6 +85,34 @@ public class StoreDAO implements LocationListener {
         });
         return list;
     }
+
+    public ArrayList<Store> getAllMenu() {
+
+        final ArrayList<Store> list = new ArrayList<Store>();
+
+        mDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    list.clear();
+                    Iterable<   DataSnapshot> dataSnapshotIterable = dataSnapshot.getChildren();
+                    Iterator<DataSnapshot> iterator = dataSnapshotIterable.iterator();
+                    while (iterator.hasNext()) {
+                        DataSnapshot next = (DataSnapshot) iterator.next();
+                        Store sach = next.getValue(Store.class);
+                        list.add(sach);
+                        HomeFragment.showStoreAdapter.notifyDataSetChanged();
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        return list;
+    }
+
     public ArrayList<Store> getShowCuahang() {
 
         final ArrayList<Store> list = new ArrayList<Store>();
@@ -162,7 +191,6 @@ public class StoreDAO implements LocationListener {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 temp.clear();
                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    //convert ra đối tượng HoaDon
                     Store store = data.getValue(Store.class);
                     try{
                         if (location != null) {

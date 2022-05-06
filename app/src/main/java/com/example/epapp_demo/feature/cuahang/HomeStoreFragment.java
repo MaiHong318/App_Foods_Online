@@ -19,14 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.FoodAdapter;
 import com.example.epapp_demo.adapter.ShowFoodAdapter;
-import com.example.epapp_demo.adapter.StoreSalesAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter1;
-import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.CartDetails;
-import com.example.epapp_demo.model.local.modul.Category;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,10 +39,9 @@ import java.util.ArrayList;
 
 public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
-    RecyclerView rcvOrder, rcvMenu;
+    RecyclerView rcvMenu;
     TextView tvShowMenu;
     TextView tvDoanhThu;
-    TextView tvSoTien;
     public static ShowFoodAdapter foodAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FoodDAO foodDAO = new FoodDAO(getActivity());
@@ -72,17 +67,12 @@ public class HomeStoreFragment extends Fragment {
         tvShowMenu = view.findViewById(R.id.tv_show_menu);
         rcvMenu = view.findViewById(R.id.rcvMenu);
         tvDoanhThu=view.findViewById(R.id.tv_Doanhthu);
-        tvSoTien=view.findViewById(R.id.rcvOrder);
 
-
-        LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
-      //  rcvOrder.setLayoutManager(llmTrending);
         String id = mAuth.getCurrentUser().getUid();
-       // rcvOrder.setAdapter(foodAdapter);
 
 
-        LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        rcvMenu.setLayoutManager(place);
+        LinearLayoutManager menu = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rcvMenu.setLayoutManager(menu);
         list = foodDAO.getAllMenu(id);
         getDonByCuaHangID();
         foodAdapter = new ShowFoodAdapter(list, getActivity());
