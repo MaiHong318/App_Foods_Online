@@ -113,15 +113,6 @@
                     android:textColor="@color/black"
                     android:layout_marginLeft="14dp" />
 
-                <TextView
-                    android:id="@+id/tv_show_order"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Tất cả"
-                    android:textSize="14sp"
-                    android:layout_marginRight="22dp"
-                    android:textColor="@color/blue_900" />
 
             </LinearLayout>
 

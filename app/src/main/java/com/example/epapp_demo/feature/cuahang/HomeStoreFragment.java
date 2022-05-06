@@ -22,7 +22,6 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.FoodAdapter;
 import com.example.epapp_demo.adapter.ShowFoodAdapter;
 import com.example.epapp_demo.adapter.StoreSalesAdapter;
-import com.example.epapp_demo.adapter.StoreDiscountAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter1;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.database.FoodDAO;
@@ -48,7 +47,6 @@ public class HomeStoreFragment extends Fragment {
     TextView tvShowMenu;
     TextView tvDoanhThu;
     TextView tvSoTien;
-    StoreDiscountAdapter placeAdapter;
     public static ShowFoodAdapter foodAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FoodDAO foodDAO = new FoodDAO(getActivity());
