@@ -14,14 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.adapter.FoodAdapter;
 import com.example.epapp_demo.adapter.ShowFoodAdapter;
-import com.example.epapp_demo.adapter.StoreSalesAdapter;
-import com.example.epapp_demo.adapter.StoreDiscountAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter1;
-import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.database.FoodDAO;
-import com.example.epapp_demo.model.local.modul.Category;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.google.firebase.auth.FirebaseAuth;
 import com.smarteist.autoimageslider.IndicatorAnimations;
@@ -34,7 +29,6 @@ public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
     RecyclerView rcvOrder, rcvMenu;
     TextView tvShowMenu;
-    StoreDiscountAdapter placeAdapter;
     public static ShowFoodAdapter foodAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FoodDAO foodDAO = new FoodDAO(getActivity());

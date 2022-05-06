@@ -15,13 +15,13 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation_1"
-        android:background="@color/white"
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
+        android:background="@color/white"
+        android:outlineSpotShadowColor="@color/blue_200"
         app:itemBackground="@color/white"
-        android:outlineSpotShadowColor="@color/green"
         app:menu="@menu/menu_cuahang" />
 
 </RelativeLayout>

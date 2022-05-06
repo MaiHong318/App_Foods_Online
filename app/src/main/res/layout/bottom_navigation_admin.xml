@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:itemBackground="@color/white"
-        android:outlineSpotShadowColor="@color/green"
+        android:outlineSpotShadowColor="@color/blue_200"
         app:menu="@menu/menu_admin"
         android:background="@color/white"
         />

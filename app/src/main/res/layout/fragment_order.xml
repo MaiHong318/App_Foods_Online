@@ -34,7 +34,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:text="Lịch sử các đơn hàng"
-                    android:textColor="@color/green"
+                    android:textColor="@color/blue_900"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -43,11 +43,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_centerInParent="true"
-                    android:layout_marginLeft="85dp"
+                    android:layout_marginLeft="55dp"
                     android:layout_marginTop="35dp"
                     android:layout_toRightOf="@+id/browse"
                     android:text="Xóa tất cả"
-                    android:textColor="@color/green" />
+                    android:textColor="@color/red_600" />
 
             </RelativeLayout>
 

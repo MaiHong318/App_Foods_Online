@@ -16,7 +16,7 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:background="@android:color/transparent"
-        android:backgroundTint="@color/green"
+        android:backgroundTint="@color/blue_700"
         android:src="@drawable/ic_add2"
         app:rippleColor="@color/white"
         android:layout_alignParentRight="true" />
