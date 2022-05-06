@@ -2,13 +2,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/blue_500</item>
+        <item name="colorPrimaryDark">@color/blue_700</item>
+        <item name="colorAccent">@color/blue_900</item>
     </style>
     <style name="EditTextThemeObs" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/grey_10</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/blue_500</item>
     </style>
     <style name="Yellow.Small.AppCompatRatingBar" parent="Base.Widget.AppCompat.RatingBar.Small">
         <item name="colorControlNormal">@color/white</item>
