@@ -135,8 +135,7 @@
                 android:layout_below="@id/rcvOrder"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-
-                android:text="300000đ"
+                android:text="0đ"
                 android:textSize="30sp" />
 
             <LinearLayout
