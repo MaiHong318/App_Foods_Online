@@ -7,7 +7,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="horizontal"
-        android:layout_margin="16dp"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="wrap_content"
@@ -52,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="Tên loại:"
-                android:textColor="@color/green"/>
+                android:textColor="@color/blue_900"/>
             <TextView
                 android:id="@+id/Nameloai"
                 android:layout_weight="1"
@@ -68,8 +67,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:text="Mô tả"
-                android:textColor="@color/green"/>
+                android:text="Mô tả:"
+                android:textColor="@color/blue_900"/>
             <TextView
                 android:id="@+id/tvMota"
                 android:layout_weight="1"

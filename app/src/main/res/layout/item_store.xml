@@ -24,7 +24,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:text="Tên cửa hàng:"
-                android:textColor="@color/green"/>
+                android:textColor="@color/blue_900"/>
             <TextView
                 android:id="@+id/tvNameCH"
                 android:layout_weight="1"
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Mail cửa hàng:"
-            android:textColor="@color/green"/>
+            android:textColor="@color/blue_900"/>
         <TextView
             android:layout_weight="1"
             android:id="@+id/tvmailCH"
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Mật khẩu:"
-            android:textColor="@color/green"/>
+            android:textColor="@color/blue_900"/>
         <TextView
             android:id="@+id/tvpassCH"
             android:textColor="@color/black"
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:text="Địa chỉ"
-            android:textColor="@color/green"/>
+            android:textColor="@color/blue_900"/>
         <TextView
             android:id="@+id/tvDiaChiCH"
             android:layout_weight="1"

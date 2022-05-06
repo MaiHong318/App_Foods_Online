@@ -15,7 +15,7 @@
            android:orientation="horizontal">
            <TextView
 
-               android:textColor="@color/green"
+               android:textColor="@color/blue_900"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:text="Mã khách hàng:"
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:textColor="@color/green"
+                android:textColor="@color/blue_900"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Ngày sinh:"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:textColor="@color/green"
+                android:textColor="@color/blue_900"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tên khách hàng:"
@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:textColor="@color/green"
+                android:textColor="@color/blue_900"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email:"
@@ -85,7 +85,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:textColor="@color/green"
+                android:textColor="@color/blue_900"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Số điện thoại:"
@@ -104,7 +104,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:textColor="@color/green"
+                android:textColor="@color/blue_900"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Địa chỉ:"

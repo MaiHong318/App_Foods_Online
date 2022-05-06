@@ -14,7 +14,7 @@
     <RelativeLayout
         android:id="@+id/relSearch"
         android:layout_width="match_parent"
-        android:background="@color/green"
+        android:background="@color/blue_200"
         android:layout_height="200dp">
 
         <ImageView
@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:background="@color/green"
+            android:background="@color/blue_200"
             android:scaleType="centerCrop" />
 
         <RelativeLayout
@@ -102,7 +102,7 @@
                             android:text="Chưa có tên cửa hàng"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Subhead"
                             android:textColor="@color/grey_900"
-                            android:textSize="16sp"
+                            android:textSize="20sp"
                             android:textStyle="bold" />
 
                         <TextView

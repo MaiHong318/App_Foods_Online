@@ -10,7 +10,8 @@
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Hoạt động của cửa hàng"
+        android:text="Lịch sử bán hàng"
+        android:textSize="25sp"
         />
     <androidx.recyclerview.widget.RecyclerView
 

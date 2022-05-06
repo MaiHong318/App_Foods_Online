@@ -20,7 +20,8 @@
             android:layout_height="80dp"
             android:layout_gravity="center"
             android:layout_weight="3"
-            app:srcCompat="@drawable/logo" />
+            app:srcCompat="@drawable/logo"
+            android:tint="@color/blue_500"/>
     </LinearLayout>
     <TextView
         android:layout_width="wrap_content"

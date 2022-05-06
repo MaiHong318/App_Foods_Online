@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:id="@+id/toolbar1"
-        android:background="@color/green"
+        android:background="@color/blue_200"
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
@@ -22,9 +22,9 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/ic_back"
                 android:layout_centerInParent="true"
-                android:tint="@color/colorPrimary"/>
+                android:src="@drawable/ic_back"
+                android:tint="@color/white" />
 
         </RelativeLayout>
 

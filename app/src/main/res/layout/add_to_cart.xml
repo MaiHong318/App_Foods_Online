@@ -70,7 +70,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:textAlignment="center"
-                app:backGroundColor="@color/green"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
+                app:backGroundColor="@color/light_blue_500"></com.cepheuen.elegantnumberbutton.view.ElegantNumberButton>
 
             <Button
                 android:id="@+id/btn_add_to_cart"
@@ -83,6 +83,7 @@
                 android:background="@drawable/border_bottom"
                 android:fontFamily="@font/icielplanton"
                 android:text="thêm vào giỏ hàng"
+                android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/white" />
 
