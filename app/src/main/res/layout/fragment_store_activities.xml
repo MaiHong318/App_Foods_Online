@@ -6,13 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white">
-    <TextView
+
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lịch sử bán hàng"
-        android:textSize="25sp"
-        />
+        android:background="@color/blue_200"
+        app:title="Lịch sử đơn hàng"
+        app:titleTextColor="@color/white"
+        android:textSize="25sp" />
     <androidx.recyclerview.widget.RecyclerView
 
         android:id="@+id/rcv_store_acti"
