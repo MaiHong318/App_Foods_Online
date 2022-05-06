@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +33,7 @@ import java.util.ArrayList;
 public class HomeStoreFragment extends Fragment {
     SliderView sliderView;
     RecyclerView rcvOrder, rcvMenu;
+    TextView tvShowMenu;
     StoreDiscountAdapter placeAdapter;
     public static ShowFoodAdapter foodAdapter;
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -52,17 +55,23 @@ public class HomeStoreFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         sliderView = view.findViewById(R.id.imgSlider);
-        rcvOrder = (RecyclerView)view.findViewById(R.id.rcvOrder);
+        rcvOrder = (RecyclerView) view.findViewById(R.id.rcvOrder);
+        tvShowMenu = view.findViewById(R.id.tv_show_menu);
+        rcvMenu = view.findViewById(R.id.rcvMenu);
+
+
         LinearLayoutManager llmTrending = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         rcvOrder.setLayoutManager(llmTrending);
         String id = mAuth.getCurrentUser().getUid();
-        rcvOrder.setAdapter(foodAdapter);
-        rcvMenu = view.findViewById(R.id.rcvMenu);
+       // rcvOrder.setAdapter(foodAdapter);
+
+
         LinearLayoutManager place = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         rcvMenu.setLayoutManager(place);
         list = foodDAO.getAllMenu(id);
         foodAdapter = new ShowFoodAdapter(list, getActivity());
         rcvMenu.setAdapter(foodAdapter);
+
         //custom slider
         SliderAdapter1 adapter = new SliderAdapter1(getActivity());
         sliderView.setSliderAdapter(adapter);
@@ -75,5 +84,11 @@ public class HomeStoreFragment extends Fragment {
         sliderView.setScrollTimeInSec(3);
         sliderView.setAutoCycle(true);
         sliderView.startAutoCycle();
+
+        tvShowMenu.setOnClickListener(view1 -> {
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.fragment_1, new FoodOfStoreFragment());
+            transaction.commit();
+        });
     }
 }

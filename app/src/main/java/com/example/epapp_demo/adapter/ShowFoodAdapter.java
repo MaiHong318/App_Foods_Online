@@ -43,11 +43,11 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
         foodDAO = new FoodDAO(context);
     }
 
-    private FoodAdapter.OnClickListener mListener;
-
-    public void setOnItemClickListener (FoodAdapter.OnClickListener onItemClickListener){
-        mListener = onItemClickListener;
-    }
+//    private FoodAdapter.OnClickListener mListener;
+//
+//    public void setOnItemClickListener (FoodAdapter.OnClickListener onItemClickListener){
+//        mListener = onItemClickListener;
+//    }
 
     @NonNull
     @Override
@@ -116,15 +116,15 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
             gia_MA = itemView.findViewById(R.id.item_gia_MA);
             anh_MA = itemView.findViewById(R.id.anh_MA);
             item_mon_an = itemView.findViewById(R.id.item_mon_an);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    mListener.onItemClick(getAdapterPosition());
-                }
-            });
+//            itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    mListener.onItemClick(getAdapterPosition());
+//                }
+//            });
         }
     }
-    public interface OnClickListener {
-        void onItemClick(int position);
-    }
+//    public interface OnClickListener {
+//        void onItemClick(int position);
+//    }
 }

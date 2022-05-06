@@ -9,6 +9,7 @@
     <color name="activity">#673AB7</color>
     <color name="favorites">#E91E63</color>
     <color name="settings">#32CD32</color>
+    <color name="green_32CD32">#32CD32</color>
 
     <!--colors for profile-->
     <color name="profilePrimaryDark">#FF3B30</color>
