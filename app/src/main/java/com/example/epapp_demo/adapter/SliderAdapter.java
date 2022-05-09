@@ -45,7 +45,7 @@ public class SliderAdapter extends SliderViewAdapter<SliderAdapter.SliderAdapter
                 break;
             default:
                 Glide.with(viewHolder.itemView)
-                        .load(R.drawable.slide5)
+                        .load(R.drawable.slider5)
                         .into(viewHolder.imageViewBackground);
                 break;
         }

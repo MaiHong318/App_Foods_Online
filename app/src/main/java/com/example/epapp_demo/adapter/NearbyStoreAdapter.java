@@ -1,6 +1,7 @@
 package com.example.epapp_demo.adapter;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -42,6 +43,7 @@ public class NearbyStoreAdapter extends ArrayAdapter<NearbyStore> {
         this.objects = objects;
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
@@ -72,18 +74,14 @@ public class NearbyStoreAdapter extends ArrayAdapter<NearbyStore> {
         } else {
             viewHolder.tv_diachi.setText(cuaHang.getDiachi());
         }
+
         viewHolder.tv_rating.setText(String.valueOf(cuaHang.getRating()));
         try {
             Picasso.get().load(cuaHang.getHinhanh()).into(viewHolder.img_cuahang);
         } catch (Exception e) {
 
         }
-        viewHolder.item_cuahang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onCuaHangGanItemClick(position);
-            }
-        });
+        viewHolder.item_cuahang.setOnClickListener(v -> mListener.onCuaHangGanItemClick(position));
 
         LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         if (context.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {

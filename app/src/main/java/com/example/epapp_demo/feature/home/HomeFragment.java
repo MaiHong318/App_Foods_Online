@@ -35,6 +35,7 @@ import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.HomeCategoriesAdapter;
 import com.example.epapp_demo.adapter.NearbyStoreAdapter;
 import com.example.epapp_demo.adapter.PlaceAdapter;
+import com.example.epapp_demo.adapter.ShowStoreAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter;
 
 import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
@@ -43,6 +44,7 @@ import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.NearbyStore;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -59,14 +61,16 @@ import java.util.List;
 public class HomeFragment extends Fragment implements LocationListener {
     SliderView sliderView;
     RecyclerView rcvCategories;
-    ListView rcvQuanGoiY;
+    RecyclerView rcvQuanGoiY;
     public static NearbyStoreAdapter nearbyStoreAdapter;
     List<NearbyStore> temp = new ArrayList<>();
-    PlaceAdapter placeAdapter;
     public static HomeCategoriesAdapter homeCategoriesAdapter;
+    public static ShowStoreAdapter showStoreAdapter;
     ArrayList<Categories> list = new ArrayList<>();
+    ArrayList<Store> listSt = new ArrayList<>();
     boolean GpsStatus;
     CategoriesDAO categoriesDAO = new CategoriesDAO(getActivity());
+    StoreDAO storeDAO = new StoreDAO(getActivity());
     ImageView btn_reload;
     LocationManager locationManager;
     TextView tv_list_cuahang, tv_list_phanloai;
@@ -101,7 +105,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         final Location location = manager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         sliderView = view.findViewById(R.id.imgSlider);
         rcvCategories = (RecyclerView)view.findViewById(R.id.rcv_category);
-        rcvQuanGoiY = view.findViewById(R.id.place_recycler_view);
+        rcvQuanGoiY = view.findViewById(R.id.rcvQuanGoiY);
         btn_reload = view.findViewById(R.id.btn_reload);
         tv_list_cuahang = view.findViewById(R.id.place_list);
         tv_list_phanloai = view.findViewById(R.id.categories_list);
@@ -113,6 +117,12 @@ public class HomeFragment extends Fragment implements LocationListener {
         list = categoriesDAO.getAllMenu();
         homeCategoriesAdapter = new HomeCategoriesAdapter(list,getActivity());
         rcvCategories.setAdapter(homeCategoriesAdapter);
+
+        LinearLayoutManager menu = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        rcvQuanGoiY.setLayoutManager(menu);
+        listSt = storeDAO.getAllMenu();
+        showStoreAdapter = new ShowStoreAdapter(listSt,getActivity());
+        rcvQuanGoiY.setAdapter(showStoreAdapter);
 
         homeCategoriesAdapter.setOnItemClickListener(position -> {
             DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("PhanLoai");
@@ -147,6 +157,16 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         });
 
+        showStoreAdapter.setOnStoreItemClickListener(position -> {
+            Store store = listSt.get(position);
+            String idStore = store.getStoreID();
+            ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        });
+
         //custom slider
         SliderAdapter adapter = new SliderAdapter(getActivity());
         sliderView.setSliderAdapter(adapter);
@@ -166,62 +186,47 @@ public class HomeFragment extends Fragment implements LocationListener {
             btn_reload.setVisibility(View.VISIBLE);
         }
 
-        btn_reload.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-                GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        btn_reload.setOnClickListener(v -> {
+            locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+            GpsStatus = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-                if (GpsStatus == true) {
-                    getTemp();
-                    btn_reload.setVisibility(View.INVISIBLE);
-                } else {
-                    Toast.makeText(getActivity(), "Bạn chưa bật vị trí của thiết bị!", Toast.LENGTH_SHORT).show();
-                }
+            if (GpsStatus == true) {
+                getTemp();
+                btn_reload.setVisibility(View.INVISIBLE);
+            } else {
+                Toast.makeText(getActivity(), "Bạn chưa bật vị trí của thiết bị!", Toast.LENGTH_SHORT).show();
             }
         });
-        nearbyStoreAdapter.setOnCuaHangGanItemClickListener(new NearbyStoreAdapter.OnCuaHangGanClickListener() {
-            @Override
-            public void onCuaHangGanItemClick(int position) {
-                NearbyStore cuaHangTemp = temp.get(position);
-                String idStore = cuaHangTemp.getMacuahang();
-                ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
+//        nearbyStoreAdapter.setOnCuaHangGanItemClickListener(position -> {
+//            NearbyStore cuaHangTemp = temp.get(position);
+//            String idStore = cuaHangTemp.getMacuahang();
+//            ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
+//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//            transaction.replace(R.id.frame_layout, newFragment);
+//            transaction.addToBackStack(null);
+//            transaction.commit();
+//        });
+
+        tv_list_cuahang.setOnClickListener(view1 -> {
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,new ListStoreFragment());
+            transaction.commit();
         });
 
-        tv_list_cuahang.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new ListStoreFragment());
-                transaction.commit();
-            }
+        tv_list_phanloai.setOnClickListener(view12 -> {
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,new ListCategoriesFragment());
+            transaction.commit();
         });
 
-        tv_list_phanloai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new ListCategoriesFragment());
-                transaction.commit();
-            }
-        });
-
-        btnSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Bundle bundle = new Bundle();
-                bundle.putString("search",edtSearch.getText().toString().trim());
-                SearchFragment searchFragment = new SearchFragment();
-                searchFragment.setArguments(bundle);
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,searchFragment);
-                transaction.commit();
-            }
+        btnSearch.setOnClickListener(view13 -> {
+            Bundle bundle = new Bundle();
+            bundle.putString("search",edtSearch.getText().toString().trim());
+            SearchFragment searchFragment = new SearchFragment();
+            searchFragment.setArguments(bundle);
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,searchFragment);
+            transaction.commit();
         });
 
 
@@ -251,7 +256,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         StoreDAO storeDAO = new StoreDAO(getActivity());
         temp = storeDAO.getTemp(getActivity());
         nearbyStoreAdapter = new NearbyStoreAdapter(getActivity(), R.layout.item_nearby_stote, temp);
-        rcvQuanGoiY.setAdapter(nearbyStoreAdapter);
+        //rcvQuanGoiY.setAdapter(nearbyStoreAdapter);
         Log.d("size","temp: "+temp.size());
     }
 }

@@ -117,7 +117,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/rcvOrder"
+                android:id="@+id/tvDT"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/category_title"
@@ -132,11 +132,12 @@
                 android:id="@+id/tv_Doanhthu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/rcvOrder"
+                android:layout_below="@id/tvDT"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="20dp"
-                android:text="0đ"
-                android:textSize="30sp" />
+                android:text="0 VNĐ"
+                android:textSize="30sp"
+                android:textColor="@color/red_600"/>
 
             <LinearLayout
                 android:id="@+id/product_title"

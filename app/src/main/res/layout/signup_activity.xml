@@ -15,14 +15,12 @@
 
         <ImageView
             android:id="@+id/dn"
-            android:layout_width="115dp"
-            android:layout_height="115dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
+            android:layout_marginBottom="10dp"
             android:padding="10dp"
-            android:src="@drawable/logo"
-            android:tint="@color/blue_500"/>
+            android:src="@drawable/logo" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/inputEmail"

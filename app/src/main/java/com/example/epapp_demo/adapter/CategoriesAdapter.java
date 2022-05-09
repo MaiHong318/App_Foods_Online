@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -47,6 +49,7 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.tvidloai.setText(phanloai.get(position).getLoaiID());
         holder.tvnameloai.setText(phanloai.get(position).getNameLoai());
         holder.tvmota.setText(phanloai.get(position).getMota());
+        Picasso.get().load(phanloai.get(position).getHinhanh()).into(holder.ivPhanLoaiPicture);
 
     }
 
@@ -57,11 +60,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         TextView tvidloai, tvnameloai, tvmota;
+        ImageView ivPhanLoaiPicture;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvidloai = itemView.findViewById(R.id.tvLoaiid);
             tvnameloai = itemView.findViewById(R.id.Nameloai);
             tvmota = itemView.findViewById(R.id.tvMota);
+            ivPhanLoaiPicture = itemView.findViewById(R.id.ivPhanLoaiPicture);
             itemView.setOnClickListener(this);
             itemView.setOnLongClickListener(this);
         }
@@ -84,22 +89,15 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
 
 
 
-            builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    final String ten1 = ten.getText().toString();
-                    final String mota1 = mota.getText().toString();
-                    final String anh1 = anh.getText().toString();
-                    Categories s = new Categories(gd.getLoaiID(),ten1,mota1,anh1);
-                    categoriesDAO.update(s);
-                }
+            builder.setPositiveButton("Sửa", (dialogInterface, i) -> {
+                final String ten1 = ten.getText().toString();
+                final String mota1 = mota.getText().toString();
+                final String anh1 = anh.getText().toString();
+                Categories s = new Categories(gd.getLoaiID(),ten1,mota1,anh1);
+                categoriesDAO.update(s);
             });
-            builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            builder.setNegativeButton("Hủy", (dialog, which) -> {
 
-                }
             });
             builder.setView(view1);
             builder.show();
@@ -115,20 +113,13 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             View view1 = layoutInflater.inflate(R.layout.delete_alert_dialog,null);
 
 
-            builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                @SuppressLint("RestrictedApi")
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            builder.setPositiveButton("Có", (dialogInterface, i) -> {
 
-                    Categories s = new Categories(gd.getLoaiID(),gd.getNameLoai(),gd.getMota(),gd.getHinhanh());
-                    categoriesDAO.delete(s);
-                }
+                Categories s = new Categories(gd.getLoaiID(),gd.getNameLoai(),gd.getMota(),gd.getHinhanh());
+                categoriesDAO.delete(s);
             });
-            builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
+            builder.setNegativeButton("Không", (dialog, which) -> {
 
-                }
             });
             builder.setView(view1);
             builder.show();
