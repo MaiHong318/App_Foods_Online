@@ -1,5 +1,6 @@
 package com.example.epapp_demo.model.local.database;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class ShowMenuDAO {
     public ArrayList<Food> getMonAnByCuaHangID(String idCuaHang) {
         final ArrayList<Food> list = new ArrayList<Food>();
         mDatabase.orderByChild("storeID").equalTo(idCuaHang).addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();
