@@ -23,7 +23,7 @@ public class DbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "create table giohang(GioHangId integer primary key autoincrement, " +
-                "DonHangId text, MonAnId text, SoLuong integer)";
+                "DonHangId text, MonAnId text, SoLuong integer, UserId text)";
         db.execSQL(sql);
         sql = "create table MonAn(MonAnId text primary key, " +
                 "NameMonAn text, GiaMonAn integer, HinhAnhMonAn text, cuaHangID text)";
@@ -33,9 +33,10 @@ public class DbHelper extends SQLiteOpenHelper {
     public void insertGH(Cart gh) {
         db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("DonHangId", gh.getStoreID());
+        values.put("DonHangId", gh.getDonHangID());
         values.put("MonAnId", gh.getMonAnID());
         values.put("SoLuong", gh.getSoLuong());
+        values.put("UserId", gh.getUserID());
         db.insert("giohang", null, values);
     }
 
@@ -60,13 +61,13 @@ public class DbHelper extends SQLiteOpenHelper {
     public ArrayList<CartDetails> listGioHang() {
         ArrayList<CartDetails> list = new ArrayList<>();
         db = this.getReadableDatabase();
-        String sql = "Select g.GioHangId, g.MonAnId, m.NameMonAn, m.GiaMonAn, g.SoLuong,m.cuaHangID, m.HinhAnhMonAn " +
+        String sql = "Select g.GioHangId, g.MonAnId, m.NameMonAn, m.GiaMonAn, g.SoLuong,m.cuaHangID, m.HinhAnhMonAn, g.UserId " +
                 " from giohang g inner join MonAn m on g.MonAnId=m.MonAnId";
         Cursor cs = db.rawQuery(sql, null);
         cs.moveToFirst();
         while (!cs.isAfterLast()) {
             CartDetails ctgh = new CartDetails(cs.getInt(0), cs.getString(1), cs.getString(2)
-                    , cs.getInt(3), cs.getInt(4),cs.getString(5), cs.getString(6));
+                    , cs.getInt(3), cs.getInt(4),cs.getString(5), cs.getString(6), cs.getString(7));
             list.add(ctgh);
             cs.moveToNext();
         }

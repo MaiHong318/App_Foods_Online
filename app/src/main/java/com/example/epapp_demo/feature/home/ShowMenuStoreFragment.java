@@ -34,6 +34,7 @@ import com.example.epapp_demo.model.local.database.ShowMenuDAO;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.example.epapp_demo.model.local.modul.Cart;
 import com.example.epapp_demo.model.local.modul.Food;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -150,7 +151,8 @@ public class ShowMenuStoreFragment extends Fragment {
                         String MonAnId = list.get(position).getMonAnID();
                         String HoaDonId = null;
                         int soLuong = soluong;
-                        Cart gh = new Cart(HoaDonId,MonAnId,soLuong);
+                        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        Cart gh = new Cart(HoaDonId,MonAnId,soLuong,userID);
                         //1. Add vô ArrayList
                         DbHelper.giohang.add(gh);
                         //2. Add vô SQLite

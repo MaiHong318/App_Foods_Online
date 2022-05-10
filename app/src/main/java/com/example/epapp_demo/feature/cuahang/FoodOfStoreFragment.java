@@ -92,8 +92,7 @@ public class FoodOfStoreFragment extends Fragment {
                         String matheloai = loai.getLoaiID();
 
 
-                        String a = mAuth.getCurrentUser().getUid();
-
+                        String a = mAuth.getCurrentUser().getUid();;
                         Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
                         foodDAO.insert(s);
                     }

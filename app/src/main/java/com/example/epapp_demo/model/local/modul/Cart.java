@@ -8,9 +8,10 @@ public class Cart implements Serializable {
     private String MonAnID;
 //    private String NameMonAn;
     private int SoLuong;
+    private String UserID;
+
 //    private int Gia;
 //    private String HinhAnhGioHang;
-    private String CuaHangID;
 
     public int getGioHangId() {
         return gioHangId;
@@ -20,13 +21,6 @@ public class Cart implements Serializable {
         this.gioHangId = gioHangId;
     }
 
-    public String getStoreID() {
-        return DonHangID;
-    }
-
-    public void setStoreID(String storeID) {
-        DonHangID = storeID;
-    }
 
     public String getMonAnID() {
         return MonAnID;
@@ -77,35 +71,30 @@ public class Cart implements Serializable {
         DonHangID = donHangID;
     }
 
-    public String getCuaHangID() {
-        return CuaHangID;
+    public String getUserID() {
+        return UserID;
     }
 
-    public void setCuaHangID(String cuaHangID) {
-        CuaHangID = cuaHangID;
+    public void setUserID(String userID) {
+        UserID = userID;
     }
 
     public Cart() {
     }
 
-    public Cart(String DonHangID, String monAnID, int soLuong) {
+    public Cart(String DonHangID, String monAnID, int soLuong,String userID) {
         this.DonHangID = DonHangID;
         MonAnID = monAnID;
         SoLuong = soLuong;
+        UserID = userID;
     }
 
-    public Cart(int gioHangId, String DonHangID, String monAnID, int soLuong) {
+    public Cart(int gioHangId, String DonHangID, String monAnID, int soLuong, String userID) {
         this.gioHangId = gioHangId;
         this.DonHangID = DonHangID;
         MonAnID = monAnID;
         SoLuong = soLuong;
+        UserID = userID;
     }
 
-    public Cart(int gioHangId, String donHangID, String monAnID, int soLuong, String cuaHangID) {
-        this.gioHangId = gioHangId;
-        DonHangID = donHangID;
-        MonAnID = monAnID;
-        SoLuong = soLuong;
-        CuaHangID = cuaHangID;
-    }
 }

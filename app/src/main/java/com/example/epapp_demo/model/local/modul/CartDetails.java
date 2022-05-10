@@ -11,11 +11,12 @@ public class CartDetails {
     private int soluong;
     private String cuaHangID;
     private String hinh;
+    private String userId;
 
     public CartDetails() {
     }
 
-    public CartDetails(int giohangId, String monAnId, String tenMonAn, int gia, int soluong,String cuaHangID, String hinh) {
+    public CartDetails(int giohangId, String monAnId, String tenMonAn, int gia, int soluong,String cuaHangID, String hinh, String UserId) {
         this.giohangId = giohangId;
         MonAnId = monAnId;
         this.tenMonAn = tenMonAn;
@@ -23,6 +24,7 @@ public class CartDetails {
         this.soluong = soluong;
         this.cuaHangID = cuaHangID;
         this.hinh = hinh;
+        this.userId = UserId;
     }
 
     public int getGiohangId() {
@@ -53,7 +55,9 @@ public class CartDetails {
         return hinh;
     }
 
-
+    public String getUserId() {
+        return userId;
+    }
 
     public Map<String,Object> toMap(){
         HashMap<String,Object> result=new HashMap<>();
@@ -64,6 +68,7 @@ public class CartDetails {
         result.put("soluong",soluong);
         result.put("cuaHangID", cuaHangID);
         result.put("hinh",hinh);
+        result.put("UserId", userId);
         return  result;
     }
 }
