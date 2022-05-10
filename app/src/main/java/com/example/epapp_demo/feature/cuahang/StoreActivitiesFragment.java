@@ -63,7 +63,6 @@ public class StoreActivitiesFragment extends Fragment {
         String i = mAuth.getCurrentUser().getUid();
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("Đơn hàng");
         mDatabase.addValueEventListener(new ValueEventListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
