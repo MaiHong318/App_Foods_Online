@@ -30,7 +30,8 @@
         <activity android:name=".feature.register.SignUpActivity" />
         <activity android:name=".feature.login.LoginActivity" />
         <activity android:name=".feature.home.BottomNavigation" />
-        <activity android:name=".intro.IntroActivity">
+        <activity android:name=".intro.IntroActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
