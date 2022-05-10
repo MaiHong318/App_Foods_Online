@@ -21,6 +21,7 @@ import com.example.epapp_demo.adapter.OrderApdapter;
 import com.example.epapp_demo.feature.admin.CategoriesFragment;
 import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.model.local.database.OrderDAO;
+import com.example.epapp_demo.model.local.modul.Cart;
 import com.example.epapp_demo.model.local.modul.CartDetails;
 import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.modul.Order;
@@ -69,7 +70,7 @@ public class OrderFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_order, container, false);
 
-        String i = mAuth.getCurrentUser().getUid();
+          String id=mAuth.getCurrentUser().getUid();
         rcv = view.findViewById(R.id.rcv_DonHang);
         tvDelete=view.findViewById(R.id.tvDelete);
 
@@ -79,7 +80,8 @@ public class OrderFragment extends Fragment {
 
   //      list = orderDAO.getDonByKhachID(""+ i +"");
   //      donHangApdapter = new OrderApdapter(list,getActivity());
-        getHistoryCart();
+        //getHistoryCart();
+        listCar=getDonByKhachID(id);
         adapter = new CartAdapter(listCar, getContext());
         rcv.setAdapter(adapter);
         tvDelete.setOnClickListener(new View.OnClickListener() {
@@ -93,23 +95,26 @@ public class OrderFragment extends Fragment {
 
         return view;
     }
-    public ArrayList<CartDetails> getHistoryCart() {
-        FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
-        DatabaseReference mdata=mAuth.getReference().child("Đơn hàng");
-
+    public ArrayList<CartDetails> getDonByKhachID(String idKhachHang) {
         final ArrayList<CartDetails> list = new ArrayList<CartDetails>();
+        FirebaseDatabase data = FirebaseDatabase.getInstance();
+      DatabaseReference mdata=data.getReference("Đơn hàng");
         mdata.addValueEventListener(new ValueEventListener() {
-            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot templateSnapshot : dataSnapshot.getChildren()){
-                    for(DataSnapshot snap : templateSnapshot.getChildren()){
-                        CartDetails cartDetails = snap.getValue(CartDetails.class);
-                        listCar.add(cartDetails);
-                        adapter.notifyDataSetChanged();
+                list.clear();
+                for (DataSnapshot ds1 : dataSnapshot.getChildren()){
+                    for (DataSnapshot ds : ds1.getChildren()){
+                        CartDetails hd = ds.getValue(CartDetails.class);
+                        if(idKhachHang.equals(hd.getUserId())){
+                            list.add(hd);
+                        }
                     }
+
                 }
+                adapter.notifyDataSetChanged();
             }
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -117,6 +122,7 @@ public class OrderFragment extends Fragment {
         });
         return list;
     }
+
     public void deleteHistoryCart(){
         FirebaseDatabase mAuth = FirebaseDatabase.getInstance();
         DatabaseReference mdata=mAuth.getReference().child("Đơn hàng");

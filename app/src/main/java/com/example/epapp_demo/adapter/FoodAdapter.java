@@ -145,29 +145,22 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
                 spn.setSelection(idxLS);
 
                 builder.setView(view1);
-                builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton("Sửa", (dialogInterface, i) -> {
 
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+                    String tenmon1 = tenmon.getText().toString();
+                    String mota1 = mota.getText().toString();
+                    int gia1 = Integer.parseInt(gia.getText().toString());
+                    String url1 = url.getText().toString();
+                    Categories loai = (Categories) spn.getSelectedItem();
+                    String matheloai = loai.getLoaiID();
+                    String idMonAn = list.get(position).getMonAnID();
+                    String a = mAuth.getCurrentUser().getUid();
+                    String nameStore=mAuth.getCurrentUser().getDisplayName();
+                    Log.d("StoreName","NAME: "+nameStore);
+                    Food s = new Food(idMonAn,tenmon1,gia1,url1,a,matheloai,mota1);
+                    foodDAO.update(s, idMonAn);
+                }).setNegativeButton("Hủy", (dialog, which) -> {
 
-                        String tenmon1 = tenmon.getText().toString();
-                        String mota1 = mota.getText().toString();
-                        int gia1 = Integer.parseInt(gia.getText().toString());
-                        String url1 = url.getText().toString();
-                        Categories loai = (Categories) spn.getSelectedItem();
-                        String matheloai = loai.getLoaiID();
-                        String idMonAn = list.get(position).getMonAnID();
-                        String a = mAuth.getCurrentUser().getUid();
-                        String nameStore=mAuth.getCurrentUser().getDisplayName();
-                        Log.d("StoreName","NAME: "+nameStore);
-                        Food s = new Food(idMonAn,tenmon1,gia1,url1,a,matheloai,mota1);
-                        foodDAO.update(s, idMonAn);
-                    }
-                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
                 });
                 builder.setView(view1);
                 builder.show();
