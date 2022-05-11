@@ -85,6 +85,7 @@ public class OrderFragment extends Fragment {
         FirebaseDatabase data = FirebaseDatabase.getInstance();
       DatabaseReference mdata=data.getReference("Đơn hàng");
         mdata.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 list.clear();

@@ -1,6 +1,7 @@
 package com.example.epapp_demo.feature.home;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -89,6 +90,7 @@ public class HomeFragment extends Fragment implements LocationListener {
 
      return view;
     }
+    @SuppressLint("MissingPermission")
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
