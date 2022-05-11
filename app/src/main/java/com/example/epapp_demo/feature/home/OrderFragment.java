@@ -1,6 +1,5 @@
 package com.example.epapp_demo.feature.home;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,24 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.CartAdapter;
-import com.example.epapp_demo.adapter.OrderApdapter;
-import com.example.epapp_demo.feature.admin.CategoriesFragment;
-import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
-import com.example.epapp_demo.model.local.database.OrderDAO;
-import com.example.epapp_demo.model.local.modul.Cart;
 import com.example.epapp_demo.model.local.modul.CartDetails;
-import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.modul.Order;
-import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -42,10 +32,9 @@ public class OrderFragment extends Fragment {
 
     RecyclerView rcv;
     TextView tvDelete;
-//    OrderDAO orderDAO = new OrderDAO(getActivity());
+
    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
-  //FirebaseDatabase mdb = FirebaseDatabase.getInstance();
-//    public static OrderApdapter donHangApdapter;
+
 
     ArrayList<Order> list = new ArrayList<>();
 
@@ -76,11 +65,7 @@ public class OrderFragment extends Fragment {
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rcv.setLayoutManager(layoutManager);
-        //mAuth = FirebaseAuth.getInstance();
 
-  //      list = orderDAO.getDonByKhachID(""+ i +"");
-  //      donHangApdapter = new OrderApdapter(list,getActivity());
-        //getHistoryCart();
         listCar=getDonByKhachID(id);
         adapter = new CartAdapter(listCar, getContext());
         rcv.setAdapter(adapter);
