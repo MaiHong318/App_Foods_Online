@@ -16,12 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.SearchAdapter;
-import com.example.epapp_demo.adapter.ShowStoreAdapter;
-import com.example.epapp_demo.adapter.StoreAdapter;
-import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
-import com.example.epapp_demo.model.local.database.StoreDAO;
+
 import com.example.epapp_demo.model.local.modul.Food;
-import com.example.epapp_demo.model.local.modul.Order;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -81,26 +77,20 @@ public class SearchFragment extends Fragment {
         searchAdapter =new SearchAdapter(list, getContext());
         rcvStoreSuggest.setAdapter(searchAdapter);
 
-        searchAdapter.setOnStoreItemClickListener(new SearchAdapter.OnStoreClickListener() {
-            @Override
-            public void onStoreItemClick(int position) {
-                Store store = storeList.get(position);
-                String idStore = store.getStoreID();
-                ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout, newFragment);
-                transaction.addToBackStack(null);
-                transaction.commit();
-            }
+        searchAdapter.setOnStoreItemClickListener(position -> {
+            Store store = storeList.get(position);
+            String idStore = store.getStoreID();
+            ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
+            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
         });
 
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FragmentTransaction transaction =  getFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_layout,new HomeFragment());
-                transaction.commit();
-            }
+        btnBack.setOnClickListener(view1 -> {
+            FragmentTransaction transaction =  getFragmentManager().beginTransaction();
+            transaction.replace(R.id.frame_layout,new HomeFragment());
+            transaction.commit();
         });
         return view;
     }

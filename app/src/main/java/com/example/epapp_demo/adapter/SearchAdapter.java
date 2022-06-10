@@ -1,5 +1,6 @@
 package com.example.epapp_demo.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,7 +22,6 @@ import java.util.List;
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder>{
 
     List<Food> list;
-    List<Store> storeList;
     Context context;
     FoodDAO foodDAO;
 
@@ -46,6 +46,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SearchAdapter.ViewHolder holder, int position) {
         holder.tvStore.setText(list.get(position).getMoTa());

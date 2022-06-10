@@ -57,57 +57,51 @@ public class InforUserActivity extends AppCompatActivity {
     }
 
     private void addevents() {
-        btn_xacnhan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    final String name = ed_name.getText().toString();
-                    final String address = ed_address.getText().toString();
-                    final String phone = ed_phone.getText().toString();
-                    final String ngaysinh = ed_ngaysinh.getText().toString();
-                    ed_ngaysinh.setOnClickListener(new View.OnClickListener() {
+        btn_xacnhan.setOnClickListener(v -> {
+            try {
+                final String name = ed_name.getText().toString();
+                final String address = ed_address.getText().toString();
+                final String phone = ed_phone.getText().toString();
+                final String ngaysinh = ed_ngaysinh.getText().toString();
+                ed_ngaysinh.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        final Calendar calendar = Calendar.getInstance();
+                        int d = calendar.get(Calendar.DAY_OF_MONTH);
+                        int m = calendar.get(Calendar.MONTH);
+                        int y = calendar.get(Calendar.YEAR);
+                        datePickerDialog = new DatePickerDialog(InforUserActivity.this, (view, year, month, dayOfMonth) -> {
+                            final String startDay = dayOfMonth + "/" + (month + 1) + "/" + year;
+                            ed_ngaysinh.setText(startDay);
+                        }, y, m, d);
+                        datePickerDialog.show();
+                    }
+                });
+                if (name.isEmpty() || address.isEmpty() || phone.isEmpty()) {
+                    Toast.makeText(InforUserActivity.this, "Thông tin không được để trống!", Toast.LENGTH_SHORT).show();
+                } else {
+                    mData.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onClick(View v) {
-                            final Calendar calendar = Calendar.getInstance();
-                            int d = calendar.get(Calendar.DAY_OF_MONTH);
-                            int m = calendar.get(Calendar.MONTH);
-                            int y = calendar.get(Calendar.YEAR);
-                            datePickerDialog = new DatePickerDialog(InforUserActivity.this, new DatePickerDialog.OnDateSetListener() {
-                                @Override
-                                public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                                    final String startDay = dayOfMonth + "/" + (month + 1) + "/" + year;
-                                    ed_ngaysinh.setText(startDay);
-                                }
-                            }, y, m, d);
-                            datePickerDialog.show();
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Customer user = new Customer(uid, name, address,pass,phone,email,ngaysinh,0);
+                            mData.child("KhachHang").child(uid).setValue(user);
+                            Intent intent = new Intent(InforUserActivity.this, BottomNavigation.class);
+                            intent.putExtra("uid", uid);
+                            startActivity(intent);
+                            finish();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
                         }
                     });
-                    if (name.isEmpty() || address.isEmpty() || phone.isEmpty()) {
-                        Toast.makeText(InforUserActivity.this, "Thông tin không được để trống!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        mData.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Customer user = new Customer(uid, name, address,pass,phone,email,ngaysinh,0);
-                                mData.child("KhachHang").child(uid).setValue(user);
-                                Intent intent = new Intent(InforUserActivity.this, BottomNavigation.class);
-                                intent.putExtra("uid", uid);
-                                startActivity(intent);
-                                finish();
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    }
-                }catch (Exception ex){
-
                 }
-
+            }catch (Exception ex){
 
             }
+
+
         });
     }
 }

@@ -69,12 +69,7 @@ public class ShowMenuStoreAdapter extends RecyclerView.Adapter<ShowMenuStoreAdap
             moTaMonAn = itemView.findViewById(R.id.item_moTa_MA);
             giaMonAn = itemView.findViewById(R.id.item_gia_MA);
             ivHinhMonAn = itemView.findViewById(R.id.anh_MA);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onMenuItemClick(getPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> mListener.onMenuItemClick(getPosition()));
         }
         @Override
         public void onClick(View v) {

@@ -69,12 +69,7 @@ public class ShowStoreAdapter extends RecyclerView.Adapter<ShowStoreAdapter.View
             storeLocation = itemView.findViewById(R.id.place_location);
             storeRating = itemView.findViewById(R.id.place_rating);
             ivStorePicture = itemView.findViewById(R.id.ivStorePicture);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mListener.onStoreItemClick(getPosition());
-                }
-            });
+            itemView.setOnClickListener(v -> mListener.onStoreItemClick(getPosition()));
         }
         @Override
         public void onClick(View v) {

@@ -30,18 +30,18 @@
                     android:id="@+id/browse"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:titleTextColor="@color/white"
-                    android:background="@color/blue_400"
+                    android:background="@color/blue_200"
                     android:textSize="28sp"
                     android:textStyle="bold"
-                    app:title="Lịch sử các đơn hàng" />
+                    app:title="Lịch sử các đơn hàng"
+                    app:titleTextColor="@color/white" />
 
                 <TextView
                     android:id="@+id/tvDelete"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/browse"
-                    android:layout_alignLeft="@+id/browse"
+                    android:layout_alignRight="@+id/browse"
                     android:layout_centerInParent="true"
                     android:padding="10dp"
                     android:text="Xóa tất cả"

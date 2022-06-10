@@ -16,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,16 +33,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.HomeCategoriesAdapter;
-import com.example.epapp_demo.adapter.NearbyStoreAdapter;
-import com.example.epapp_demo.adapter.PlaceAdapter;
 import com.example.epapp_demo.adapter.ShowStoreAdapter;
+import com.example.epapp_demo.adapter.SuggestStoreAdapter;
 import com.example.epapp_demo.adapter.SliderAdapter;
 
 import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
 import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.model.local.database.StoreDAO;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
-import com.example.epapp_demo.model.local.modul.NearbyStore;
+import com.example.epapp_demo.model.local.modul.SuggestStore;
 import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.google.firebase.database.DataSnapshot;
@@ -63,10 +61,10 @@ public class HomeFragment extends Fragment implements LocationListener {
     SliderView sliderView;
     RecyclerView rcvCategories;
     RecyclerView rcvQuanGoiY;
-    public static NearbyStoreAdapter nearbyStoreAdapter;
-    List<NearbyStore> temp = new ArrayList<>();
-    public static HomeCategoriesAdapter homeCategoriesAdapter;
+    public static SuggestStoreAdapter suggestStoreAdapter;
     public static ShowStoreAdapter showStoreAdapter;
+    List<SuggestStore> suggestStoreList = new ArrayList<>();
+    public static HomeCategoriesAdapter homeCategoriesAdapter;
     ArrayList<Categories> list = new ArrayList<>();
     ArrayList<Store> listSt = new ArrayList<>();
     boolean GpsStatus;
@@ -160,8 +158,8 @@ public class HomeFragment extends Fragment implements LocationListener {
         });
 
         showStoreAdapter.setOnStoreItemClickListener(position -> {
-            Store store = listSt.get(position);
-            String idStore = store.getStoreID();
+            Store cuaHangTemp = listSt.get(position);
+            String idStore = cuaHangTemp.getStoreID();
             ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
             FragmentTransaction transaction = getFragmentManager().beginTransaction();
             transaction.replace(R.id.frame_layout, newFragment);
@@ -199,15 +197,6 @@ public class HomeFragment extends Fragment implements LocationListener {
                 Toast.makeText(getActivity(), "Bạn chưa bật vị trí của thiết bị!", Toast.LENGTH_SHORT).show();
             }
         });
-//        nearbyStoreAdapter.setOnCuaHangGanItemClickListener(position -> {
-//            NearbyStore cuaHangTemp = temp.get(position);
-//            String idStore = cuaHangTemp.getMacuahang();
-//            ShowMenuStoreFragment newFragment = new ShowMenuStoreFragment(idStore);
-//            FragmentTransaction transaction = getFragmentManager().beginTransaction();
-//            transaction.replace(R.id.frame_layout, newFragment);
-//            transaction.addToBackStack(null);
-//            transaction.commit();
-//        });
 
         tv_list_cuahang.setOnClickListener(view1 -> {
             FragmentTransaction transaction =  getFragmentManager().beginTransaction();
@@ -256,9 +245,8 @@ public class HomeFragment extends Fragment implements LocationListener {
 
     public void getTemp() {
         StoreDAO storeDAO = new StoreDAO(getActivity());
-        temp = storeDAO.getTemp(getActivity());
-        nearbyStoreAdapter = new NearbyStoreAdapter(getActivity(), R.layout.item_nearby_stote, temp);
-        //rcvQuanGoiY.setAdapter(nearbyStoreAdapter);
-        Log.d("size","temp: "+temp.size());
+        suggestStoreList = storeDAO.getTemp(getActivity());
+        suggestStoreAdapter = new SuggestStoreAdapter(suggestStoreList,getActivity());
+        Log.d("size","temp: "+suggestStoreList.size());
     }
 }

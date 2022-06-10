@@ -74,44 +74,35 @@ public class ChangeProfileFragment extends Fragment {
 
             }
         });
-       txtNgaySinh.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               final Calendar calendar = Calendar.getInstance();
-               int d = calendar.get(Calendar.DAY_OF_MONTH);
-               int m = calendar.get(Calendar.MONTH);
-               int y = calendar.get(Calendar.YEAR);
-               datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
-                   @Override
-                   public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                       final String startDay = dayOfMonth + "/" + (month + 1) + "/" + year;
-                       txtNgaySinh.setText(startDay);
-                   }
-               }, y, m, d);
-               datePickerDialog.show();
-           }
+       txtNgaySinh.setOnClickListener(v -> {
+           final Calendar calendar = Calendar.getInstance();
+           int d = calendar.get(Calendar.DAY_OF_MONTH);
+           int m = calendar.get(Calendar.MONTH);
+           int y = calendar.get(Calendar.YEAR);
+           datePickerDialog = new DatePickerDialog(getActivity(), (view1, year, month, dayOfMonth) -> {
+               final String startDay = dayOfMonth + "/" + (month + 1) + "/" + year;
+               txtNgaySinh.setText(startDay);
+           }, y, m, d);
+           datePickerDialog.show();
        });
-       btnXacNhan.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View v) {
-               String hoten = edtHoTen.getText().toString();
-               String sodienthoai = edtSdt.getText().toString();
-               String diachi = edtDiaChi.getText().toString();
-               String ngaysinh = txtNgaySinh.getText().toString();
-               if (hoten.length() > 0 && sodienthoai.length() >0 && diachi.length() >0 && ngaysinh.length()>0) {
-                       databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userName").setValue(hoten);
-                       databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userSDT").setValue(sodienthoai);
-                       databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userDiaChi").setValue(diachi);
-                       databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userNgaySinh").setValue(ngaysinh);
-                       Toast.makeText(getActivity(), "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
-                   Fragment newFragment = new SettingFragment();
-                   FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                   transaction.replace(R.id.frame_layout, newFragment);
-                   transaction.addToBackStack(null);
-                   transaction.commit();
-               } else {
-                   Toast.makeText(getActivity(), "Vui lòng không để trống", Toast.LENGTH_SHORT).show();
-               }
+       btnXacNhan.setOnClickListener(v -> {
+           String hoten = edtHoTen.getText().toString();
+           String sodienthoai = edtSdt.getText().toString();
+           String diachi = edtDiaChi.getText().toString();
+           String ngaysinh = txtNgaySinh.getText().toString();
+           if (hoten.length() > 0 && sodienthoai.length() >0 && diachi.length() >0 && ngaysinh.length()>0) {
+                   databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userName").setValue(hoten);
+                   databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userSDT").setValue(sodienthoai);
+                   databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userDiaChi").setValue(diachi);
+                   databaseReference1.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("userNgaySinh").setValue(ngaysinh);
+                   Toast.makeText(getActivity(), "Cập nhật thông tin thành công!", Toast.LENGTH_SHORT).show();
+               Fragment newFragment = new SettingFragment();
+               FragmentTransaction transaction = getFragmentManager().beginTransaction();
+               transaction.replace(R.id.frame_layout, newFragment);
+               transaction.addToBackStack(null);
+               transaction.commit();
+           } else {
+               Toast.makeText(getActivity(), "Vui lòng không để trống", Toast.LENGTH_SHORT).show();
            }
        });
         return view;

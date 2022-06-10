@@ -67,145 +67,127 @@ public class StoreSettingsFragment extends Fragment {
         vido = view.findViewById(R.id.vido);
         ivEditProfileCH = view.findViewById(R.id.ivEditProfileCH);
 
-        ivAvt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.edit_avatar,null);
-                final EditText url = view1.findViewById(R.id.url);
-                builder.setView(view1);
-                builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                Store user = dataSnapshot.getValue(Store.class);
-                                String url1 = url.getText().toString();
-                                userID = fAuth.getCurrentUser().getUid();
+        ivAvt.setOnClickListener(view12 -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View view1 = getLayoutInflater().inflate(R.layout.edit_avatar,null);
+            final EditText url = view1.findViewById(R.id.url);
+            builder.setView(view1);
+            builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Store user = dataSnapshot.getValue(Store.class);
+                            String url1 = url.getText().toString();
+                            userID = fAuth.getCurrentUser().getUid();
 //                                        String userId = mData.push().getKey();
-                                Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),url1,user.getStoreViDo(),user.getStoreKinhDo(),1);
-                                storeDAO.update(s);
+                            Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),url1,user.getStoreViDo(),user.getStoreKinhDo(),1);
+                            storeDAO.update(s);
 
-                            }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
+                        }
+                    });
 
 
-                    }
-                });
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.setNegativeButton("Hủy", (dialog, which) -> {
 
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-            }
+            });
+            builder.setView(view1);
+            builder.show();
         });
 
-        ivEditViTri.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        ivEditViTri.setOnClickListener(view13 -> {
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-                View view1 = layoutInflater.inflate(R.layout.add_locate_store,null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view1 = layoutInflater.inflate(R.layout.add_locate_store,null);
 
-                final EditText kinhdo = view1.findViewById(R.id.edtKinhDo);
-                final EditText vido = view1.findViewById(R.id.edtViDo);
+            final EditText kinhdo = view1.findViewById(R.id.edtKinhDo);
+            final EditText vido = view1.findViewById(R.id.edtViDo);
 
-                builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+            builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
 
-                        mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            Store user = dataSnapshot.getValue(Store.class);
+                            double kinhdo1 = Double.parseDouble(kinhdo.getText().toString());
+                            double vido1 = Double.parseDouble(vido.getText().toString());
+
+                            Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),user.getStoreHinhAnh(),vido1,kinhdo1,1);
+                            storeDAO.update(s);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+
+                }
+            });
+            builder.setNegativeButton("Hủy", (dialog, which) -> {
+
+            });
+            builder.setView(view1);
+            builder.show();
+
+        });
+
+        ivEditProfileCH.setOnClickListener(view14 -> {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
+            View view1 = layoutInflater.inflate(R.layout.edit_store,null);
+
+            final EditText name = view1.findViewById(R.id.edtNameCHa);
+            final EditText diachi = view1.findViewById(R.id.edtDiaCHiCHa);
+
+            builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
+                @SuppressLint("RestrictedApi")
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+
+                    mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            try{
                                 Store user = dataSnapshot.getValue(Store.class);
-                                double kinhdo1 = Double.parseDouble(kinhdo.getText().toString());
-                                double vido1 = Double.parseDouble(vido.getText().toString());
+                                String name1 = name.getText().toString();
+                                String diachi1 = diachi.getText().toString();
 
-                                Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), user.getStoreName(),user.getStoreDiaChi(),user.getStoreDanhGia(),user.getStoreHinhAnh(),vido1,kinhdo1,1);
+                                Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), name1,diachi1,user.getStoreDanhGia(),user.getStoreHinhAnh(),user.getStoreViDo(),user.getStoreKinhDo(),1);
                                 storeDAO.update(s);
+                            }catch (Exception e){
+                                e.printStackTrace();
                             }
+                        }
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                            }
-                        });
-
-
-                    }
-                });
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-
-            }
-        });
-
-        ivEditProfileCH.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                LayoutInflater layoutInflater = LayoutInflater.from(getActivity());
-                View view1 = layoutInflater.inflate(R.layout.edit_store,null);
-
-                final EditText name = view1.findViewById(R.id.edtNameCHa);
-                final EditText diachi = view1.findViewById(R.id.edtDiaCHiCHa);
-
-                builder.setPositiveButton("Sửa", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                try{
-                                    Store user = dataSnapshot.getValue(Store.class);
-                                    String name1 = name.getText().toString();
-                                    String diachi1 = diachi.getText().toString();
-
-                                    Store s = new Store(userID,user.getStoreMail(),user.getStorePass(),user.getStoreMonAn(), name1,diachi1,user.getStoreDanhGia(),user.getStoreHinhAnh(),user.getStoreViDo(),user.getStoreKinhDo(),1);
-                                    storeDAO.update(s);
-                                }catch (Exception e){
-                                    e.printStackTrace();
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
+                        }
+                    });
 
 
-                    }
-                });
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            builder.setNegativeButton("Hủy", (dialog, which) -> {
 
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-            }
+            });
+            builder.setView(view1);
+            builder.show();
         });
 
         mData.child("CuaHang").child(userID).addValueEventListener(new ValueEventListener() {
@@ -236,6 +218,7 @@ public class StoreSettingsFragment extends Fragment {
 
 
         ivLogoutCH.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("RestrictedApi")
             @Override
             public void onClick(View view) {
 
@@ -244,19 +227,12 @@ public class StoreSettingsFragment extends Fragment {
                 View view1 = layoutInflater.inflate(R.layout.logout_alert_dialog,null);
 
 
-                builder.setPositiveButton("Có", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        FirebaseAuth.getInstance().signOut();
-                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                    }
+                builder.setPositiveButton("Có", (dialogInterface, i) -> {
+                    FirebaseAuth.getInstance().signOut();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 });
-                builder.setNegativeButton("Không", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                builder.setNegativeButton("Không", (dialog, which) -> {
 
-                    }
                 });
                 builder.setView(view1);
                 builder.show();

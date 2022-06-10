@@ -139,98 +139,92 @@ public class LoginActivity extends AppCompatActivity {
             dialog.hide();
         }
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(validateEmail() & validatePassword()){
-                    final String email1 = edtemail.getText().toString();
-                    final String pass1 = edtpassword.getText().toString();
-                    pb.setVisibility(View.VISIBLE);
-                    if (email1.equals("admin@gmail.com")&&pass1.equals("admin1")){
-                        Intent i = new Intent(LoginActivity.this, BottomNavigationAdmin.class);
-                        startActivity(i);
-                        finish();
-                    }else {
+        btnLogin.setOnClickListener(v -> {
+            if(validateEmail() & validatePassword()){
+                final String email1 = edtemail.getText().toString();
+                final String pass1 = edtpassword.getText().toString();
+                pb.setVisibility(View.VISIBLE);
+                if (email1.equals("admin@gmail.com")&&pass1.equals("admin1")){
+                    Intent i = new Intent(LoginActivity.this, BottomNavigationAdmin.class);
+                    startActivity(i);
+                    finish();
+                }else {
 
 
-                        mAuth.signInWithEmailAndPassword(email1, pass1)
-                                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
-                                                    Toast.LENGTH_SHORT).show();
-                                            final String userId = fAuth.getCurrentUser().getUid();
-                                            try {
-                                                mData.child("KhachHang").child(userId).addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mAuth.signInWithEmailAndPassword(email1, pass1)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công",
+                                                Toast.LENGTH_SHORT).show();
+                                        final String userId = fAuth.getCurrentUser().getUid();
+                                        try {
+                                            mData.child("KhachHang").child(userId).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                                                        try {
-                                                            Customer user = dataSnapshot.getValue(Customer.class);
-                                                            Log.d("abcxyz", String.valueOf(user));
-                                                            int phanquyen = user.getPhanQuyen();
-                                                            if (phanquyen == 0) {
-                                                                CheckGpsStatus();
-                                                                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                                                                DatabaseReference databaseReference1 = firebaseDatabase.getReference("KhachHang");
-                                                                databaseReference1.child(userId).child("userPass").setValue(pass1);
-                                                                Intent i = new Intent(LoginActivity.this, BottomNavigation.class);
-                                                                startActivity(i);
-                                                                finish();
-                                                            }
-                                                        } catch (Exception e) {
-                                                            Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
+                                                    try {
+                                                        Customer user = dataSnapshot.getValue(Customer.class);
+                                                        Log.d("abcxyz", String.valueOf(user));
+                                                        int phanquyen = user.getPhanQuyen();
+                                                        if (phanquyen == 0) {
+                                                            CheckGpsStatus();
+                                                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                                                            DatabaseReference databaseReference1 = firebaseDatabase.getReference("KhachHang");
+                                                            databaseReference1.child(userId).child("userPass").setValue(pass1);
+                                                            Intent i = new Intent(LoginActivity.this, BottomNavigation.class);
                                                             startActivity(i);
                                                             finish();
                                                         }
-
-
-                                                    }
-
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                                                    }
-                                                });
-                                            } catch (Exception e) {
-                                                mData.child("CuaHang").child(userId).addValueEventListener(new ValueEventListener() {
-                                                    @Override
-                                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                        Store user = dataSnapshot.getValue(Store.class);
-                                                        Log.d("abcxyz", String.valueOf(user));
+                                                    } catch (Exception e) {
                                                         Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
                                                         startActivity(i);
                                                         finish();
-
                                                     }
 
-                                                    @Override
-                                                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                                    }
-                                                });
-                                            }
+                                                }
 
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",
-                                                    Toast.LENGTH_SHORT).show();
-                                            pb.setVisibility(View.GONE);
+                                                }
+                                            });
+                                        } catch (Exception e) {
+                                            mData.child("CuaHang").child(userId).addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                    Store user = dataSnapshot.getValue(Store.class);
+                                                    Log.d("abcxyz", String.valueOf(user));
+                                                    Intent i = new Intent(LoginActivity.this, BottomNavigationStore.class);
+                                                    startActivity(i);
+                                                    finish();
+
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
                                         }
-                                    }
-                                });
-                    }
 
+
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại",
+                                                Toast.LENGTH_SHORT).show();
+                                        pb.setVisibility(View.GONE);
+                                    }
+                                }
+                            });
                 }
+
             }
         });
-        txtSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(i);
-            }
+        txtSignUp.setOnClickListener(v -> {
+            Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+            startActivity(i);
         });
     }
     //check GPS

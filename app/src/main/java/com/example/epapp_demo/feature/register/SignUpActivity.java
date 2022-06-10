@@ -58,43 +58,37 @@ public class SignUpActivity extends AppCompatActivity {
             finish();
         }
 
-        btnSignUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(validateEmail() & validatePassword()){
-                    final String email= regUser.getText().toString();
-                    final String password = regPass.getText().toString();
-                    pb.setVisibility(View.VISIBLE);
-                    mAuth.createUserWithEmailAndPassword(email, password)
-                            .addOnCompleteListener(SignUpActivity.this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.v(email,password);
-                                        Toast.makeText(SignUpActivity.this, "Đăng kí thành công",
-                                                Toast.LENGTH_SHORT).show();
-                                        userID = mAuth.getCurrentUser().getUid();
+        btnSignUp.setOnClickListener(v -> {
+            if(validateEmail() & validatePassword()){
+                final String email= regUser.getText().toString();
+                final String password = regPass.getText().toString();
+                pb.setVisibility(View.VISIBLE);
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(SignUpActivity.this, task -> {
+                            if (task.isSuccessful()) {
+                                Log.v(email,password);
+                                Toast.makeText(SignUpActivity.this, "Đăng kí thành công",
+                                        Toast.LENGTH_SHORT).show();
+                                userID = mAuth.getCurrentUser().getUid();
 //                                        String userId = mData.push().getKey();
-                                        Customer s = new Customer(userID,"","",password,"", email,"",0);
-                                        mData.child("KhachHang").child(userID).push();
-                                        mData.child("KhachHang").child(userID).setValue(s);
+                                Customer s = new Customer(userID,"","",password,"", email,"",0);
+                                mData.child("KhachHang").child(userID).push();
+                                mData.child("KhachHang").child(userID).setValue(s);
 //                                        KhachHangDAO khachHangDAO = new KhachHangDAO(SignUpActivity.this);
 //                                        khachHangDAO.insert(s);
-                                        Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
-                                        startActivity(i);
-                                        finish();
+                                Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
+                                startActivity(i);
+                                finish();
 
-                                    } else {
-                                        Log.v(email,password);
-                                        Toast.makeText(SignUpActivity.this, "Nhập đúng định dạng email, mật khẩu 6 kí tự",
-                                                Toast.LENGTH_SHORT).show();
-                                        pb.setVisibility(View.GONE);
-                                    }
-                                }
-                            });
-                }
-
+                            } else {
+                                Log.v(email,password);
+                                Toast.makeText(SignUpActivity.this, "Nhập đúng định dạng email, mật khẩu 6 kí tự",
+                                        Toast.LENGTH_SHORT).show();
+                                pb.setVisibility(View.GONE);
+                            }
+                        });
             }
+
         });
     }
 

@@ -2,9 +2,10 @@ package com.example.epapp_demo.model.local.database;
 
 
 
-import static com.example.epapp_demo.feature.home.HomeFragment.nearbyStoreAdapter;
+import static com.example.epapp_demo.feature.home.HomeFragment.suggestStoreAdapter;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -22,7 +23,7 @@ import com.example.epapp_demo.feature.cuahang.ListStoreFragment;
 import com.example.epapp_demo.feature.admin.StoreFragment;
 import com.example.epapp_demo.feature.home.HomeFragment;
 import com.example.epapp_demo.model.local.modul.Store;
-import com.example.epapp_demo.model.local.modul.NearbyStore;
+import com.example.epapp_demo.model.local.modul.SuggestStore;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -42,7 +43,7 @@ public class StoreDAO implements LocationListener {
     DatabaseReference mDatabase;
     Context context;
     String CuaHangID;
-    List<NearbyStore> temp = new ArrayList<>();
+    List<SuggestStore> temp = new ArrayList<>();
     public StoreDAO(Context context) {
         this.mDatabase = FirebaseDatabase.getInstance().getReference("CuaHang");
         this.context = context;
@@ -91,6 +92,7 @@ public class StoreDAO implements LocationListener {
         final ArrayList<Store> list = new ArrayList<Store>();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
+            @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -172,7 +174,7 @@ public class StoreDAO implements LocationListener {
         });
     }
     //get CuaHang within 10km
-    public List<NearbyStore> getTemp(Context context) {
+    public List<SuggestStore> getTemp(Context context) {
         LocationManager manager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
@@ -196,7 +198,7 @@ public class StoreDAO implements LocationListener {
                         if (location != null) {
                             double khoangcach = distanceBetween2Points(location.getLatitude(), location.getLongitude(), store.getStoreViDo(), store.getStoreKinhDo());
                             if (khoangcach > 0) {
-                                temp.add(new NearbyStore(
+                                temp.add(new SuggestStore(
                                         store.getStoreID(),
                                         store.getStoreName(),
                                         store.getStoreDiaChi(),
@@ -214,14 +216,14 @@ public class StoreDAO implements LocationListener {
                 }
 
                 //sort khoảng cách đến quán ăn theo thứ tự tăng dần
-                Collections.sort(temp, new Comparator<NearbyStore>() {
+                Collections.sort(temp, new Comparator<SuggestStore>() {
                     @Override
-                    public int compare(NearbyStore o1, NearbyStore o2) {
+                    public int compare(SuggestStore o1, SuggestStore o2) {
                         return Double.valueOf(o1.getKhoangcach()).compareTo(o2.getKhoangcach());
                     }
                 });
 
-                nearbyStoreAdapter.notifyDataSetChanged();
+                suggestStoreAdapter.notifyDataSetChanged();
 
             }
 

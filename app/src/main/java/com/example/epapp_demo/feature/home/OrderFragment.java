@@ -1,5 +1,6 @@
 package com.example.epapp_demo.feature.home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;

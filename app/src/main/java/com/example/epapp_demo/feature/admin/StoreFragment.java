@@ -62,59 +62,46 @@ public class StoreFragment extends Fragment {
         lv.setAdapter(cuaHangAdapte);
         Log.d("test1", String.valueOf(list));
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_store_dialog,null);
-                final EditText tenCH = view1.findViewById(R.id.edtNameStore);
-                final EditText mailCH = view1.findViewById(R.id.edtMailStore);
-                final EditText passCH = view1.findViewById(R.id.edtPassStore);
-                builder.setView(view1);
-                builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+        add.setOnClickListener(view12 -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View view1 = getLayoutInflater().inflate(R.layout.add_store_dialog,null);
+            final EditText tenCH = view1.findViewById(R.id.edtNameStore);
+            final EditText mailCH = view1.findViewById(R.id.edtMailStore);
+            final EditText passCH = view1.findViewById(R.id.edtPassStore);
+            builder.setView(view1);
+            builder.setPositiveButton("Thêm", (dialogInterface, i) -> {
 
 
-                        final String tenCH1 = tenCH.getText().toString();
-                        final String mailCH1 = mailCH.getText().toString();
-                        final String passCH1 = passCH.getText().toString();
+                final String tenCH1 = tenCH.getText().toString();
+                final String mailCH1 = mailCH.getText().toString();
+                final String passCH1 = passCH.getText().toString();
 
-                        mAuth.createUserWithEmailAndPassword(mailCH1, passCH1)
-                                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            Log.v(mailCH1,passCH1);
-                                            Toast.makeText(getActivity(), "Đăng kí thành công",
-                                                    Toast.LENGTH_SHORT).show();
-                                            userID = mAuth.getCurrentUser().getUid();
-                                            Store s = new Store(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);;
-                                            mData.child("CuaHang").child(userID).push();
-                                            mData.child("CuaHang").child(userID).setValue(s);
-                                            Log.d("Status","Success");
+                mAuth.createUserWithEmailAndPassword(mailCH1, passCH1)
+                        .addOnCompleteListener(getActivity(), task -> {
+                            if (task.isSuccessful()) {
+                                Log.v(mailCH1,passCH1);
+                                Toast.makeText(getActivity(), "Đăng kí thành công",
+                                        Toast.LENGTH_SHORT).show();
+                                userID = mAuth.getCurrentUser().getUid();
+                                Store s = new Store(userID,mailCH1,passCH1,null, tenCH1,"",5.0,"",null,null,1);;
+                                mData.child("CuaHang").child(userID).push();
+                                mData.child("CuaHang").child(userID).setValue(s);
+                                Log.d("Status","Success");
 
 
-                                        } else {
-                                            Log.v(mailCH1,passCH1);
-                                            Toast.makeText(getActivity(), "Nhập đúng định dạng email, mật khẩu 6 kí tự",
-                                                    Toast.LENGTH_SHORT).show();
-                                            Log.d("Status","Fail");
-                                        }
-                                    }
-                                });
-                    }
-                });
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                            } else {
+                                Log.v(mailCH1,passCH1);
+                                Toast.makeText(getActivity(), "Nhập đúng định dạng email, mật khẩu 6 kí tự",
+                                        Toast.LENGTH_SHORT).show();
+                                Log.d("Status","Fail");
+                            }
+                        });
+            });
+            builder.setNegativeButton("Hủy", (dialog, which) -> {
 
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-            }
+            });
+            builder.setView(view1);
+            builder.show();
         });
         return view;
     }

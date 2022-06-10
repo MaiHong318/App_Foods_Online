@@ -1,6 +1,7 @@
 package com.example.epapp_demo.feature.admin;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -35,27 +36,24 @@ public class BottomNavigationAdmin extends AppCompatActivity {
         }
 
     }
+    @SuppressLint("NonConstantResourceId")
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.qlycuahang:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new StoreFragment()).commit();
+                        return true;
+                    case R.id.qlynguoidung:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CustomerFragment()).commit();
+                        return true;
+                    case R.id.theloaimonan:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CategoriesFragment()).commit();
+                        return true;
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.qlycuahang:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new StoreFragment()).commit();
-                    return true;
-                case R.id.qlynguoidung:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CustomerFragment()).commit();
-                    return true;
-                case R.id.theloaimonan:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_2, new CategoriesFragment()).commit();
-                    return true;
+                    case R.id.dangxuat:
+                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
 
-                case R.id.dangxuat:
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-
-            }
-            return false;
-        }
-    };
+                }
+                return false;
+            };
 }

@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
-import com.example.epapp_demo.model.local.modul.NearbyStore;
+import com.example.epapp_demo.model.local.modul.SuggestStore;
 import com.example.epapp_demo.model.local.modul.Place;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.ItemHolder>{
     private List<Place> mPlaces = new ArrayList<>();
     private Context context;
     int resource;
-    List<NearbyStore> objects;
+    List<SuggestStore> objects;
     private OnPlaceClickListener mListener;
     public void setOnPlaceItemClickListener (OnPlaceClickListener onPlaceItemClickListener){
         mListener = onPlaceItemClickListener;

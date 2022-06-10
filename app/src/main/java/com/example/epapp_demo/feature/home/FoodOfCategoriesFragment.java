@@ -22,7 +22,6 @@ import android.widget.RelativeLayout;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.adapter.FoodAdapter;
 
-import com.example.epapp_demo.feature.admin.ListCategoriesFragment;
 import com.example.epapp_demo.model.local.database.FoodDAO;
 import com.example.epapp_demo.model.local.modul.Food;
 

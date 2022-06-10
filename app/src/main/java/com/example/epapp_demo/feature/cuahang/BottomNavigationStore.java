@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -31,27 +32,24 @@ public class BottomNavigationStore extends AppCompatActivity {
         }
 
     }
+    @SuppressLint("NonConstantResourceId")
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
+                switch (item.getItemId()) {
+                    case R.id.Home:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new HomeStoreFragment()).commit();
+                        return true;
+                    case R.id.Hoat_Dong:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new StoreActivitiesFragment()).commit();
+                        return true;
+                    case R.id.Mon_An:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new FoodOfStoreFragment()).commit();
+                        return true;
+                    case R.id.Tai_Khoan:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new StoreSettingsFragment()).commit();
+                        return true;
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.Home:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new HomeStoreFragment()).commit();
-                    return true;
-                case R.id.Hoat_Dong:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new StoreActivitiesFragment()).commit();
-                    return true;
-                case R.id.Mon_An:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new FoodOfStoreFragment()).commit();
-                    return true;
-                case R.id.Tai_Khoan:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_1, new StoreSettingsFragment()).commit();
-                    return true;
-
-            }
-            return false;
-        }
-    };
+                }
+                return false;
+            };
 }

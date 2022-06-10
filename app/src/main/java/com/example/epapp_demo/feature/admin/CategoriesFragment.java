@@ -57,38 +57,28 @@ public class CategoriesFragment extends Fragment {
         lv.setAdapter(categoriesAdapter);
         Log.d("test2", String.valueOf(list));
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_categories_dialog,null);
-                final EditText tenloai = view1.findViewById(R.id.edttenlaoi);
-                final EditText motalaoi = view1.findViewById(R.id.edtMota);
-                final EditText anh = view1.findViewById(R.id.edtUrlAnh);
+        add.setOnClickListener(view12 -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View view1 = getLayoutInflater().inflate(R.layout.add_categories_dialog,null);
+            final EditText tenloai = view1.findViewById(R.id.edttenlaoi);
+            final EditText motalaoi = view1.findViewById(R.id.edtMota);
+            final EditText anh = view1.findViewById(R.id.edtUrlAnh);
 
-                builder.setView(view1);
+            builder.setView(view1);
 
-                builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
+            builder.setPositiveButton("Thêm", (dialogInterface, i) -> {
 
-                        String anh1 = anh.getText().toString();
-                        String tenl1 = tenloai.getText().toString();
-                        String motal1 = motalaoi.getText().toString();
-                        Categories s = new Categories(null,tenl1,motal1,anh1);
-                        categoriesDAO.insert(s);
+                String anh1 = anh.getText().toString();
+                String tenl1 = tenloai.getText().toString();
+                String motal1 = motalaoi.getText().toString();
+                Categories s = new Categories(null,tenl1,motal1,anh1);
+                categoriesDAO.insert(s);
 
-                    }
-                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+            }).setNegativeButton("Hủy", (dialog, which) -> {
 
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-            }
+            });
+            builder.setView(view1);
+            builder.show();
         });
 
         return view;

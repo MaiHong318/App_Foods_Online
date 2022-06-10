@@ -63,48 +63,38 @@ public class FoodOfStoreFragment extends Fragment {
         rcv.setAdapter(monAnAdapter);
         final ArrayList<Categories> listPL = new CategoriesDAO(getActivity()).getAllspn();
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                View view1 = getLayoutInflater().inflate(R.layout.add_food_dialog,null);
-                final EditText tenmon = view1.findViewById(R.id.edtTenMon);
-                final Spinner spn = view1.findViewById(R.id.spnTheLoai);
-                final EditText mota = view1.findViewById(R.id.edtMotaMon);
-                final EditText gia = view1.findViewById(R.id.edtGiaMon);
-                final EditText url = view1.findViewById(R.id.edtUrlMon);
+        add.setOnClickListener(v -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            View view1 = getLayoutInflater().inflate(R.layout.add_food_dialog,null);
+            final EditText tenmon = view1.findViewById(R.id.edtTenMon);
+            final Spinner spn = view1.findViewById(R.id.spnTheLoai);
+            final EditText mota = view1.findViewById(R.id.edtMotaMon);
+            final EditText gia = view1.findViewById(R.id.edtGiaMon);
+            final EditText url = view1.findViewById(R.id.edtUrlMon);
 
-                //Test
+            //Test
 
-                ArrayAdapter adapter = new ArrayAdapter (getActivity(), android.R.layout.simple_spinner_item, listPL);
-                spn.setAdapter(adapter);
+            ArrayAdapter adapter = new ArrayAdapter (getActivity(), android.R.layout.simple_spinner_item, listPL);
+            spn.setAdapter(adapter);
 
-                builder.setView(view1);
-                builder.setPositiveButton("Thêm", new DialogInterface.OnClickListener() {
-                    @SuppressLint("RestrictedApi")
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        String tenmon1 = tenmon.getText().toString();
-                        String mota1 = mota.getText().toString();
-                        int gia1 = Integer.parseInt(gia.getText().toString());
-                        String url1 = url.getText().toString();
-                        Categories loai = (Categories) spn.getSelectedItem();
-                        String matheloai = loai.getLoaiID();
+            builder.setView(view1);
+            builder.setPositiveButton("Thêm", (dialogInterface, i1) -> {
+                String tenmon1 = tenmon.getText().toString();
+                String mota1 = mota.getText().toString();
+                int gia1 = Integer.parseInt(gia.getText().toString());
+                String url1 = url.getText().toString();
+                Categories loai = (Categories) spn.getSelectedItem();
+                String matheloai = loai.getLoaiID();
 
 
-                        String a = mAuth.getCurrentUser().getUid();;
-                        Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
-                        foodDAO.insert(s);
-                    }
-                }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                String a = mAuth.getCurrentUser().getUid();;
+                Food s = new Food(null,tenmon1,gia1,url1,a,matheloai,mota1);
+                foodDAO.insert(s);
+            }).setNegativeButton("Hủy", (dialog, which) -> {
 
-                    }
-                });
-                builder.setView(view1);
-                builder.show();
-            }
+            });
+            builder.setView(view1);
+            builder.show();
         });
         return view;
     }
