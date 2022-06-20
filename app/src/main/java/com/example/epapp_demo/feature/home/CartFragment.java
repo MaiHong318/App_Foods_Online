@@ -41,7 +41,6 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     ArrayList<CartDetails> list = new ArrayList<>();
     DbHelper db;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
     List<Customer> listCustomer;
 
     public CartFragment() {
@@ -65,6 +64,7 @@ public class CartFragment extends Fragment {
         adapter = new CartAdapter(list, getContext());
         rcv.setAdapter(adapter);
         rcv.clearOnChildAttachStateChangeListeners();
+
         Add.setOnClickListener(new View.OnClickListener() {
 
             @RequiresApi(api = Build.VERSION_CODES.N)
@@ -81,7 +81,7 @@ public class CartFragment extends Fragment {
 
                     builder.setView(view1);
 
-                    //edtAddress.setText(listCustomer.get().getUserDiaChi());
+
                     builder.setPositiveButton("Thêm", (dialogInterface, i1) -> {
                         String address = edtAddress.getText().toString();
 
