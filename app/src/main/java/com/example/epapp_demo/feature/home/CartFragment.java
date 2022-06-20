@@ -1,6 +1,7 @@
 package com.example.epapp_demo.feature.home;
 
 
+import android.app.AlertDialog;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.epapp_demo.R;
@@ -22,9 +25,14 @@ import com.example.epapp_demo.adapter.CartAdapter;
 import com.example.epapp_demo.model.local.database.DbHelper;
 import com.example.epapp_demo.model.local.modul.CartDetails;
 
+import com.example.epapp_demo.model.local.modul.Categories;
+import com.example.epapp_demo.model.local.modul.Customer;
+import com.example.epapp_demo.model.local.modul.Food;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class CartFragment extends Fragment {
@@ -33,6 +41,8 @@ public class CartFragment extends Fragment {
     CartAdapter adapter;
     ArrayList<CartDetails> list = new ArrayList<>();
     DbHelper db;
+    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    List<Customer> listCustomer;
 
     public CartFragment() {
         // Required empty public constructor
@@ -65,13 +75,29 @@ public class CartFragment extends Fragment {
                 if (list.isEmpty()) {
                     Toast.makeText(getContext(), "Bạn chưa thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                 } else {
-                    String id = mdata.push().getKey();
-                    mdata.child(id).setValue(list, (databaseError, databaseReference) -> {
-                        list.forEach(item -> db.delete(String.valueOf(item.getMonAnId())));
-                        rcv.setAdapter(null);
-                        Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    View view1 = getLayoutInflater().inflate(R.layout.add_address_dialog,null);
+                    final EditText edtAddress = view1.findViewById(R.id.edtAddress);
+
+                    builder.setView(view1);
+
+                    //edtAddress.setText(listCustomer.get().getUserDiaChi());
+                    builder.setPositiveButton("Thêm", (dialogInterface, i1) -> {
+                        String address = edtAddress.getText().toString();
+
+                        String id = mdata.push().getKey();
+                        mdata.child(id).setValue(list, (databaseError, databaseReference) -> {
+                            list.forEach(item -> db.delete(String.valueOf(item.getMonAnId())));
+                            rcv.setAdapter(null);
+                            Toast.makeText(getContext(), "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
+                        });
+
+                    }).setNegativeButton("Hủy", (dialog, which) -> {
 
                     });
+                    builder.setView(view1);
+                    builder.show();
 
 
 
