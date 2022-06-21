@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -61,9 +62,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.ViewHolder> {
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-
-
-        Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.anh_MA);
+        Food food = list.get(position);
+        if (null != food.getHinhAnhMonAn() && !TextUtils.isEmpty(food.getHinhAnhMonAn())) {
+            Picasso.get().load(food.getHinhAnhMonAn()).into(holder.anh_MA);
+        } else {
+            Picasso.get().load(R.drawable.logo).into(holder.anh_MA);
+        }
         holder.ten_Ma.setText(list.get(position).getNameMonAn());
         holder.gia_MA.setText(formatter.format(list.get(position).getGiaMonAn())+" VND");
         holder.moTa_MA.setText(list.get(position).getMoTa());

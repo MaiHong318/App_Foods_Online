@@ -2,6 +2,7 @@ package com.example.epapp_demo.adapter;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,7 +48,12 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
         holder.tvidloai.setText(phanloai.get(position).getLoaiID());
         holder.tvnameloai.setText(phanloai.get(position).getNameLoai());
         holder.tvmota.setText(phanloai.get(position).getMota());
-        Picasso.get().load(phanloai.get(position).getHinhanh()).into(holder.ivPhanLoaiPicture);
+        Categories categories = phanloai.get(position);
+        if (null != categories.getHinhanh() && !TextUtils.isEmpty(categories.getHinhanh())) {
+            Picasso.get().load(categories.getHinhanh()).into(holder.ivPhanLoaiPicture);
+        } else {
+            Picasso.get().load(R.drawable.logo).into(holder.ivPhanLoaiPicture);
+        }
 
     }
 

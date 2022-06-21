@@ -3,6 +3,7 @@ package com.example.epapp_demo.adapter;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,7 +28,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHolder>{
+public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHolder> {
     List<Food> list;
     Context context;
     FoodDAO foodDAO;
@@ -36,7 +37,7 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
     private ViewHolder holder;
     private int position;
 
-    public ShowFoodAdapter(List<Food> list, Context context){
+    public ShowFoodAdapter(List<Food> list, Context context) {
         this.list = list;
         this.context = context;
         foodDAO = new FoodDAO(context);
@@ -51,7 +52,7 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
     @NonNull
     @Override
     public ShowFoodAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(context).inflate(R.layout.item_food,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.item_food, parent, false);
         foodDAO = new FoodDAO(context);
         return new ShowFoodAdapter.ViewHolder(view);
     }
@@ -60,10 +61,16 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
     public void onBindViewHolder(@NonNull ShowFoodAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         this.holder = holder;
         this.position = position;
-        Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.anh_MA);
-        holder.ten_Ma.setText(list.get(position).getNameMonAn());
-        holder.gia_MA.setText(formatter.format(list.get(position).getGiaMonAn())+" VND");
-        holder.moTa_MA.setText(list.get(position).getMoTa());
+        Food food = list.get(position);
+        if (null != food.getHinhAnhMonAn() && !TextUtils.isEmpty(food.getHinhAnhMonAn())) {
+            Picasso.get().load(food.getHinhAnhMonAn()).into(holder.anh_MA);
+        } else {
+            Picasso.get().load(R.drawable.logo).into(holder.anh_MA);
+        }
+
+        holder.ten_Ma.setText(food.getNameMonAn());
+        holder.gia_MA.setText(formatter.format(food.getGiaMonAn()) + " VND");
+        holder.moTa_MA.setText(food.getMoTa());
 
         final FoodDAO foodDAO = new FoodDAO(context);
 
@@ -108,6 +115,7 @@ public class ShowFoodAdapter extends RecyclerView.Adapter<ShowFoodAdapter.ViewHo
         public TextView ten_Ma, moTa_MA, gia_MA;
         public ImageView anh_MA;
         LinearLayout item_mon_an;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             ten_Ma = itemView.findViewById(R.id.item_ten_MA);

@@ -2,6 +2,7 @@ package com.example.epapp_demo.feature.home;
 
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -93,8 +94,11 @@ public class CartFragment extends Fragment {
 
                         });
 
-                    }).setNegativeButton("Hủy", (dialog, which) -> {
+                    }).setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
+                        }
                     });
                     builder.setView(view1);
                     builder.show();

@@ -1,6 +1,7 @@
 package com.example.epapp_demo.adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.CategoriesDAO;
 import com.example.epapp_demo.model.local.modul.Categories;
+import com.example.epapp_demo.model.local.modul.Food;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -47,9 +49,14 @@ public class ShowCategoriesAdapter extends RecyclerView.Adapter<ShowCategoriesAd
     @Override
     public void onBindViewHolder(@NonNull ShowCategoriesAdapter.ViewHolder holder, int position) {
         try {
-            Picasso.get().load(phanloai.get(position).getHinhanh()).into(holder.ivPhanLoaiPicture);
-            holder.tvNameLoai.setText(phanloai.get(position).getNameLoai());
-            holder.tvMoTa.setText(phanloai.get(position).getMota());
+            Categories categories = phanloai.get(position);
+            if (null != categories.getHinhanh() && !TextUtils.isEmpty(categories.getHinhanh())) {
+                Picasso.get().load(categories.getHinhanh()).into(holder.ivPhanLoaiPicture);
+            } else {
+                Picasso.get().load(R.drawable.logo).into(holder.ivPhanLoaiPicture);
+            }
+            holder.tvNameLoai.setText(categories.getNameLoai());
+            holder.tvMoTa.setText(categories.getMota());
         }catch (Exception ex){
 
         }

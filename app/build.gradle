@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.appfood"
-        minSdkVersion 29
+        minSdkVersion 23
         targetSdkVersion 32
         versionCode 1
         versionName "1.0"
