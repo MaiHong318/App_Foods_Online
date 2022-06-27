@@ -2,6 +2,7 @@ package com.example.epapp_demo.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.epapp_demo.R;
 import com.example.epapp_demo.model.local.database.FoodDAO;
+import com.example.epapp_demo.model.local.modul.Categories;
 import com.example.epapp_demo.model.local.modul.Food;
 import com.example.epapp_demo.model.local.modul.Store;
 import com.squareup.picasso.Picasso;
@@ -52,8 +54,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
         holder.tvStore.setText(list.get(position).getStoreID());
         holder.tvFood.setText(list.get(position).getNameMonAn());
         holder.tvCost.setText(Integer.toString(list.get(position).getGiaMonAn()));
-        Picasso.get().load(list.get(position).getHinhAnhMonAn()).into(holder.ivFood);
 
+        Food food = list.get(position);
+        if (null != food.getHinhAnhMonAn() && !TextUtils.isEmpty(food.getHinhAnhMonAn())) {
+            Picasso.get().load(food.getHinhAnhMonAn()).into(holder.ivFood);
+        } else {
+            Picasso.get().load(R.drawable.logo).into(holder.ivFood);
+        }
 
     }
 

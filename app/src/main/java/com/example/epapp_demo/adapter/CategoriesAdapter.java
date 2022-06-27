@@ -91,8 +91,6 @@ public class CategoriesAdapter extends RecyclerView.Adapter<CategoriesAdapter.Vi
             mota.setText(gd.getMota());
 
 
-
-
             builder.setPositiveButton("Sửa", (dialogInterface, i) -> {
                 final String ten1 = ten.getText().toString();
                 final String mota1 = mota.getText().toString();
